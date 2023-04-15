@@ -3,13 +3,13 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase
 import { getFirestore, collection, query, where, getDocs,getDoc, setDoc,startAfter, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js';
 
 var firebaseConfig = {
-  apiKey: "AIzaSyAYwT_AKDrFzjZurqiHh4aTwvSNzn1uPT0",
-  authDomain: "workform-95a5d.firebaseapp.com",
-  projectId: "workform-95a5d",
-  storageBucket: "workform-95a5d.appspot.com",
-  messagingSenderId: "947978405979",
-  appId: "1:947978405979:web:3abb1089942aa62587177e",
-  measurementId: "G-KWLW01R1S1"
+  apiKey: "AIzaSyCxhFz0o6GZZr0xLC4qBbrDNRJWv2Wi0bI",
+  authDomain: "ordersystem-f3088.firebaseapp.com",
+  projectId: "ordersystem-f3088",
+  storageBucket: "ordersystem-f3088.appspot.com",
+  messagingSenderId: "676460912839",
+  appId: "1:676460912839:web:a6e88519d4f45fc8055ee2",
+  measurementId: "G-6R5MHRT3XJ"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -122,7 +122,7 @@ if(product==null){
   document.querySelector(".mainPage").style.display="none";
   document.querySelector(".productPage").style.display="block";
   document.querySelector(".nav-link").textContent="المتجر";
-  document.querySelector(".nav-link").href="/store.html";
+  document.querySelector(".nav-link").href="./store.html";
   
   await getProductData(product).then(e=>{
  
@@ -175,7 +175,7 @@ if(product==null){
             <h2 class="productName" data-id="${e.id}">${e.ProductName}</h2>
           </div>
           <div class="priceOfCardDad">
-            <h2 class="productPrice">${e.ProductPrice} Sr</h2>
+            <h2 class="productPrice">${e.ProductPrice} ${currency}</h2>
           </div>
           <div class="quantityOfCardDad">
             <span class="low">-</span>
@@ -183,7 +183,7 @@ if(product==null){
             <span class="height">+</span>
           </div>
           <div class="totalPriceOfCardDad">
-            <span class="totalPriceCard productTotalPrice">${e.ProductPrice} Sr</span>
+            <span class="totalPriceCard productTotalPrice">${e.ProductPrice} ${currency}</span>
           </div>
           <div class="delOfCardDad">
             <img src="./Store Folder/images/delete.png" class="btnForDeletFromCart" loading="lazy">
@@ -246,7 +246,7 @@ async function loadMore(X){
 
 
 
-
+let currency = "Egp"
 
 
 
@@ -269,7 +269,7 @@ array.forEach(e=>{
           <h1 class="card-title text-color cardName">${e.ProductName}</h1>
           <p class="priceDad">
               <span class="price">${e.ProductPrice}</span>
-              <span>Sr</span>
+              <span>${currency}</span>
           </p>
           <div class="btn btn-outline-success btnForAddToCard" data-note="${e.ProductNote}" data-id="${e.id}"> إضافة للسلة  </div>
           
@@ -340,7 +340,7 @@ document.querySelector(".sendData").addEventListener("click",()=>{
       date: Date.now(),
       orderByUser: "المتجر",
       isAccepted: "Orders-New",
-      country_calling_code: "+966",
+      country_calling_code: "+20",
       orderDate: showDate(),
       active: "Store",
       dataStore: dataStore,
@@ -470,7 +470,7 @@ window.onclick=(e)=>{
           <h2 class="productName" data-id="${idOfCard}">${nameOfCard}</h2>
         </div>
         <div class="priceOfCardDad">
-          <h2 class="productPrice">${priceOfCard} Sr</h2>
+          <h2 class="productPrice">${priceOfCard} ${currency}</h2>
         </div>
         <div class="quantityOfCardDad">
           <span class="low">-</span>
@@ -478,7 +478,7 @@ window.onclick=(e)=>{
           <span class="height">+</span>
         </div>
         <div class="totalPriceOfCardDad">
-          <span class="totalPriceCard productTotalPrice">${priceOfCard} Sr</span>
+          <span class="totalPriceCard productTotalPrice">${priceOfCard} ${currency}</span>
         </div>
         <div class="delOfCardDad">
           <img src="./Store Folder/images/delete.png" class="btnForDeletFromCart" loading="lazy">
@@ -525,7 +525,7 @@ window.onclick=(e)=>{
     e.target.parentNode.children[1].innerText++
     let mainNum = parseInt(e.target.parentNode.children[1].innerText)
     let pricee = parseInt(e.target.parentNode.parentNode.children[2].innerText)
-    e.target.parentNode.parentNode.children[4].children[0].innerText=`${mainNum*pricee + " Sr"}`
+    e.target.parentNode.parentNode.children[4].children[0].innerText=`${mainNum*pricee + `${currency}`}`
     totalPrice()
   }
   /* end height btn + */
@@ -542,7 +542,7 @@ window.onclick=(e)=>{
       e.target.parentNode.children[1].innerText--
       let mainNum = parseInt(e.target.parentNode.children[1].innerText)
       let pricee = parseInt(e.target.parentNode.parentNode.children[2].innerText)
-      e.target.parentNode.parentNode.children[4].children[0].innerText=`${mainNum*pricee + " Sr"}`
+      e.target.parentNode.parentNode.children[4].children[0].innerText=`${mainNum*pricee + `${currency}`}`
     }
     totalPrice()
   }
@@ -848,7 +848,7 @@ document.querySelector(".FormToSendOrder").addEventListener("submit",(e)=>{
       date: Date.now(),
       orderByUser: "المتجر",
       isAccepted: "Orders-New",
-      country_calling_code: "+966",
+      country_calling_code: "+20",
       orderDate: showDate(),
       active: `${active}`,
       orderNumber: id,
