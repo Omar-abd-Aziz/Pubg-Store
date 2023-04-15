@@ -122,7 +122,7 @@ if(product==null){
   document.querySelector(".mainPage").style.display="none";
   document.querySelector(".productPage").style.display="block";
   document.querySelector(".nav-link").textContent="المتجر";
-  document.querySelector(".nav-link").href="/store.html";
+  document.querySelector(".nav-link").href="./store.html";
   
   await getProductData(product).then(e=>{
  
@@ -175,7 +175,7 @@ if(product==null){
             <h2 class="productName" data-id="${e.id}">${e.ProductName}</h2>
           </div>
           <div class="priceOfCardDad">
-            <h2 class="productPrice">${e.ProductPrice} Sr</h2>
+            <h2 class="productPrice">${e.ProductPrice} ${currency}</h2>
           </div>
           <div class="quantityOfCardDad">
             <span class="low">-</span>
@@ -183,7 +183,7 @@ if(product==null){
             <span class="height">+</span>
           </div>
           <div class="totalPriceOfCardDad">
-            <span class="totalPriceCard productTotalPrice">${e.ProductPrice} Sr</span>
+            <span class="totalPriceCard productTotalPrice">${e.ProductPrice} ${currency}</span>
           </div>
           <div class="delOfCardDad">
             <img src="./Store Folder/images/delete.png" class="btnForDeletFromCart" loading="lazy">

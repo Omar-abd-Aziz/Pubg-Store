@@ -1,16 +1,11 @@
-/*1*/
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js';
-import { getFirestore, collection, query, where, getDocs,getDoc, setDoc,startAfter, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js';
+window.open('', '_self', '');
 
-var firebaseConfig = {
-  apiKey: "AIzaSyCxhFz0o6GZZr0xLC4qBbrDNRJWv2Wi0bI",
-  authDomain: "ordersystem-f3088.firebaseapp.com",
-  projectId: "ordersystem-f3088",
-  storageBucket: "ordersystem-f3088.appspot.com",
-  messagingSenderId: "676460912839",
-  appId: "1:676460912839:web:a6e88519d4f45fc8055ee2",
-  measurementId: "G-6R5MHRT3XJ"
-};
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js';
+import { getFirestore, collection, getDocs,getDoc, setDoc, addDoc, doc } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js';
+
+// TODO: Replace the following with your app's Firebase project configuration
+
+import { firebaseConfig } from './firebase.js';
 
 firebase.initializeApp(firebaseConfig);
 const app = initializeApp(firebaseConfig);
@@ -19,191 +14,23 @@ const db = getFirestore(app);
 let X;
 
 async function getCit(db,X) {
-  const citiesCol = collection(db,`${X}`);
-  const citySnapshot = await getDocs(citiesCol);
-  const cityList = citySnapshot.docs.map(doc => doc.data());
-  return cityList;
-}
-/*1*/
-
-
-
-
-
-/* start function return array from db */
-
-let AllProducts;
-
-async function forAllProducts(X){
-
-  const q = query(collection(db, "StoreProducts"), orderBy("date","desc"), limit(X||8));
-  const querySnapshot = await getDocs(q);
-  const cityList = querySnapshot.docs.map(doc => doc.data());
-
-  let array=cityList;
-
-  return array;
+const citiesCol = collection(db,`${X}`);
+const citySnapshot = await getDocs(citiesCol);
+const cityList = citySnapshot.docs.map(doc => doc.data());
+return cityList;
 };
 
-/* end function return array from db */
+
+//////////////////////////////////////////////////////////////////////////
 
 
 
 
-
-
-
-  /* start calc the total price of products in cart */
-  function totalPrice()
-  {
-    let ArrayOfPrie = Array.from(document.querySelectorAll(".totalPriceCard"))
-    let TotalPrice = 0
-    let numOfCardsHaveAdd=0
-
-    ArrayOfPrie.forEach(e=>{
-      numOfCardsHaveAdd++
-      TotalPrice+=parseInt(e.innerText)
-    })
-
-    document.querySelector(".totalPrice").innerText=`${TotalPrice}`
-    document.querySelector(".numOfCardsAdd").innerText=numOfCardsHaveAdd;
-    saveCartLocal();
-  }
-  /* start calc the total price of products in cart */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let arrayOfCardsHadAddToCart = [];
-
-await getCartFromLocal();
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-const product = urlParams.get('product');
-
-
-if(product==null){
-
-/* start return the array and pass it to showData function */
-  showBannar()
-
-  forAllProducts(8).then(e=>{
-    AllProducts = e;
-    ShowAll(e);
-  });
-/* end return the array and pass it to showData function */
-
-  
-} else if(product!==null){
-
-  document.querySelector(".mainPage").style.display="none";
-  document.querySelector(".productPage").style.display="block";
-  document.querySelector(".nav-link").textContent="المتجر";
-  document.querySelector(".nav-link").href="./store.html";
-  
-  await getProductData(product).then(e=>{
- 
-    let productDivDad=document.querySelector("#productDetails");
-    productDivDad.querySelector(".ProductName").textContent=`${e.ProductName}`;
-    productDivDad.querySelector(".ProductPrice").textContent=`${e.ProductPrice}`;
-    productDivDad.querySelector(".ProductNote").textContent=`${e.ProductNote}`;
-    productDivDad.querySelector(".ProductId").dataset.id=`${e.id}`;
-    document.querySelector("#imageSection").querySelector(".ProductImage").src=`${e.ProductImage}`;
-
-    if(e.ArrayOfProductImages!==undefined){
-
-      for(let i=0; i<e.ArrayOfProductImages.length; i++){
-        let isHidden='block';
-        if(i!==0){
-          isHidden="none";
-        };
-        let html = `
-        
-        <div class="mySlides2 fade" style="margin-bottom: 20px; display: ${isHidden};">
-          <a class="sliderLinkTwo">
-            <img class="sliderImgTwo imgToOpen" src="${e.ArrayOfProductImages[i].src}" style="width:100%">
-          </a>
-        </div>
-  
-        `;
-  
-        document.querySelector(".slideshow-container2").insertAdjacentHTML("afterbegin", html);
-      };
-
-    } else {
-      document.querySelector("#imageSection").querySelector(".ProductImage").style.display="block";
-      document.querySelector(".sliderBtnsDad").style.display="none";
-    }
-
-
-   
-
-    document.querySelector(".ProductToAddToCart").addEventListener("click",()=>{
-
-      if(arrayOfCardsHadAddToCart.includes(e.ProductName)==false)
-      {
-        arrayOfCardsHadAddToCart.push(e.ProductName)
-        
-        document.querySelector(".divForCardsHasSelc").innerHTML+=`
-        
-        <div class="cartDiv productNote" data-note="${e.ProductNote}" data-price="${e.ProductPrice}" data-name="${e.ProductName}" data-src="${e.ProductImage}" data-number="">
-          <img src="${e.ProductImage}" class="productImage" loading="lazy">
-          <div class="nameOfCardDad">
-            <h2 class="productName" data-id="${e.id}">${e.ProductName}</h2>
-          </div>
-          <div class="priceOfCardDad">
-            <h2 class="productPrice">${e.ProductPrice} ${currency}</h2>
-          </div>
-          <div class="quantityOfCardDad">
-            <span class="low">-</span>
-            <span style="width: 40px;" class="productAmount">1</span>
-            <span class="height">+</span>
-          </div>
-          <div class="totalPriceOfCardDad">
-            <span class="totalPriceCard productTotalPrice">${e.ProductPrice} ${currency}</span>
-          </div>
-          <div class="delOfCardDad">
-            <img src="./Store Folder/images/delete.png" class="btnForDeletFromCart" loading="lazy">
-          </div>
-        </div>
-        
-        ` 
-      } else {
-        Swal.fire(
-          'المنتج موجود في السلة بالفعل',
-        )
-      }
-  
-      totalPrice();
-  
-
-    });
-
-  });
-
+function idGenerator() {
+    var S4 = function() {
+    return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    };
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 };
 
 
@@ -212,402 +39,219 @@ if(product==null){
 
 
 
+swool();
+function swool(){
 
-/* start function to get product Data */
-
-async function getProductData(productId){
-  let productData;
-  await getDoc(doc(db,"StoreProducts",`${productId}`)).then(e=>{
-    productData = e.data();
-  });
-  return productData;
-};
-
-/* end function to get product Data */
-
-
-
-
-
-
-/* start function loadMore start from last eelment and return array from db */
-
-async function loadMore(X){
-  const q = query(collection(db, "StoreProducts"), orderBy("date","desc"),startAfter(AllProducts[AllProducts.length-1].date), limit(X||8));
-  const querySnapshot = await getDocs(q);
-  const cityList = querySnapshot.docs.map(doc => doc.data());
-
-  let array=cityList;
-
-  return array;
-}
-
-/* end function loadMore start from last eelment and return array from db */
-
-
-
-let currency = "Egp"
-
-
-
-
-/* start function to show data and display it */
-
-function ShowAll(array){
-
-array.forEach(e=>{
-  document.querySelector(".cardsDad").innerHTML+=`
-  
-  <div class="card">
-      <div class="CardImgDad">
-        <a href="?product=${e.id}">
-          <img src="${e.ProductImage}" class="card-img-top cardImg" loading="lazy">
-        </a>
-      </div>
-
-      <div class="card-body">
-          <h1 class="card-title text-color cardName">${e.ProductName}</h1>
-          <p class="priceDad">
-              <span class="price">${e.ProductPrice}</span>
-              <span>${currency}</span>
-          </p>
-          <div class="btn btn-outline-success btnForAddToCard" data-note="${e.ProductNote}" data-id="${e.id}"> إضافة للسلة  </div>
-          
-      </div>
-      <div style="font-size: 18px; font-weight: 500;">
-        <p>
-        كود المنتج : ${e.id}
-        </p>
-      </div>
-  </div>
-  
-  `;
-});
-
-};
-
-/* start function to show data and display it */
-
-
-
-
-
-
-
-
-
-/*start catch all product in cart and catch user info from inputs and send it to firebase */
-document.querySelector(".sendData").addEventListener("click",()=>{
-
-  let AllProductName=document.querySelectorAll(".productName");
-  let AllProductPrice=document.querySelectorAll(".productPrice");
-  let AllProductNote=document.querySelectorAll(".productNote");
-  let AllProductImage=document.querySelectorAll(".productImage");
-  let AllProductAmount=document.querySelectorAll(".productAmount");
-
-  let dataStore=[];
-
-  for(let i=0; i<AllProductName.length; i++){
-    
-    dataStore.push({
-      productId: AllProductName[i].dataset.id,
-      productName: AllProductName[i].textContent,
-      productPrice: parseInt(AllProductPrice[i].textContent),
-      productNote: AllProductNote[i].dataset.note,
-      productImage: AllProductImage[i].src,
-      productAmount: parseInt(AllProductAmount[i].textContent),
-      productTotalPrice: parseInt(AllProductPrice[i].textContent)*parseInt(AllProductAmount[i].textContent),
-    });
- 
-  };
-
-
-  var name = document.querySelector(".NameOfPerson").value
-  var phoneNumber = document.querySelector(".phoneNum").value
-  var address = document.querySelector(".address").value
-  var note = document.querySelector(".noteFromPerson").value
-
-
-  if(name!=""&&phoneNumber!=""&&address!="")
-  {
-    let id = (Math.random()*1000000).toFixed();
-    setDoc(doc(db,"Persons",`${id}`),{
-      id: id,
-      name: name,
-      phone: phoneNumber,
-      city: address,  
-      note: note,
-      date: Date.now(),
-      orderByUser: "المتجر",
-      isAccepted: "Orders-New",
-      country_calling_code: "+20",
-      orderDate: showDate(),
-      active: "Store",
-      dataStore: dataStore,
-      orderNumber: id,
-    });
-
-    document.querySelector(".formDad").style.display="none"
-    document.querySelector(".NameOfPerson").value=""
-    document.querySelector(".phoneNum").value=""
-    document.querySelector(".address").value=""
-
-    /**/
-    Swal.fire(
-      'تم ارسال الطلب',
-      'سنقوم بالتواصل معك قريبا',
-      'success'
-    )
-    /**/
-
-  } else{
-    Swal.fire("","يجب عليك ادخال الاسم ورقم الهاتف والعنوان")
-  };
-});
-
-/*end catch all product in cart and catch user info from inputs and send it to firebase */
-
-
-
-
-
-
-
-
-
-
-/*start btn to hide cart div*/
-document.querySelector(".btnCart").addEventListener("click", ()=>{
-  document.querySelector(".divForCardsHasSelcDad").style.display="block"
-  document.querySelector(".cartOk").addEventListener("click", ()=>{
-    if(parseInt(document.querySelector(".totalPrice").innerText)!==0)
-    {
-      document.querySelector(".formDad").style.display="block"
-    }
-  })
-})
-
-document.querySelector(".btnToHide").addEventListener("click", ()=>{
-  document.querySelector(".divForCardsHasSelcDad").style.display="none"
-})
-/*end btn to hide cart div*/
-
-
-
-
-
-
-
-
-
-
-
-
-/* start on click */
-
-window.onclick=(e)=>{
-
-   /* start imgBtnOpen */
-   if(e.target.classList.value.includes("imgToOpen")){
-    let src = e.target.src;
-    
     Swal.fire({
-      imageUrl: src,
-      imageWedith: 100,
-      imageAlt: 'A tall image',
-      customClass: {
-        popup: 'widthContainer100',
-      }
+        title: 'قم بملي البيانات التالية',
+        html: `
+        
+        
+        <div class="mainForm">
+    
+            <label for="name">:الاسم</label>
+            <input type="text" dir="auto" autocomplete="off" id="name">
+    
+            <label for="phone">:رقم الجوال</label>
+            <input type="number" placeholder="" dir="auto" autocomplete="off" id="phone">
+    
+            <label for="active">:النشاط</label>
+            <select dir="auto" id="active" name="carlist" form="carform" style="font-weiht: bold; padding: 5px 5px; width: 98%; margin: auto 10px auto 0px; border: 2px solid black; border-radius: 6px;">
+              <option value=""></option>
+              <option value="أدارة التسويق الرقمي">
+              أدارة التسويق الرقمي
+              </option>
+              <option value="نظام الدروب شيبنج">
+              نظام الدروب شيبنج
+              </option>
+              <option value="ادارة متاجر اكترونية">
+              ادارة متاجر الكترونية
+              </option>
+              <option value="ادارة حسابات السوشيال ميديا">
+              ادارة حسابات السوشيال ميديا
+              </option>
+              <option value="تسويق الكتروني">
+              تسويق الكتروني
+              </option>
+              <option value="تصميم موقع الكترونية">
+              تصميم موقع الكترونية
+              </option>
+              <option value="تصميم متجر الكترونية">
+              تصميم متجر الكترونية
+              </option>
+              <option value="تصميم متجر علي منصة سلة">
+              تصميم متجر علي منصة سلة
+              </option>
+              <option value="صيانة متجر سلة">
+              صيانة متجر سلة
+              </option>
+              <option value="تصميم متجر علي منصة زيد">
+              تصميم متجر علي منصة زيد
+              </option>
+              <option value="تصميم منيو مطعم الكتروني">
+              تصميم منيو مطعم الكتروني
+              </option>
+              <option value="ربط خدامات">
+              ربط خدامات
+              </option>
+              <option value="نقاط بيع">
+              نقاط بيع
+              </option>
+              <option value="دعم فني">
+              دعم فني
+              </option>
+              <option value="برامج محاسبية متاكملة">
+              برامج محاسبية متاكملة
+              </option>
+              <option value="برامج معامل تحاليل طبية">
+              برامج معامل تحاليل طبية
+              </option>
+              <option value="برامج مستوصفات طبية">
+              برامج مستوصفات طبية
+              </option>
+              <option value="خدمة اخرة">
+              شي اخر..
+              </option>
+            </select>
+    
+            <label for="city">:المدينة</label>
+            <input type="text" dir="rtl" autocomplete="off" id="city" value="">
+
+            <label for="note">:تفاصيل الطلب</label>
+            <textarea type="text" dir="rtl" autocomplete="off" id="note" value="" rows="4" style="width: 98%; border: 2px solid black; border-radius: 6px;"></textarea>
+
+        </div>
+        
+        
+        `,
+        confirmButtonText: 'ارسال',
+    }).then(async (result) => {    
+        if (result.isConfirmed) {
+
+
+            
+            const inputOptions = new Promise(() => {
+                setTimeout(() => {
+
+                }, 4000)
+            })
+            
+            
+            
+  
+
+            let name=document.querySelector("#name").value;
+            let phone=document.querySelector("#phone").value;
+            let active=document.querySelector("#active").value;
+            let city=document.querySelector("#city").value;
+            let note=document.querySelector("#note").value;
+
+
+            
+
+
+            if((name).trim()!==""&&(phone).trim()!==""&&(active).trim()!==""&&(city).trim()!==""){
+
+                SendData(name,phone,active,city,note);
+
+                await Swal.fire({
+                    title: '..برجاء الانتظار',
+                    input: 'radio',
+                    inputOptions: inputOptions,
+                })
+
+                
+                
+            }else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'برجاء كتابة البيانات بشكل صحيح',
+                }).then((x)=>{
+                    swool();
+                });
+            }
+
+
+            
+            
+        };
+    });
+
+};
+
+document.querySelector("#simpleBtn").addEventListener("click",()=>{
+
+    swool();
+    getPersonCity();
+
+});
+
+
+
+async function SendData(name,phone,active,city,note){
+
+    
+    let country_calling_code;
+    await fetch("https://ipapi.co/json/").then(e=>e.json()).then(data=>{
+        country_calling_code=data.country_calling_code;
+    });
+
+
+
+    /* 4 start function to create randomOrderNum */
+    let randomOrderNumber = (Math.random()*1000000).toFixed();
+    /* 5 end function to create randomOrderNum */
+
+
+    
+
+
+
+    /* Start Send Whatsapp Massage */
+
+    let HelloMassage=`
+
+عميلنا العزيز ( ${name} )
+تم استلام طلبك ( ${active} )
+رقم الطلب : ${randomOrderNumber}
+الرجاء الاحتفاظ بهذه الرسالة وسوف يقوم فريقنا بالتواصل معك فور التاكد من بيانات طلبك
+سعدنا بخدمتك يومك سعيد
+
+    `;
+    
+    HelloMassage=HelloMassage.trim();
+    let whatappAPI=`https://karzoun.app/api/send.php?number=${country_calling_code.slice(1)+Number(`${phone}`)}&type=text&message=${encodeURIComponent(HelloMassage)}&instance_id=63C2CA489C2CA&access_token=1757991908`;
+    console.log(whatappAPI);
+    // fetch(whatappAPI);
+
+    /* End Send Whatsapp Massage */
+
+    
+    let id=idGenerator();
+
+    setDoc(doc(db,"Persons",id), {
+        id: id,
+        name: name,
+        phone: phone,
+        active: active,
+        city: city,
+        note: note,
+        date: Date.now(),
+        orderDate: showDate(),
+        orderNumber: randomOrderNumber,
+        country_calling_code: country_calling_code,
+        isAccepted: "Orders-New",
+    }).then(e=>{
+        Swal.fire('تم الارسال سنقوم بالتواصل معك ', '', 'success').then((e)=>{
+            window.location.href="./index.html"
+            // window.close();
+        });
     })
 
-  };
-  /* end imgBtnOpen */
-
-
-  /* start detailsBtn */
-  if(e.target.classList.value.includes("detailsBtn")){
-    let note = e.target.dataset.note;
-    
-    Swal.fire(`${note}`);
-
-  };
-  /* end detailsBtn */
-
-
-
-  /* start load more */
-  if(e.target.classList.value.includes("LoadMore")){
-    loadMore(8).then(e=>{
-      AllProducts=e;
-      ShowAll(e);
-    });
-  };
-  /* end load more */
-
-
-  
-  /*start add card to cart*/
-
-  if(e.target.classList.value.includes("btnForAddToCard")==true)
-  {
-    let src = e.target.parentNode.parentNode.querySelector(".cardImg").src;
-    let nameOfCard = e.target.parentNode.parentNode.querySelector(".cardName").textContent;
-    let priceOfCard = parseInt(e.target.parentNode.parentNode.querySelector(".price").innerText);
-    let idOfCard = e.target.dataset.id;
-    let noteOfCard = e.target.dataset.note;
-
-
-    /**/
-    if(arrayOfCardsHadAddToCart.includes(nameOfCard)==false)
-    {
-      arrayOfCardsHadAddToCart.push(nameOfCard)
-      
-      document.querySelector(".divForCardsHasSelc").innerHTML+=`
-      
-      <div class="cartDiv productNote" data-note="${noteOfCard}" data-price="${priceOfCard}" data-name="${nameOfCard}" data-src="${src}" data-number="">
-        <img src="${src}" class="productImage" loading="lazy">
-        <div class="nameOfCardDad">
-          <h2 class="productName" data-id="${idOfCard}">${nameOfCard}</h2>
-        </div>
-        <div class="priceOfCardDad">
-          <h2 class="productPrice">${priceOfCard} ${currency}</h2>
-        </div>
-        <div class="quantityOfCardDad">
-          <span class="low">-</span>
-          <span style="width: 40px;" class="productAmount">1</span>
-          <span class="height">+</span>
-        </div>
-        <div class="totalPriceOfCardDad">
-          <span class="totalPriceCard productTotalPrice">${priceOfCard} ${currency}</span>
-        </div>
-        <div class="delOfCardDad">
-          <img src="./Store Folder/images/delete.png" class="btnForDeletFromCart" loading="lazy">
-        </div>
-      </div>
-      
-      ` 
-    } else {
-      Swal.fire(
-        'المنتج موجود في السلة بالفعل',
-      )
-    }
-
-    totalPrice();
-  };
-  /*end add card to cart*/
-
-
-
-
-  /* start remove from cart */
-  if(e.target.classList.value.includes("btnForDeletFromCart")==true)
-  {
-    e.target.parentNode.parentNode.remove()
-    totalPrice()
-    let name = e.target.parentNode.parentNode.children[1].innerText
-
-    for(let i = 0; i < arrayOfCardsHadAddToCart.length; i++){ 
-      if(arrayOfCardsHadAddToCart[i].trim()===name.trim())
-      {
-        arrayOfCardsHadAddToCart.splice(i, 1);
-      }
-    }
-  }
-  /* end remove from cart */
-
-
-
-
-
-  /* start height btn + */
-  if(e.target.classList.value.includes("height")==true)
-  {
-    e.target.parentNode.children[1].innerText++
-    let mainNum = parseInt(e.target.parentNode.children[1].innerText)
-    let pricee = parseInt(e.target.parentNode.parentNode.children[2].innerText)
-    e.target.parentNode.parentNode.children[4].children[0].innerText=`${mainNum*pricee + `${currency}`}`
-    totalPrice()
-  }
-  /* end height btn + */
-
-
-
-  
-
-  /* start low btn + */
-  if(e.target.classList.value.includes("low")==true)
-  {
-    if(Number(e.target.parentNode.children[1].innerText>1))
-    {
-      e.target.parentNode.children[1].innerText--
-      let mainNum = parseInt(e.target.parentNode.children[1].innerText)
-      let pricee = parseInt(e.target.parentNode.parentNode.children[2].innerText)
-      e.target.parentNode.parentNode.children[4].children[0].innerText=`${mainNum*pricee + `${currency}`}`
-    }
-    totalPrice()
-  }
-  /* end low btn + */
 
 
 };
-
-/* end on click */
-
-
-
-
-
-
-
-
-
-
-/* start show and hide form  */
-
-document.querySelector(".hideForm").addEventListener("click", ()=>{
-  hideForm()
-})
-
-
-function hideForm()
-{
-  document.querySelector(".formDad").style.display="none"
-}
-
-/* start show and hide form  */
-
-
-
-
-
-/* start btn scroll */
-
-let btnup = document.getElementById('btnup')
-
-window.onscroll = function() {
-  if (window.scrollY >= 200) {
-    btnup.style.display = "block";
-  } else {
-    btnup.style.display = "none";
-  }
-};
-
-btnup.onclick = function() {
-  window.scrollTo({
-    left: 0,
-    top: 0,
-    behavior: "smooth",
-  })
-}
-
-/* end btn scroll */
-
-
-
-
-
-
-
 
 
 
@@ -615,39 +259,40 @@ btnup.onclick = function() {
 /* 1 start function to get data now */
 function showDate(){
   
-  const d = new Date();
-  
-  let year = d.getFullYear();
-  let month = d.getMonth();
-  let day = d.getDate();
-  let hour = d.getHours();
-  let mint = d.getMinutes();
-  
-  if(mint<10){
-    mint=`0${mint}`
-  }
-  
-  let dateNow;
-
-
-  if (hour>=12){
+    const d = new Date();
     
-    dateNow= `
-      ${year}/${month+1}/${day}
-      => ${hour-12}:${mint} PM
-      `;
-
-  } else if (hour<=11){
+    let year = d.getFullYear();
+    let month = d.getMonth();
+    let day = d.getDate();
+    let hour = d.getHours();
+    let mint = d.getMinutes();
     
-      dateNow = `
+    if(mint<10){
+      mint=`0${mint}`
+    }
+    
+    let dateNow;
+
+
+    if (hour>=12){
       
-      ${year}/${month+1}/${day}
-         ${hour}:${mint} AM
+      dateNow= `
+        ${year}/${month+1}/${day}
+        => ${hour-12}:${mint} PM
+        `;
+
+    } else if (hour<=11){
       
-      `;
-  }
-  return dateNow;
+        dateNow = `
+        
+        ${year}/${month+1}/${day}
+           ${hour}:${mint} AM
+        
+        `;
+    }
+    return dateNow;
 }
+
 
 /* 1 end function to get data now */
 
@@ -655,218 +300,101 @@ function showDate(){
 
 
 
+/* 2 start function to get differnce between data now */
+function getDiffDate(oldDate){
+        
+    var starts = moment(`${oldDate}`);
+    var ends   = moment();
+
+    var duration = moment.duration(ends.diff(starts));
+
+    // with ###moment precise date range plugin###
+    // it will tell you the difference in human terms
+
+    var diff = moment.preciseDiff(starts, ends, true); 
+    // example: { "years": 2, "months": 7, "days": 0, "hours": 6, "minutes": 29, "seconds": 17, "firstDateWasLater":  false }
 
 
-/* start get bannar imgs */
+    // or as string:
+    var diffHuman = moment.preciseDiff(starts, ends);
+    // example: 2 years 7 months 6 hours 29 minutes 17 seconds
 
-async function showBannar(){
-  
-  await getDoc(doc(db,"Bannar","Bannar1")).then(e=>{
-    document.querySelector(".sliderImgOne").src=e.data().BannarImg;
-    document.querySelector(".sliderLinkOne").href=e.data().BannarLink;
-  })
-  
-  
-  await getDoc(doc(db,"Bannar","Bannar2")).then(e=>{
-    document.querySelector(".sliderImgTwo").src=e.data().BannarImg;
-    document.querySelector(".sliderLinkTwo").href=e.data().BannarLink;
-  })
-  
-  
-  await getDoc(doc(db,"Bannar","Bannar3")).then(e=>{
-    document.querySelector(".sliderImgThree").src=e.data().BannarImg;
-    document.querySelector(".sliderLinkThree").href=e.data().BannarLink;
-  })
+    let diffDate=diff;
 
-};
+    if(diffDate.years!==0){
+        diffDate={
+            "diffDateNum": diffDate.years,
+            "diffDateName": "سنة",
+        };
+    } else if(diff.months!==0){
+        diffDate={
+            "diffDateNum": diffDate.months,
+            "diffDateName": "شهر",
+        };
+    } else if(diff.days!==0){
+        diffDate={
+            "diffDateNum": diffDate.days,
+            "diffDateName": "يوم",
+        };
+    } else if(diff.hours!==0){
+        diffDate={
+            "diffDateNum": diffDate.hours,
+            "diffDateName": "ساعة",
+        };
+    } else if(diff.minutes!==0){
+        diffDate={
+            "diffDateNum": diffDate.minutes,
+            "diffDateName": "دقيقة",
+        };
+    } else {
+        diffDate={
+            "diffDateNum": 0,
+            "diffDateName": "الان",
+        };
+    }
 
-/* end get bannar imgs */
+    let stringDiffDate = `منذ ${diffDate.diffDateNum + " " + diffDate.diffDateName}`;
+    // منذ 1 سنة
 
+    if(diffDate.diffDateName=="الان"){
+      stringDiffDate="الان";
+    }
+    
+    // diffDate => json like {diffDateNum: 1, diffDateName: 'سنة'}
 
-
-
-
-
-
-/* start function to save in local storage */
-
-
-async function saveCartLocal(){
-  await localStorage.setItem("divForCardsHasSelc",document.querySelector(".divForCardsHasSelc").innerHTML);
-  await localStorage.setItem("numOfCardsAdd",document.querySelector(".numOfCardsAdd").textContent);
-  await localStorage.setItem("arrayOfCardsHadAddToCart",JSON.stringify(arrayOfCardsHadAddToCart));
+    return stringDiffDate;
 }
 
+// console.log(getDiffDate("2022/1/1 => 5:55 PM"));
+/* 2 end function to get differnce between data now */
 
 
-async function getCartFromLocal(){
+/* 3 start get person ciy and code */
 
-  // console.log(localStorage.getItem("arrayOfCardsHadAddToCart"))
+function getPersonCity(){
 
-  if(localStorage.getItem("divForCardsHasSelc")!==null){
-    document.querySelector(".divForCardsHasSelc").innerHTML=localStorage.getItem("divForCardsHasSelc");
-  }
-
-  if(localStorage.getItem("numOfCardsAdd")!==null){
-    document.querySelector(".numOfCardsAdd").textContent=localStorage.getItem("numOfCardsAdd");
-  } else if(localStorage.getItem("numOfCardsAdd")==null){
-    document.querySelector(".numOfCardsAdd").textContent = 0;
-  }
-
-  if(localStorage.getItem("arrayOfCardsHadAddToCart")!==null){
-    arrayOfCardsHadAddToCart=JSON.parse(localStorage.getItem("arrayOfCardsHadAddToCart"));
-  } else if(localStorage.getItem("arrayOfCardsHadAddToCart")==null){
-    arrayOfCardsHadAddToCart = [];
-  }
-};
-
-
-/* end function to save in local storage */
-
-
-
-
-
-
-
-
-
-
-/* start function to Filter Profucts With Categories */
-
-
-
-
-
-/* start show all AllStoreCategories in her select */
-AllStoreCategoriesInSelect();
-
-async function AllStoreCategoriesInSelect(){
-
-  let R = query(collection(db, "StoreCategories"), orderBy("date","desc"));
-  const querySnapshot = await getDocs(R);
-  const cityList = querySnapshot.docs.map(doc => doc.data());
-  let array=cityList;
-
-  document.querySelector("#AllStoreCategories").innerHTML=`
-  
-  <option value="AllStoreCategories">كل الاقسام</option>
-
-  `;
-
-  array.forEach(e=>{
-
-    document.querySelector("#AllStoreCategories").innerHTML+=`
-      
-      <option value="${e.id}">${e.name}</option>
+    fetch("https://ipapi.co/json/").then(e=>e.json()).then(data=>{
+        document.querySelector("#city").value=data.city;
+        // translateText(data.city);
+    });
     
-    `;
+    
+    async function translateText(text){
 
-  });
-
+        let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=English|Arabic`;
+        await fetch(apiUrl).then(res => res.json()).then(data => {
+            let x = data.responseData.translatedText;
+            document.querySelector("#city").value=x;
+        });
+    
+    };
 
 };
 
-
-/* end show all AllStoreCategories in her select */
-
+getPersonCity();
 
 
 
+/* 3 end get person ciy and code */
 
 
-document.querySelector("#AllStoreCategories").addEventListener("change",async (e)=>{
-  let FilterWith = e.target.value;
-  let q;
-
-  if(FilterWith=="AllStoreCategories"){
-    document.querySelector(".LoadMore").style.display="block";
-    q = query(collection(db, "StoreProducts"), orderBy("date","desc"), limit(8));
-  } else {
-    document.querySelector(".LoadMore").style.display="none";
-    q = query(collection(db, "StoreProducts"),where("ProductCategorieId",'==',`${FilterWith}`), orderBy("date","desc"));
-  };
-  const querySnapshot = await getDocs(q);
-  const cityList = querySnapshot.docs.map(doc => doc.data());
-  let array=cityList;
-
-  document.querySelector(".cardsDad").innerHTML=``;
-  ShowAll(array);
-
-});
-
-
-/* end function to Filter Profucts With Categories */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* start function FormToSendOrder */
-
-
-
-document.querySelector(".FormToSendOrder").addEventListener("submit",(e)=>{
-  e.preventDefault();
-
-  let name = document.querySelector(".FormToSendOrder").querySelector("#full_name").value
-  let phoneNumber = document.querySelector(".FormToSendOrder").querySelector("#phone_number").value
-  let address = document.querySelector(".FormToSendOrder").querySelector("#full_address").value
-  let note = document.querySelector(".FormToSendOrder").querySelector("#full_note").value
-  let active = document.querySelector(".ProductName").textContent;
-
-
-  
-  
-  if(name!=""&&phoneNumber!=""&&address!="")
-  {
-    let id = (Math.random()*1000000).toFixed();
-    setDoc(doc(db,"Persons",`${id}`),{
-      id: id,
-      name: name,
-      phone: phoneNumber,
-      city: address,  
-      note: note,
-      date: Date.now(),
-      orderByUser: "المتجر",
-      isAccepted: "Orders-New",
-      country_calling_code: "+20",
-      orderDate: showDate(),
-      active: `${active}`,
-      orderNumber: id,
-    }).then(e=>{
-      Swal.fire(
-        'تم ارسال الطلب',
-        'سنقوم بالتواصل معك قريبا',
-        'success'
-      )
-    })
-
-  } else{
-    Swal.fire("","يجب عليك ادخال الاسم ورقم الهاتف والعنوان")
-  };
-
-  return false;
-});
-
-
-
-/* end function FormToSendOrder */
