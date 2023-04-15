@@ -1,0 +1,1532 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard-Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link rel="stylesheet" href="./css/framework.css" />
+    <link rel="stylesheet" href="./css/master.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
+
+
+    <link rel="icon" type="image/x-icon" href="./imgs/pubg icon.png">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment-precise-range-plugin@1.3.0/moment-precise-range.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+
+
+    <style>
+
+
+      @font-face {
+        font-family: myFirstFont;
+        src: url(./Fonts/Ethnocentric.ttf);
+      }
+
+      
+      /* Table Styles */
+
+      .table-wrapper{
+          box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+      }
+
+      .fl-table {
+          border-radius: 5px;
+          font-size: 17px;
+          font-weight: normal;
+          border: none;
+          border-collapse: collapse;
+          width: 100%;
+          max-width: 100%;
+          white-space: nowrap;
+          background-color: white;
+      }
+
+      .fl-table td{
+          text-align: center;
+          padding: 3px;
+          border: 2px solid #0a1951;
+      }
+
+
+      .fl-table th {
+          text-align: center;
+          padding: 8px;
+          border: 2px solid #0a1951;
+      }
+
+
+      .fl-table td {
+          border-right: 1px solid #f8f8f8;
+          font-size: 14px;
+          font-family: 'Cairo';
+      }
+
+
+      .fl-table thead th {
+          color: #ffffff;
+          background: #0a1951;
+      }
+
+      .fl-table tr {
+        border: 1px solid rgb(0, 0, 0);
+      }
+
+      /* Responsive */
+
+      @media (max-width: 767px) {
+          .HelloDiv {
+              display: none;
+          }
+      }
+
+
+
+      .CompanyName::before{
+        content: "Digital vision for information technology";
+        position: relative;
+        bottom: -28px;
+        left: 300px;
+        font-family: myFirstFont;
+        color: #397eaf;
+        font-size: 13px;
+      }
+
+
+
+
+      .OrderActiveNote{
+        width: 98%;
+        border: 2px solid black;
+        border-radius: 6px;
+        padding: 10px;
+        font-size: 20px;
+      }
+
+
+      .OrderActiveNoteTwo{
+        width: 98%;
+        border: 2px solid black;
+        border-radius: 6px;
+        padding: 10px;
+        font-size: 20px;
+      }
+
+
+      
+
+
+/* Slideshow container */
+.slideshow-container {
+  position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+
+.mySlides img {
+  max-height: 600px;
+}
+
+
+
+
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 10px;
+  color: white;
+  background-color: rgba(0,0,0,0.8);
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  text-decoration: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev {
+  left: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: white;
+  background: black;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+.fade:not(.show) {
+  opacity: 10!important;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+
+
+
+
+
+
+
+
+    </style>
+
+  </head>
+  <body>
+    <div class="page d-flex">
+      
+      <div class="content w-full">
+        
+        <!-- Start Head -->
+        <div class="head bg-white between-flex" style="padding: 0px 10px 15px; background: #f1f5f9;">
+          <div class="p-relative">
+            <h1 class="p-relative" style="text-align: center;">المنتجات</h1>
+          </div>
+          <div class="icons d-flex align-center">
+            <a href="./setting-page.html">
+              <i class="fa-solid fa-gear fa-bounce" style="font-size: 30px; margin: 18px 0px 0px;"></i>
+            </a>
+          </div>
+        </div>
+        <!-- End Head -->
+
+        <div style="display: flex;align-items: center; justify-content: space-between; margin: 10px 5px; overflow: scroll;">
+          <div>
+            <select class="limitToFirst">
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+              <option value="500">500</option>
+              <option value="1000">1000</option>
+              <option value="2000">2000</option>
+              <option value="10000">10000</option>
+            </select>
+          </div>
+
+          <div class="SearchDiv" style="background: #0a1951; border-radius: 6px; border: none; padding: 5px;">
+            <select dir="rtl" class="SearchField" style="margin: 5px 0px;font-size: 20px;background: white;color: black;padding: 5px;border: 2px solid black;border-radius: 6px;text-align: start;font-weight: bold;">
+              <option value="id">رقم المنتج</option>
+              <option value="ProductName">اسم المنتج</option>
+              <option value="ProductPrice"> سعر المنتج </option>
+            </select>
+            <input type="text" placeholder="Search text" class="addOrderInput SearchInput" style="max-width: 150px; font-size: 20px;">
+            <button class="SearchBtn" style="cursor: pointer; font-size: 20px;background: white;color: black;padding: 5px;border: 2px solid black;border-radius: 6px;text-align: end;font-weight: bold;">Search</button>
+          </div>
+
+          <button style="font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600; border: none; min-width: 120px;" class="BannarBtn">تعديل البانر</button>
+          <button style="font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600; border: none; min-width: 120px;" class="StoreCategoriesBtn">اقسام المتجر</button>
+          <button style="font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600; border: none; min-width: 120px;" class="addNewOrder">اضافة منتج</button>
+        </div>
+
+        <div style="overflow: auto;">
+
+          <div class="table-wrapper">
+            <table class="fl-table">
+                <thead>
+                <tr>
+                    <th>التعديل</th>
+                    <th>القسم</th>
+                    <th>سعر المنتج</th>
+                    <th>اسم المنتج</th>
+                    <th>رقم المنتج</th>
+                    <th>#</th>
+                </tr>
+                </thead>
+
+                <tbody id="AllOrders">
+                
+                <tbody>
+            </table>
+        </div>
+          
+        </div>
+
+      </div>
+
+
+      <!-- Start Sidebar can copy it to anthor file -->
+      <div class="sidebar bg-white p-20 p-relative">
+        <div class="HelloDiv">
+          <i class="fa-regular fa-circle-user fa-fw" style="font-weight: bold;font-size: 50px;width: 100%;"></i>
+          <h2>Hello <span id="AdminName" style="color: #397eaf"></span></h2>
+        </div>
+        <ul>
+          
+          <li>
+
+            
+
+            <a class="active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end;" href="Dashboard-Store.html">
+              <span style="font-weight: bold; font-size:20px;">المتجر</span>
+              <i class="fa-regular fa-cart-shopping" style="font-weight: bold; font-size:20px; margin-left: 10px;"></i>
+            </a>
+
+            <a class="active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end;" href="Dashboard-Orders.html">
+              <span style="font-weight: bold; font-size:20px;">الطلبات</span>
+              <i class="fa-regular fa-circle-user fa-fw" style="font-weight: bold; font-size:20px; margin-left: 10px;"></i>
+            </a>
+
+            <a class="active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end;" href="Dashboard-OrdersActives.html">
+              <span style="font-weight: bold; font-size:20px;">طلبات التفعيل</span>
+              <i class="fa-solid fa-circle-check fa-fw" style="color: #1877f2;; font-weight: bold; font-size:20px; margin-left: 10px;"></i>
+            </a>
+
+            <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer;" href="Dashboard-Accepted.html">
+              <span style="font-weight: bold; font-size:20px;">العملاء</span>
+              <i class="fa-regular fa-circle-user fa-fw" style="font-weight: bold; font-size:20px; margin-left: 10px; color: green; border-radius: 50%;"></i>
+            </a>
+
+            <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer;" href="Dashboard-Archived.html">
+              <span style="font-weight: bold; font-size:20px;">الارشيف</span>
+              <i class="fa-solid fa-folder-open fa-fw" style="font-weight: bold; font-size:20px; margin-left: 10px; color: gray;"></i>
+            </a>
+
+            <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer;" href="Dashboard-Technical-Support.html">
+              <span style="font-weight: bold; font-size:20px;">الدعم الفني</span>
+              <i class="fa-solid fa-headset" style="font-weight: bold; font-size:20px; margin-left: 10px; color: gray;"></i>
+            </a>
+
+            <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer;" href="Dashboard-Suppliers.html">
+              <span style="font-weight: bold; font-size:20px;">الموردين</span>
+              <i class="fa-regular fa-truck-field" style="font-weight: bold; font-size:20px; margin-left: 10px; color: #397eaf;"></i>
+            </a>
+
+            <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer;" href="Print-Page.html">
+              <span style="font-weight: bold; font-size:20px;">عرض سعر</span>
+              <i class="fa-solid fa-file-invoice-dollar" style="font-weight: bold; font-size:20px; margin-left: 15px; color: #20a2ed;"></i>
+            </a>
+
+            <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer;" href="Dashboard-Reports.html">
+              <span style="font-weight: bold; font-size:20px;">التقارير</span>
+              <i class="fa-regular fa-book" style="font-weight: bold; font-size:20px; margin-left: 15px; color: #000000;"></i>
+            </a>
+
+            <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer; background: rgba(137, 8, 8, 0.676); color: white;" id="logOut-digital">
+              <span style="font-weight: bold; font-size:20px;">تسجيل الخروج</span>
+              <i class="fas fa-sign-out-alt fa-fw" style="font-weight: bold; font-size:20px; margin-left: 10px; color: white;"></i>
+            </a>
+
+          </li>
+          
+        </ul>
+      </div>
+      <!-- End Sidebar can copy it to anthor file -->
+
+    </div>
+
+
+</body>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
+
+  <script type="module">
+
+
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js';
+  import { getFirestore, collection, query, where, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js';
+
+  // TODO: Replace the following with your app's Firebase project configuration
+  
+  import { firebaseConfig } from './firebase.js';
+
+  firebase.initializeApp(firebaseConfig);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  let X;
+
+  async function getCit(db,X) {
+  const citiesCol = collection(db,`${X}`);
+  const citySnapshot = await getDocs(citiesCol);
+  const cityList = citySnapshot.docs.map(doc => doc.data());
+  return cityList;
+  };
+
+
+
+
+
+
+
+
+
+/* start return AllStoreProducts */
+
+let AllStoreProducts;
+
+async function forAllStoreProducts(X){
+
+  const q = query(collection(db, "StoreProducts"), orderBy("date","desc"), limit(X||20));
+  const querySnapshot = await getDocs(q);
+  const cityList = querySnapshot.docs.map(doc => doc.data());
+
+  AllStoreProducts=cityList;
+
+  return AllStoreProducts;
+};
+
+/* end return AllStoreProducts */
+
+
+//////////////////////////////////////////////////////////////////////////
+
+
+
+
+document.querySelector("body > div > div.sidebar.bg-white.p-20.p-relative > ul > li > a:nth-child(1)").style.background="rgb(176 206 226 / 85%)"
+
+
+
+
+
+
+
+
+
+/*start login cods*/
+
+
+
+/* 02 start get AllAccounts */
+
+let AllAccounts;
+
+await getCit(db, 'accounts').then(async (e) => {
+  AllAccounts = e;
+})
+
+async function getUserDataWithId(id){
+  return AllAccounts.find(e=>e.id==id);
+}
+
+/* 02 end get All Accounts */
+
+
+
+
+
+
+
+/* 04 start check and get user doc */
+
+let mainPersonData;
+let docId = await localStorage.getItem("doc-digital-id");
+
+if(docId!==null&&docId.trim()!==''){
+    // document.querySelector('.profile-btn').dataset.personid=docId;
+    mainPersonData=await getUserDataWithId(docId);
+
+    if(mainPersonData.isAdmin==false){
+      location.href="./Dashboard-notAdmin.html";
+    };
+
+    document.querySelector("#AdminName").textContent=`${mainPersonData.username}..`;
+} else {
+  location.href="./login/login.html"
+}
+
+/* 04 end check and get user doc */
+
+
+
+document.querySelector("#logOut-digital").addEventListener("click",()=>{
+
+  localStorage.setItem("doc-digital-id","");
+  location.href="./login/login.html";
+
+});
+
+
+/*end login cods*/
+
+
+
+
+
+
+/* start limitToFirst btn */
+
+document.querySelector(".limitToFirst").addEventListener("change",(e)=>{
+
+let limitToFirst=e.srcElement.value;
+
+getAllStoreProducts(limitToFirst);
+  
+});
+
+/* end limitToFirst btn */
+
+
+
+
+
+
+
+
+
+
+/* 3 start get AllStoreProducts */
+let AllPersonsData;
+
+
+
+async function getAllStoreProducts(X){
+  
+  forAllStoreProducts(X).then(AllStoreProducts=>{
+        let i = 0;
+  
+        AllPersonsData=AllStoreProducts;
+  
+
+        if(AllStoreProducts.length!==0){
+          document.querySelector("#AllOrders").innerHTML="";
+        }
+
+        
+  
+  
+        AllStoreProducts.forEach(el=>{
+            let I=0;
+            if((el.ProductName).trim()!==""&&(el.ProductPrice).trim()!==""&&(el.id).trim()!==""&&(el.ProductNote).trim()!==""){
+              i++;
+              document.querySelector("#AllOrders").innerHTML+=`
+  
+  
+                  <tr data-id="${el.id}" style="font-weight: 600;">
+                    <td class="Order-Editing">
+                      
+  
+                      <a>
+                        <i title="حذف" class="fa-solid fa-trash removeOrder" data-id="${el.id}" style="font-size: 20px; color: white; background: darkred; border-radius: 50%; padding: 6px 8px; cursor: pointer;"></i>
+                      </a>
+  
+                      <a>
+                        <i title="تعديل" class="fa-solid fa-pen-to-square editOrder" data-id="${el.id}" style="font-size: 20px; color: #e0dfdf; background: #233245; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
+                      </a>
+
+                      <a>
+                        <i title="تفاصيل المنتج" class="fa-sharp fa-solid fa-circle-info Order-Note" data-id="${el.id}" data-img="${el.ProductImage}" data-note="${el.ProductNote}" style="font-size: 25px; color: #233245; background: white; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
+                      </a>
+  
+                      
+                    </td>
+                    <td class="Product-Categorie-Name">${el.ProductCategorieName}</td>
+                    <td class="Order-ByUser">${el.ProductPrice}</td>
+                    <td class="Product-Name">${el.ProductName}</td>
+                    <td class="Product-Number">${el.id}</td>
+                    <td class="Product-Id">#${i}</td>
+                  </tr>
+              
+              
+              `;
+            };
+        });
+    });
+};
+
+
+/* 3 End get AllStoreProducts */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* start search in firebase doc (search in students) */
+
+
+document.querySelector(".SearchBtn").addEventListener("click",async ()=>{
+
+let SearchField = document.querySelector(".SearchField").value;
+let SearchInput = document.querySelector(".SearchInput").value;
+
+SearchField=SearchField.trim();
+SearchInput=SearchInput.trim();
+
+console.log(SearchField,SearchInput);
+
+if(SearchField!==""&&SearchField!=="SearchInput"){
+
+  const q = query(collection(db, "StoreProducts"), where(SearchField, '==', SearchInput));
+
+  const querySnapshot = await getDocs(q);
+  const cityList = querySnapshot.docs.map(doc => doc.data());
+  let AllFromSearch=cityList;
+
+  console.log(AllFromSearch);
+  document.querySelector("#AllOrders").innerHTML=``;
+
+  let i = 0;
+
+  AllFromSearch.forEach(el=>{
+    i++;
+
+    document.querySelector("#AllOrders").innerHTML+=`
+
+                  <tr data-id="${el.id}" style="font-weight: 600;">
+                    <td class="Order-Editing">
+                      
+  
+                      <a>
+                        <i title="حذف" class="fa-solid fa-trash removeOrder" data-id="${el.id}" style="font-size: 20px; color: white; background: darkred; border-radius: 50%; padding: 6px 8px; cursor: pointer;"></i>
+                      </a>
+  
+                      <a>
+                        <i title="تعديل" class="fa-solid fa-pen-to-square editOrder" data-id="${el.id}" style="font-size: 20px; color: #e0dfdf; background: #233245; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
+                      </a>
+
+                      <a>
+                        <i title="تفاصيل المنتج" class="fa-sharp fa-solid fa-circle-info Order-Note" data-id="${el.id}" data-img="${el.ProductImage}" data-note="${el.ProductNote}" style="font-size: 25px; color: #233245; background: white; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
+                      </a>
+  
+                      
+                    </td>
+                    <td class="Order-ByUser">${el.ProductPrice}</td>
+                    <td class="Product-Name">${el.ProductName}</td>
+                    <td class="Product-Number">${el.id}</td>
+                    <td class="Product-Id">#${i}</td>
+                  </tr>
+    
+    `;
+
+  });
+  
+};
+
+});
+
+
+/* end search in firebase doc (search in students) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 4 Start set Orders Accepted and orders archived*/
+
+window.onclick=(e)=>{
+
+
+  
+/* start btn to  add Categorie */
+if([...e.target.classList].includes("AddNewCategorie")){
+  AddNewCategorie();
+};
+/* start btn to  add Categorie */
+
+
+
+
+  
+/* start btn to  Delete Categorie */
+if([...e.target.classList].includes("RemoveCategorie")){
+  DeleteCategorie();
+};
+/* start btn to  Delete Categorie */
+
+
+
+
+
+/* start order detals btn*/
+if([...e.target.classList].includes("Order-Note")){
+  Swal.fire(
+      `${e.target.dataset.note}`
+    );
+
+    Swal.fire({
+      title: 'وصف المنتج',
+      text: `${e.target.dataset.note}`,
+      imageUrl: `${e.target.dataset.img}`,
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: 'Custom image',
+    })
+}
+/* end order detals btn*/
+
+
+
+
+
+/* start remove product */
+if([...e.target.classList].includes("removeOrder")){
+
+
+  Swal.fire({
+  title: 'Are you want to delet it?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+      let productId=e.target.dataset.id;
+      let productData=AllPersonsData.find(el=>el.id==`${productId}`);
+
+      let productDoc=doc(db, "StoreProducts", productId);
+
+      deleteDoc(productDoc);
+
+      e.target.parentNode.parentNode.parentNode.remove();
+
+      Swal.fire(
+        'Deleted!',
+        'Product has been deleted.',
+        'success'
+      );
+
+    }
+  })
+
+
+};
+/* end remove product */
+
+
+
+
+/* start edit order */
+
+
+if([...e.target.classList].includes("editOrder")){
+
+  let productId=e.target.dataset.id;
+  let productData=AllPersonsData.find(el=>el.id==`${productId}`);
+
+  swool(productData);
+
+};
+
+
+
+async function swool(productData){
+
+  let AllStoreCategories;
+  await getAllStoreCategories().then(e=>{
+    AllStoreCategories=e;
+  });
+
+
+  let newSelect = document.createElement("select");
+  AllStoreCategories.forEach(e=>{
+
+    newSelect.innerHTML+=`
+    <option value="${e.id}">${e.name}</option>
+    `;
+
+  });
+
+
+
+
+  Swal.fire({
+      title: 'قم بتعديل البيانات التالية',
+      html: `
+      
+      
+      <div class="mainForm" style="overflow-y: hidden; overflow-c: scroll; font-size: 17px!important; font-family: 'Cairo', sans-serif; font-weight: bold!important;">
+
+        <label for="ProductName">اسم المنتج</label>
+        <input style="width: 98%;" class="addOrderInput" type="text" dir="auto" autocomplete="off" id="ProductName" value="${productData.ProductName}">
+
+        <label for="ProductPrice">سعر المنتج</label>
+        <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="ProductPrice" value="${productData.ProductPrice}">
+
+        <label for="ProductNote">وصف المنتج</label>
+        <textarea style="width: 98%;" class="addOrderInput" rows="5" id="ProductNote" type="text" dir="auto" autocomplete="off" id="ProductNote" value="${productData.ProductNote}">${productData.ProductNote}</textarea>
+
+
+        <label for="ProductCategorie">القسم</label>
+        <select style="width: 98%;" class="addOrderInput" id="ProductCategorie" dir="auto">
+          <option value="${productData.ProductCategorieId}">${productData.ProductCategorieName}</option>
+          ${newSelect.innerHTML}
+        </select>
+        <br>
+
+        <p style="text-align: center;">
+          Product Code ${productData.id}
+        </p>
+
+
+      </div>
+      
+      
+      `,
+      confirmButtonText: 'حفظ',
+  }).then((result) => {    
+      if (result.isConfirmed) {
+
+          
+          let ProductName=document.querySelector("#ProductName").value;
+          let ProductPrice=document.querySelector("#ProductPrice").value;
+          let ProductNote=document.querySelector("#ProductNote").value;
+          let ProductCategorieSelect=document.querySelector("#ProductCategorie");
+          let ProductCategorieId=ProductCategorieSelect.value;
+          let ProductCategorieName = ProductCategorieSelect.options[ProductCategorieSelect.selectedIndex].text;
+
+
+          
+          if(ProductName.trim()!==''&&ProductPrice.trim()!==''&&ProductNote.trim()!==''){
+            
+            setDoc(doc(db,"StoreProducts",productData.id), {
+              ...productData,
+              ProductName: ProductName,
+              ProductPrice: ProductPrice,
+              ProductNote: ProductNote,
+              ProductCategorieId: ProductCategorieId,
+              ProductCategorieName: `${ProductCategorieName}`,
+            }).then(e=>{});
+
+
+          };
+
+      };
+  });
+
+};
+
+/* end edit order */
+
+
+
+
+
+
+
+
+
+
+
+if([...e.target.classList].includes("ProductImgLabel")){
+
+  let imgInput = e.target.parentNode.querySelector("#ProductImgInput");
+  let img = e.target.parentNode.querySelector(".ProductImgUpload");
+  imgInput.addEventListener("change",(e)=>{
+
+    document.querySelector(".ProductImgsUploadDad").innerHTML=``;
+    for(let i=0; i<e.target.files.length; i++){
+      let x = e.target.files[i];
+      const reader = new FileReader();
+      reader.readAsDataURL(e.target.files[i]);
+      reader.onload = () => {
+        document.querySelector(".ProductImgsUploadDad").innerHTML+=`
+        
+          <img src="${reader.result}" style="border-radius: 10px; margin: 10px auto; max-height: 200px; border-bottom: 3px solid black; margin-bottom: 10px;" class="ProductImgUpload">
+
+        `;
+      };
+    };
+  
+    // e.target.value=null;
+    document.querySelector(".ProductImgLabel").style.display="none";
+    document.querySelector(".ProductImgsUploadDad").style.display="block";
+  });
+
+  
+};
+
+
+
+
+
+};
+
+/* 4 end set Orders Accepted and orders archived*/
+
+
+
+
+
+
+/* 5 start add new Product */
+
+document.querySelector(".addNewOrder").addEventListener("click",async ()=>{
+
+
+  let AllStoreCategories;
+  await getAllStoreCategories().then(e=>{
+    AllStoreCategories=e;
+  });
+
+
+  let newSelect = document.createElement("select");
+  AllStoreCategories.forEach(e=>{
+
+    newSelect.innerHTML+=`
+    <option value="${e.id}">${e.name}</option>
+    `;
+
+  });
+
+
+  Swal.fire({
+      title: ' اضافة منتج جديد ',
+      html: `
+      
+      
+      <div class="mainForm" style="overflow-y: hidden; overflow-c: scroll; font-size: 17px!important; font-family: 'Cairo', sans-serif; font-weight: bold!important;">
+
+        <label for="ProductName">اسم المنتج</label>
+        <input style="width: 98%;" class="addOrderInput" type="text" dir="auto" autocomplete="off" id="ProductName" >
+
+        <label for="ProductPrice">سعر المنتج</label>
+        <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="ProductPrice">
+
+        <label for="ProductNote">وصف المنتج</label>
+        <textarea style="width: 98%;" class="addOrderInput" rows="5" id="ProductNote" type="text" dir="auto" autocomplete="off" id="ProductNote"></textarea>
+      
+
+        <label for="ProductCategorie">القسم</label>
+        <select style="width: 98%;" class="addOrderInput" id="ProductCategorie" dir="auto">
+          ${newSelect.innerHTML}
+        </select>
+
+        <br><br>
+
+        <label for="ProductImgInput" class="ProductImgLabel" style="border: none;border-radius: 20px;background: green;color: white;padding: 5px 15px;cursor: pointer;">اختر صور المنتج</label>
+        <input style="width: 98%; display: none;" class="addOrderInput" accept="image/*" type="file" dir="rtl" autocomplete="off" id="ProductImgInput" multiple="multiple">
+
+        <br><br>
+
+        <div class="ProductImgsUploadDad" style="background: black; display: none; overflow:scroll; max-height: 250px; border: 2px solid black; border-radius: 6px; padding: 5px;">
+          
+        </div>
+
+      `,
+      confirmButtonText: 'اضافة',
+      showCancelButton: true,
+  }).then(async (result) => {    
+      if (result.isConfirmed) {
+          let ProductName=document.querySelector("#ProductName").value;
+          let ProductPrice=document.querySelector("#ProductPrice").value;
+          let ProductNote=document.querySelector("#ProductNote").value;
+          let ProductImgInput = document.querySelector("#ProductImgInput");
+          let ProductCategorieSelect=document.querySelector("#ProductCategorie");
+          let ProductCategorieId=ProductCategorieSelect.value;
+          let ProductCategorieName = ProductCategorieSelect.options[ProductCategorieSelect.selectedIndex].text;
+
+          function idGenerator() {
+            return (Math.random()*10000000).toFixed();
+          };
+
+          let id = idGenerator();
+
+
+          if(ProductName.trim()!==''&&ProductPrice.trim()!==''&&ProductNote.trim()!==''&&ProductCategorieId.trim()!==''&&ProductCategorieName.trim()!==''){
+            Swal.fire({
+              title: 'Please Wait!',
+              didOpen: () => {
+                Swal.showLoading()
+              }
+            });
+            uploadImage(ProductImgInput,ProductName,ProductPrice,ProductNote,id, undefined,ProductCategorieId,ProductCategorieName);
+          };
+
+
+          
+      };
+  });
+
+});
+
+
+/* 5 end add new Product */
+
+
+
+
+
+function AddNewProduct(ProductName,ProductPrice,ProductNote,id,ProductImage,ProductCategorieId,ProductCategorieName,ArrayOfProductImages){
+  setDoc(doc(db,"StoreProducts",id), {
+      id: id,
+      ProductName: ProductName,
+      ProductPrice: ProductPrice,
+      ProductNote: ProductNote,
+      ProductCategorieId: ProductCategorieId,
+      ProductCategorieName: `${ProductCategorieName}`,
+      ProductImage: ProductImage,
+      ProductDate: showDate(),
+      date: Date.now(),
+      ArrayOfProductImages: ArrayOfProductImages,
+    }).then(e=>{});
+
+};
+
+
+
+
+
+
+
+/*  start function to upload img */
+
+
+
+
+async function uploadImage(input,ProductName,ProductPrice,ProductNote,id,ProductImage,ProductCategorieId,ProductCategorieName) {
+
+
+
+if(input!=="noNewImg"){
+
+  let ArrayOfProductImages = [];
+  for(let i=0; i<input.files.length; i++){
+
+    const ref = firebase.storage().ref();
+    const file =  input.files[i];
+    const name = +new Date() + "-" + file.name;
+    const metadata = {
+      contentType: file.type,
+    };
+    
+    const task = ref.child(name).put(file, metadata);
+    await task
+    .then(async snapshot => snapshot.ref.getDownloadURL())
+    .then(async url => {
+    
+      ArrayOfProductImages.push({src: url});
+      
+    })
+    .catch(console.error);
+    
+    };
+
+    Swal.fire("Done");
+    AddNewProduct(ProductName,ProductPrice,ProductNote,id, ArrayOfProductImages[0].src,ProductCategorieId,ProductCategorieName,ArrayOfProductImages);
+  };
+
+
+};
+
+
+/* end function to upload img */
+
+
+
+
+const colRef= collection(db,"StoreProducts");
+
+onSnapshot(colRef,async()=>{
+  getAllStoreProducts();
+});
+
+
+
+
+/* 1 start function to get data now */
+function showDate(){
+  
+  const d = new Date();
+  
+  let year = d.getFullYear();
+  let month = d.getMonth();
+  let day = d.getDate();
+  let hour = d.getHours();
+  let mint = d.getMinutes();
+  
+  if(mint<10){
+    mint=`0${mint}`
+  }
+  
+  let dateNow;
+
+  // console.log(hour)
+
+  if (hour>=12){
+    
+    dateNow= `
+      ${year}/${month+1}/${day}
+      => ${hour-12}:${mint} PM
+      `;
+
+  } else if (hour<=11){
+    
+      dateNow = `
+      
+      ${year}/${month+1}/${day}
+         ${hour}:${mint} AM
+      
+      `;
+  }
+  return dateNow;
+}
+
+/* 1 end function to get data now */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 5 start add new bannar */
+
+document.querySelector(".BannarBtn").addEventListener("click",()=>{
+
+
+Swal.fire({
+    title: ' تعديل صور البانر ',
+    html: `
+    
+    
+    <div class="mainForm" style="overflow-y: hidden; overflow-c: scroll; font-size: 17px!important; font-family: 'Cairo', sans-serif; font-weight: bold!important;">
+
+      <label for="BannarNumber">رقم البانر</label>
+
+      <select style="width: 98%;" class="addOrderInput" id="BannarNumber" dir="auto">
+        <option value="Bannar1">الاول</option>
+        <option value="Bannar2">الثاني</option>
+        <option value="Bannar3">الثالث</option>
+      </select>
+
+
+      <label for="BannarLink">لينك العرض</label>
+      <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="BannarLink">
+
+      <br><br>
+      <label for="BannerImgInput" class="ProductImgLabel" style="border: none;border-radius: 20px;background: green;color: white;padding: 5px 15px;cursor: pointer;">اختر صورة البنر</label>
+      <input style="width: 98%; display: none;" class="addOrderInput" accept="image/*" type="file" dir="rtl" autocomplete="off" id="BannerImgInput" >
+
+      <br><br>
+
+      <img src="" style="display: none; width: 100%; max-height: 200px;" class="ProductImgUpload">
+
+
+    </div>
+
+    `,
+    confirmButtonText: 'حفظ',
+}).then(async (result) => {    
+    if (result.isConfirmed) {
+
+        let BannarNumber=document.querySelector("#BannarNumber").value;
+        let BannarLink=document.querySelector("#BannarLink").value;
+        let BannerImgInput = document.querySelector("#BannerImgInput");
+        let id = `${BannarNumber}`;
+
+
+        if(BannarNumber.trim()!==''&&BannarLink.trim()!==''){
+          
+          const ref = firebase.storage().ref();
+          const file =  BannerImgInput.files[0];
+          const name = +new Date() + "-" + file.name;
+          const metadata = {
+            contentType: file.type,
+          };
+          
+          const task = ref.child(name).put(file, metadata);
+          task
+          .then(async snapshot => snapshot.ref.getDownloadURL())
+          .then(async url => {
+          
+            console.log(url)
+
+            setDoc(doc(db,"Bannar",`${id}`),{
+              BannarImg: url,
+              BannarLink: BannarLink,
+            });
+            
+          });
+
+        };
+
+    };
+});
+
+});
+
+
+/* 5 end add new bannar */
+
+
+
+
+
+
+
+
+
+
+
+/* start Store Categories Btn */
+
+
+document.querySelector(".StoreCategoriesBtn").addEventListener("click",()=>{
+  ShowAllStoreCategories();
+});
+
+
+
+async function getAllStoreCategories(){
+  const q = query(collection(db, "StoreCategories"), orderBy("date","desc"));
+  const querySnapshot = await getDocs(q);
+  const cityList = querySnapshot.docs.map(doc => doc.data());
+
+  return cityList;
+};
+
+
+
+async function ShowAllStoreCategories() {
+
+  let AllStoreCategories;
+  await getAllStoreCategories().then(e=>{
+    AllStoreCategories=e;
+  });
+
+
+  let newSelect = document.createElement("select");
+  AllStoreCategories.forEach(e=>{
+
+    newSelect.innerHTML+=`
+    <option value="${e.id}">${e.name}</option>
+    `;
+
+  });
+
+
+  Swal.fire({
+      title: ' اقسام المتجر ',
+      html: `
+      
+      <div class="mainForm" style="overflow-y: hidden; overflow-c: scroll; font-size: 17px!important; font-family: 'Cairo', sans-serif; font-weight: bold!important;">
+
+        <label for="AllCategories">جميع الاقسام</label>
+        <select style="width: 98%;" class="addOrderInput" id="AllCategories" dir="auto">
+          ${newSelect.innerHTML}
+        </select>
+        <br>
+        <button style="font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: darkred; color: white; padding: 5px 0px; font-weight: 600; border: none;" class="RemoveCategorie">حذف قسم</button>
+        <button style="font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: green; color: white; padding: 5px 0px; font-weight: 600; border: none;" class="AddNewCategorie">اضافة قسم</button>
+
+      </div>
+
+      `,
+      showConfirmButton: false
+  });
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+async function AddNewCategorie(){
+  let { value: name } = await Swal.fire({
+    input: 'text',
+    title: 'اسم القسم',
+    confirmButtonText: 'ok'
+  })
+
+  if(name){
+    let id = (Math.random()*100000000).toFixed();
+
+    setDoc(doc(db,"StoreCategories",`${id}`),{
+      id: id,
+      name: name,
+      date: Date.now(),
+    }).then(
+      Swal.fire(
+        'Good!',
+        'تم اضافة القسم',
+        'success'
+      )
+    );
+    
+  };
+};
+
+
+
+
+
+
+
+
+
+
+async function DeleteCategorie(){
+
+  let CategorieSelect = document.querySelector("#AllCategories");
+  let CategorieNeedToRemove = CategorieSelect.value.trim();
+  let CategorieNeedToRemoveName = CategorieSelect.options[CategorieSelect.selectedIndex].text;
+  let CategorieDoc=doc(db, "StoreCategories", `${CategorieNeedToRemove}`);
+
+  Swal.fire({
+    title: "هل تريد حذف هذا القسم؟",
+    html: `<h2>${CategorieNeedToRemoveName}</h2>`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if(result.isConfirmed) {
+
+      deleteDoc(CategorieDoc).then(e=>{
+
+        Swal.fire(
+          'Deleted!',
+          'Categorie has been deleted.',
+          'success'
+        );
+
+      })
+    };
+  });
+
+};
+
+
+/* end Store Categories Btn */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 2 start function to get differnce between data now */
+function getDiffDate(oldDate){
+        
+    var starts = moment(`${oldDate}`);
+    var ends   = moment();
+
+    var duration = moment.duration(ends.diff(starts));
+
+    // with ###moment precise date range plugin###
+    // it will tell you the difference in human terms
+
+    var diff = moment.preciseDiff(starts, ends, true); 
+    // example: { "years": 2, "months": 7, "days": 0, "hours": 6, "minutes": 29, "seconds": 17, "firstDateWasLater":  false }
+
+
+    // or as string:
+    var diffHuman = moment.preciseDiff(starts, ends);
+    // example: 2 years 7 months 6 hours 29 minutes 17 seconds
+
+    let diffDate=diff;
+
+    if(diffDate.years!==0){
+        diffDate={
+            "diffDateNum": diffDate.years,
+            "diffDateName": "سنة",
+        };
+    } else if(diff.months!==0){
+        diffDate={
+            "diffDateNum": diffDate.months,
+            "diffDateName": "شهر",
+        };
+    } else if(diff.days!==0){
+        diffDate={
+            "diffDateNum": diffDate.days,
+            "diffDateName": "يوم",
+        };
+    } else if(diff.hours!==0){
+        diffDate={
+            "diffDateNum": diffDate.hours,
+            "diffDateName": "ساعة",
+        };
+    } else if(diff.minutes!==0){
+        diffDate={
+            "diffDateNum": diffDate.minutes,
+            "diffDateName": "دقيقة",
+        };
+    } else {
+        diffDate={
+            "diffDateNum": 0,
+            "diffDateName": "الان",
+        };
+    }
+
+    let stringDiffDate = `منذ ${diffDate.diffDateNum + " " + diffDate.diffDateName}`;
+    // منذ 1 سنة
+
+    if(diffDate.diffDateName=="الان"){
+      stringDiffDate="الان";
+    }
+    
+    // diffDate => json like {diffDateNum: 1, diffDateName: 'سنة'}
+
+    return stringDiffDate;
+}
+
+// console.log(getDiffDate("2022/1/1 => 5:55 PM"));
+
+/* 2 end function to get differnce between data now */
+
+
+
+
+
+
+</script>
+
+
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="KoxFDST3d6i1bDnCHChJAry6xM0lyiGrrxymKitlGas" />
+    <title>مؤسسة الرؤية الرقمية</title>
+    <link rel="shortcut icon" href="./Main-Page-Folder/images/logo.png">
+    <!-- start link css -->
+    <link rel="stylesheet" href="./Main-Page-Folder/style.css   ">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- end link css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+    <!--  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/CSSRulePlugin.min.js"></script>
+    <script src="https://kit.fontawesome.com/3f5e60a4f0.js" crossorigin="anonymous"></script>
+
+    <style>
+        
+        .nav-item a{
+            font-weight: bold;
+            font-size: 20px;
+            font-family: 'Cairo', sans-serif;
+            margin: 0px 10px;
+        }
+
+        .cardPage{
+            width: 100%;
+            height: 100%;
+            border: 2px solid black;
+            border-radius: 20px;
+        }
+
+        .cardPage h5{
+            font-weight: bold;
+        }
+
+        .CompanyName::before {
+            content: "Digital vision for information technology";
+            position: relative;
+            bottom: -25px;
+            left: 280px;
+            font-family: "cairo",sans-serif;
+            font-weight: bold;
+            color: #397eaf;
+            font-size: 22px;
+        }
+
+
+        @media (max-width: 1220px) {
+            .CompanyName{
+                display: none;
+            }
+        }
+
+
+        #cardGif{
+            transition-duration: 1s;
+        }
+        #cardGif > .icon{
+            border-radius: 20px;
+        }
+
+        #cardGif:hover{
+            background: #272727;
+            color: white;
+        }
+
+        .friends > .cardPage{
+            border: 3px solid black;
+            transition-duration: 0.5s;
+        }
+
+        .friends > .cardPage:hover{
+            border: 3px solid #4baf39;
+        }
+
+
+    </style>
+    <!--  -->
+
+</head>
+<body>
+    
+    <!-- Stat nav -->
+    <div class="bg-white" style="position: fixed; z-index: 2; width: 100%; border-bottom: 1px solid rgba(128, 128, 128, 0.485);">
+        <div class="">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white font-weight-bold" style="font-family: sans-serif;">
+                
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto" style="flex: auto; justify-content: start;">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">تواصل معنا</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./store.html">المتجر</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./Form.html">ماذا نقدم</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#who-are-we">من نحن</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="home-btn">الرئيسية</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="icons d-flex align-center">
+                    <p class="CompanyName" style="font-weight: bold; font-size: 20px; font-family: cairo,sans-serif; padding-right: 10px;"> الرؤيا الرقمية لتقنية المعلومات </p>
+                    <img src="./Main-Page-Folder/images/logo.png" style="width: 50px;" alt="" class="Nav-Logo">
+                </div>
+
+            </nav>
+        </div>
+    </div>
+    <!-- End nav -->
+
+    <div style="height: 60px;"></div>
+    <!-- start bannar -->
+    <div>
+        <img src="./Main-Page-Folder/images/phone Banner.png" style="width: 100%;" id="headerImg">
+    </div>
+    <!-- end bannar -->
+
+    <!-- start section -->
+
+    <br  id="who-are-we">
+    <div class="container">
+        <center>
+            <h2 style="font-family: cairo,sans-serif; font-weight: bold;">من نحن</h2>
+            <hr style="background: #83bf00 none repeat scroll 0 0; width: 80px; height: 2px; border-radius: 20px;" class="wht">
+            <br>
+            <p style="max-width: 800px; font-size: 23px; font-family: cairo,sans-serif; font-weight: bold;">
+                <span style="font-size: 25px; color: #83bf00; font-family: cairo,sans-serif; font-weight: bold;">تأسست</span>
+                الرؤيا الرقمية لتقنية المعلومات في عام 2019م بإدارة فريق سعودي متخصص ذو خبرة عالية في تقنية المعلومات والتقنيات الناشئة ، لتلبي كافة متطلبات الأفراد والشركات والمؤسسات الحكومية والخاصة في مجال تقنية المعلومات ولتقدم حلول برمجية متميزة ذات جودة ونوعية عالية .
+            </p>
+            
+        </center>
+
+        <center>
+            <h2 style="font-family: cairo,sans-serif; font-weight: bold; padding: 50px 0px 0px 0px">ماذا نقدم</h2>
+            <hr style="background: #83bf00 none repeat scroll 0 0; width: 80px; height: 2px; border-radius: 20px;" class="wht">
+            <h2 style="font-family: cairo,sans-serif; font-weight: bold; padding: 50px 0px 0px 0px">نظام الرؤيا الرقمية</h2>
+            <br>
+        </center>
+
+        <div class="grid">
+
+            <div class="cardPage" id="cardGif">
+                <img src="./Main-Page-Folder/images/social-media.gif" alt="img" class="icon">
+                <h5>يدعم البيع كاش او شبكة او اجل</h5>
+                <!-- <p>
+                    We provide a wide spectrum of Marine Waste Management services focused on De-slopping.
+                </p> -->
+            </div>
+
+            <div class=".grid cardPage" id="cardGif">
+                <img src="./Main-Page-Folder/images/cloud-network.gif" alt="img" class="icon">
+                <h5> يدعم نقل مبلغ الفاتورة على جهاز الدفع مدى </h5>
+                <!-- <p>
+                    We provide a wide spectrum of Marine Waste Management services focused on De-slopping.
+                </p> -->
+            </div>
+
+            <div class=".grid cardPage" id="cardGif">
+                <img src="./Main-Page-Folder/images/computer.gif" alt="img" class="icon">
+                <h5>يدعم متطلبات الفاتورة الالكترونيه للمرحلة الأولى والثانية</h5>
+                <!-- <p>
+                    We provide a wide spectrum of Marine Waste Management services focused on De-slopping.
+                </p> -->
+            </div>
+
+            <div class=".grid cardPage" id="cardGif">
+                <img src="./Main-Page-Folder/images/note.gif" alt="img" class="icon">
+                <h5>امكانية العمل ضمن شبكة محلية او واسعة</h5>
+                <!-- <p>
+                    We provide a wide spectrum of Marine Waste Management services focused on De-slopping.
+                </p> -->
+            </div>
+
+            <div class=".grid cardPage" id="cardGif">
+                <img src="./Main-Page-Folder/images/workplace.gif" alt="img" class="icon">
+                <h5>يدعم ضريبة القيمة المضافة بشكل كامل</h5>
+                <!-- <p>
+                    We provide a wide spectrum of Marine Waste Management services focused on De-slopping.
+                </p> -->
+            </div>
+
+            <div class=".grid cardPage" id="cardGif">
+                <img src="./Main-Page-Folder/images/money-bag.gif" alt="img" class="icon">
+                <h5>مناسب للمتاجر ومحلات الجملة والتجزئة وكذلك المطاعم</h5>
+                <!-- <p>
+                    We provide a wide spectrum of Marine Waste Management services focused on De-slopping.
+                </p> -->
+            </div>
+
+        </div>
+
+        <br><br>
+
+    </div>
+    <!-- end section -->
+    <br><br>
+    <!-- start section -->
+    <div class="container twoDivs" >
+
+
+        <div class="col-md-6 twoDivImgDad" style=" display: flex;">
+            <img src="./Main-Page-Folder/images/4.jpg" alt="img" class="twoDivImg div-center" style="border-radius: 20px;">
+        </div>
+
+
+
+        <div class="col-md-6" style="text-align: end;">
+            <h2>الانظمة المتاحة  <span style="color: var(--main-color); font-weight: bold;">لدينا</span></h2>
+            
+            <b style="color: rgba(0, 0, 0, 0.594); font-size: 20px;">
+                :لدينا مجموعة كبيرة من <span style="color: var(--main-color);"> الانظمة الالكترونية </span>
+            </b>
+            <br>
+            <br>
+            <ul style="color:#000; font-weight: 600; font-family: cairo, sans-serif;" class="row">
+
+                <div class="col-md-6">
+                    <li> موقع تعريفي لشركتك</li>
+                    <li>نظام استقبل الطلبات</li>
+                    <li>متجر الكتروني</li>
+                    
+                </div>
+                
+                <div class="col-md-6">
+                    <li>محلات السوبرماركت</li>
+                    <li>المطاعم والوجبات السريعة</li>
+                    <li>المكتبات</li>
+                    <li>محلات الملابس الجاهزة</li>
+                    <li>الاسواق التجارية</li>
+                    <li>شركات المقاولات</li>
+                    <li>الصيديلات</li>
+                    <li>الكمبيوتر والالكترونيات</li>
+                    <li>الاجهزة والادوات الكهربية</li>
+                </div>
+
+            </ul>
+        </div>
+        
+       
+
+    </div>
+    <!-- end section -->
+
+    <br><br><br><br>
+
+    <!-- start section -->
+    <div class="row" style="width: 103%;">
+        <div class="col-md-6" style="background-image: url(./Main-Page-Folder/images/2.jpg); background-size: cover; min-height: 300px;"></div>
+
+        <div class="col-md-6" style="padding: 50px 50px; background: #eee none repeat scroll 0 0; text-align: end;" >
+            <h4 style="color: black;">نحو النجاح</h4>
+            <br>
+            <img src="./Main-Page-Folder/images/home.gif" alt="" style="border-radius: 50%; width: 70px; height: 70px;">
+            <br><br>
+            <h1 style="color: black;">حقق أعلى استفادة</h1>
+            <br>
+            <b style="max-width: 300px!important; font-weight: 600; font-family: cairo,sans-serif;">
+                تحكم بأعمالك من أي جهاز
+                وأصدر فواتيرك وشاركها
+                حافظ على عملاءك وسهل عليهم عملية الشراء
+                بوقت أسرع وجهد أقل
+            </b>
+            <br><br>
+            <a href="./Form.html">
+                <button type="button" class="btn btn-secondary">تواصل معنا</button>
+            </a>
+        </div>
+    </div>
+    <!-- end section -->
+
+
+    <!-- start section -->
+    
+    <div style="background: white;">
+        <div class="container">
+            <center>
+                <h2 style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: bold; padding: 50px 0px 0px 0px">شركاء النجاح</h2>
+                <hr style="background: #83bf00 none repeat scroll 0 0; width: 80px; height: 2px; border-radius: 20px;" class="wht">
+                <br>  
+            </center>
+            <br>
+
+            <div class="grid friends">
+                <div class="cardPage">
+                    <img src="./Main-Page-Folder/images/friends 1.jpeg" alt="img" class="icon" style="width: 100%; min-height: 100px;">
+                </div>
+    
+                <div class="cardPage">
+                    <img src="./Main-Page-Folder/images/friends 2.jpeg" alt="img" class="icon" style="width: 100%; min-height: 100px;">
+                </div>
+    
+                <div class="cardPage">
+                    <img src="./Main-Page-Folder/images/friends 3.jpeg" alt="img" class="icon" style="width: 100%; min-height: 100px;">
+                </div>
+    
+                <div class="cardPage">
+                    <img src="./Main-Page-Folder/images/friends 4.jpeg" alt="img" class="icon" style="width: 100%; min-height: 100px;">
+                </div>
+    
+                <div class="cardPage">
+                    <img src="./Main-Page-Folder/images/friends 5.jpeg" alt="img" class="icon" style="width: 100%; min-height: 100px;">
+                </div>
+    
+                
+                <div class="cardPage">
+                    <img src="./Main-Page-Folder/images/karzoun.png" alt="img" class="icon" style="width: 100%; min-height: 100px;">
+                </div>
+    
+            </div>
+    
+        </div>
+        <br><br>
+    </div>
+    
+    <!-- end section -->
+ 
+
+    <!-- Start Section -->
+    <div style="background: white;">
+        <div class="container">
+            <center>
+                <h2 style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: bold; padding: 50px 0px 0px 0px">لماذا نحن؟</h2>
+                <hr style="background: #83bf00 none repeat scroll 0 0; width: 80px; height: 2px; border-radius: 20px;" class="wht">
+                <br>  
+            </center>
+            <br>
+
+            <div class="row">
+                <div class=".grid cardPage col-sm-6 col-md-6 col-lg-4" style="border: none !important;">
+                    <img src="./Main-Page-Folder/images/speedometer.gif" alt="img" class="icon" style="width: 100px; height: 100px; border-radius: 20px;">
+                    <br>
+                    <h4 style="color: black;">السرعة</h4>
+                    <h1> ٣٠
+                        دقيقة
+                    </h1>
+                </div>
+                <div class=".grid cardPage col-sm-6 col-md-6 col-lg-4" style="border: none !important;">
+                    <img src="./Main-Page-Folder/images/tech-support.gif" alt="img" class="icon" style="width: 100px; height: 100px; border-radius: 20px;">
+                    <br>
+                    <h4 style="color: black;">خدمة العملاء</h4>
+                    <h1>15</h1>
+                </div>
+                <div class=".grid cardPage col-sm-6 col-md-6 col-lg-4" style="border: none !important;">
+                    <img src="./Main-Page-Folder/images/social-media.gif" alt="img" class="icon" style="width: 100px; height: 100px; border-radius: 20px;">
+                    <br>
+                    <h4 style="color: black;">العملاء</h4>
+                    <h1>1142</h1>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </div>
+    <!-- End Section -->
+
+    <!-- start footer -->
+    <div class="footer bg-dark text-light" id="contact" style="background: url(./Main-Page-Folder/images/footer-bg-1.webp); background-size: cover;">
+        <div class="container">
+          <div class="box">
+            <h3>Digital Vision</h3>
+            <ul class="social" style="text-decoration: none;">
+              <li>
+                <a href="#" class="facebook">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+              </li>
+              <li>
+                <a href="http://wa.me/+966596704007" class="whatsapp">
+                  <i class="fab fa-whatsapp"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="telegram">
+                  <i class="fab fa-telegram"></i>
+                </a>
+              </li>
+            </ul>
+
+          </div>
+          <div class="box">
+            <ul class="links">
+              <li><a href="">Digital Vision group</a></li>
+              <li><a href="">Digital Vision Company</a></li>
+              <li><a href="">Digital Vision Location</a></li>
+            </ul>
+          </div>
+          <div class="box">
+            <div class="line">
+              <i class="fas fa-map-marker-alt fa-fw"></i>
+              <div class="info">Saudi Arabia, Jeddah, Abha, Riyadh</div>
+            </div>
+            <div class="line">
+              <i class="far fa-clock fa-fw"></i>
+              <div class="info">Business Hours: 24/7</div>
+            </div>
+            <div class="line">
+              <i class="fas fa-phone-volume fa-fw"></i>
+              <div class="info">
+                <span>+966596704007</span>
+              </div>
+            </div>
+            <div class="line">
+                <i class="fa-solid fa-envelope fa-fw"></i>
+                <div class="info">
+                  <span>info@royaarakamya.com</span>
+                </div>
+              </div>
+          </div>
+
+        </div>
+        <p class="copyright">
+            جميع الحقوق محفوظة لشركة 
+            الرؤيا الرقمية لتقنية المعلومات
+        </p>
+    </div>
+    <!-- send footer -->
+
+
+    
+</body>
+<!-- start link js -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<!-- end link js -->
+
+<!--  -->
+<script src="./Main-Page-Folder/main.js"></script>
+<script>
+
+location.href="./store.html"
+
+</script>
+<!--  -->
+
+</html>

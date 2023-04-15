@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض سعر جديد</title>
+    <link rel="stylesheet" href="./print-page-folder/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.min.js" ></script>
+
+</head>
+<body>
+
+    <div class="HomeAndPrintDiv hiddenOnPrint" style="display: flex; align-items: center;">
+        <i class="fa-solid fa-house HomeBtn"></i>
+        <i class="fa-solid fa-download PrintBtn"></i>
+        <img src="./print-page-folder/imgs/Flag_of_Saudi_Arabia.svg" data-flag="Saudi_Arabia" class="TheFlag" style="margin: 10px; height: 40px !important; width: 60px;user-select: none;cursor: pointer;" alt="">
+    </div>
+
+
+
+    <div class="main-div">
+
+        <div class="nav">
+            <div class="qr-code"></div>
+            <div class="ToChange" style="align-self: center;">عرض سعر</div>
+            <div class="companydetails">
+                <p>الرؤيا الرقمية لتقنية المعلومات</p>
+                <p>الرقم الضريبي : 302252074700003</p>
+                <p>العنوان : جدة حي الاجاويد</p>
+                <p>المقر الرئیسي : خالد بن الولید جدة</p>
+            </div>
+            <div class="logo"></div>
+        </div>
+
+
+        <div class="purchase-details">
+            <div class="date-orderNumber" style="display: flex; justify-content: space-between; align-items: center;">
+                <table>
+                    <tr>
+                        <td style="text-align: end;" class="OrderNumber">
+                            
+                        </td>
+                        <td style="text-align: end;">
+                            رقم الفاتورة
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: end;" class="OrderDate">
+                            2021-5-19
+                        </td>
+                        <td style="text-align: end;">
+                            التاريخ 
+                        </td>
+                    </tr>
+                </table>
+            </div>
+           
+            <div class="NameOfBuyer ToChange">
+                اسم العميل
+            </div>
+            <div class="LabelNameOfBuyer ToChange">
+                : اسم العميل
+            </div>
+            
+        </div>
+
+        
+        <table class="main-table">
+            <thead>
+                <tr>
+                    <th>
+                        الاجمالي
+                    </th>
+                    <th class="hiddenOnPrint">
+                        الضريبة
+                    </th>
+                    <th>
+                        السعر
+                    </th>
+                    <th>
+                        الكمية
+                    </th>
+                    <th>
+                        الوصف
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody class="main-table-body">
+                <!-- <tr class="ToEdit">
+                    <td class="remove-dad">
+                        <span class="Total" data--total-pricewith-tax="0">0</span>
+                        <button class="remove hiddenOnPrint">
+                            <i class="fa-solid fa-trash Remove"></i>
+                        </button>
+                    </td>
+                    <td class="hiddenOnPrint">
+                        <select id="tax" class="tax">
+                            <option value="15">القيمة المضافة</option>
+                            <option value="0">لا يوجد</option>
+                        </select>
+                    </td>
+                    <td class="ToChange price">
+                        0
+                    </td>
+                    <td class="ToChange amount">
+                        0
+                    </td>
+                    <td class="ToChange">
+                        اسم المنتج
+                    </td>
+                </tr> -->
+            </tbody>
+
+            <tfoot>
+                <tr class="edit-btns">
+                    <td class="total-price StateCurrencyDad">
+                        <span class="StateCurrency">ر.س</span>
+                        <span class="TotalPriceWithoutTax">0</span>
+                    </td>
+                    <td class="fontCustom ToChange">
+                        الاجمالي
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        <button class="addToTable hiddenOnPrint">اضافة منتج</button>
+                    </td>
+                </tr>
+                <tr class="edit-btns">
+                    <td class="total-price StateCurrencyDad">
+                        <span class="StateCurrency">ر.س</span>
+                        <span class="AllTax">0</span>
+                    </td>
+                    <td class="fontCustom ToChange">
+                        القيمة المضافة
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
+                <tr class="edit-btns">
+                    <td class="total-price StateCurrencyDad">
+                        <span class="StateCurrency">ر.س</span>
+                        <span class="TotalPriceWithTax">0</span>
+                    </td>
+                    <td class="fontCustom ToChange">
+                        الصافي
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
+                <tr class="edit-btns hiddenIfRival">
+                    <td class="total-price StateCurrencyDad">
+                        <span class="StateCurrency">ر.س</span>
+                        <span class="rival ToChange">0</span>
+                    </td>
+                    <td class="fontCustom ToChange">
+                        الخصم
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
+                <tr class="edit-btns hiddenIfRival">
+                    <td class="total-price StateCurrencyDad">
+                        <span class="StateCurrency">ر.س</span>
+                        <span class="TotalPriceAfterRival">0</span>
+                    </td>
+                    <td class="fontCustom ToChange">
+                        الصافي بعد الخصم
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
+            </tfoot>
+            
+        </table>
+        <br>
+        <p style="text-align: center;">ملاحظات</p>
+        <div class="note">
+            <div contenteditable="true" class="OfferNote" dir="auto">لا يوجد</div>
+        </div>
+
+        <br>
+        
+        <div class="PrintFooter">
+            <p>بنك الراجي</p>
+            <p>رقم الحساب: 206000010006080322727</p>
+            <p>SA7780000206608010322727 :رقم الايبان</p>
+        </div>
+        
+        
+
+    </div>
+    
+</body>
+<script src="./print-page-folder/main.js" type="module"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
+
+
+</html>
