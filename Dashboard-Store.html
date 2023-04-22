@@ -282,6 +282,7 @@
               <option value="id">رقم المنتج</option>
               <option value="ProductName">اسم المنتج</option>
               <option value="ProductPrice"> سعر المنتج </option>
+              <option value="ProductCategorieName"> القسم </option>
             </select>
             <input type="text" placeholder="Search text" class="addOrderInput SearchInput" style="max-width: 150px; font-size: 20px;">
             <button class="SearchBtn" style="cursor: pointer; font-size: 20px;background: white;color: black;padding: 5px;border: 2px solid black;border-radius: 6px;text-align: end;font-weight: bold;">Search</button>
@@ -661,7 +662,7 @@ if(SearchField!==""&&SearchField!=="SearchInput"){
 
     document.querySelector("#AllOrders").innerHTML+=`
 
-                  <tr data-id="${el.id}" style="font-weight: 600;">
+    <tr data-id="${el.id}" style="font-weight: 600;">
                     <td class="Order-Editing">
                       
   
@@ -679,11 +680,12 @@ if(SearchField!==""&&SearchField!=="SearchInput"){
   
                       
                     </td>
+                    <td class="Product-Categorie-Name">${el.ProductCategorieName}</td>
                     <td class="Order-ByUser">${el.ProductPrice}</td>
                     <td class="Product-Name">${el.ProductName}</td>
                     <td class="Product-Number">${el.id}</td>
                     <td class="Product-Id">#${i}</td>
-                  </tr>
+    </tr>
     
     `;
 
