@@ -1,37 +1,12 @@
 
-/* start custom function */
-function $(e) {
-    return document.querySelector(e)
-}
-
-function $all(e) {
-    return document.querySelector(e)
-}
-
-function cs(e) {
-    return console.log(e)
-}
-/* end custom function */
-
-
-
-
-
-
-
-
 
 /////* start firebase */////
 
-
-
 /*1*/
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js';
-import { getFirestore, collection, getDocs,getDoc, setDoc, addDoc, doc } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js';
+import { getFirestore, collection, getDocs,getDoc, setDoc, addDoc, doc,query,where } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js';
 
 // TODO: Replace the following with your app's Firebase project configuration
-
-
 import { firebaseConfig } from '../firebase.js';
 
 // firebase.initializeApp(firebaseConfig);
@@ -53,59 +28,39 @@ async function getCit(db,X) {
 
 
 
-/* start get accounts */
-let AllAccounts;
-getCards();
-function getCards() {
-    getCit(db, 'accounts').then(async (e) => {
-        AllAccounts = e;
-    })
-}
-/* end get accounts */
-
-
-
 /*Start Sing In*/
 
 
-$(".btn-sign-in").addEventListener("click",()=>{
-    var username = $(".username-in").value;
-    var password = $(".password-in").value;
-    var numOfFalse=0;
-    if (username!=""&&password!="") {
-        AllAccounts.forEach(e=>{
-            
-            numOfFalse++;
-            if(username==e.username&&password==e.password&&e.id!==undefined) {
-                $(".username-in").value=""
-                $(".password-in").value=""
+document.querySelector(".btn-sign-in").addEventListener("click",async()=>{
+    let username =  document.querySelector(".username-in").value
+    let password =  document.querySelector(".password-in").value
+
+    if (username.trim()!==""&&password.trim()!=="") {
+
+        const q = query(collection(db, "accounts"), where("username", "==", `${username}`), where("password", "==", `${password}`));
+
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            if(doc.data().id!==undefined){
+                document.querySelector(".username-in").value=""
+                document.querySelector(".password-in").value=""
                 /**/
-                localStorage.setItem("doc-digital-id",e.id);
+                localStorage.setItem("doc-digital-id",doc.data().id);
                 /**/
-                numOfFalse="true"
                 location.href="../Dashboard-Orders.html"
             } else {
-                Swal.fire("","Error");
-            }
-
-            if (numOfFalse>=AllAccounts.length){
                 Swal.fire("","Usename Or Password Are Wrong");
-            } else if(numOfFalse=="true"){
-                location.href="../Dashboard-Orders.html";
             }
+        });
 
-        })
     } else {Swal.fire("","Enter Usename And Password")}
 
-});
-
-
-
-
-
-
+})
 
 /*End Sing In*/
+
+
+
 
 
 /////* end firebase */////
@@ -117,11 +72,11 @@ const AdminCode="951";
 
 /* start create account */
 
-$(".btn-sign-up").addEventListener("click",()=>{
-    var username = $(".username-up").value
-    var password = $(".password-up").value
-    var password2 = $(".password-up-2").value
-    var email = $(".email-up").value
+document.querySelector(".btn-sign-up").addEventListener("click",()=>{
+    var username = document.querySelector(".username-up").value
+    var password = document.querySelector(".password-up").value
+    var password2 = document.querySelector(".password-up-2").value
+    var email = document.querySelector(".email-up").value
     let name = username
 
     
@@ -146,24 +101,22 @@ $(".btn-sign-up").addEventListener("click",()=>{
         password: password,
         date: Date.now(),
       }).then(e=>{
-        getCards();
+        Swal.fire(
+            'تم انشاء الحساب',
+            'يمكنك الان تسجيل الدخول',
+            'success'
+        )
       });
   
 
-      $(".username-up").value=""
-      $(".password-up").value=""
-      $(".email-up").value=""
-      $(".password-up-2").value=""
+      document.querySelector(".username-up").value=""
+      document.querySelector(".password-up").value=""
+      document.querySelector(".email-up").value=""
+      document.querySelector(".password-up-2").value=""
 
-      /**/
-      Swal.fire(
-        'تم انشاء الحساب',
-        'يمكنك الان تسجيل الدخول',
-        'success'
-      )
-      /**/
 
-      $("#tab-1").click()
+
+      document.querySelector("#tab-1").click()
 
     }else if(email!=AdminCode) {
         Swal.fire("","Error, Admin Code Not True","")
@@ -175,6 +128,10 @@ $(".btn-sign-up").addEventListener("click",()=>{
 })
 
 /* end create account */
+
+
+
+// await getDoc(doc(db, "accounts", "L8tRIutxitBgha5OdTby")).then(e=>cs(e.data()))
 
 
 
