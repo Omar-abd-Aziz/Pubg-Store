@@ -401,15 +401,15 @@ document.querySelector(".NumberOfOrders").innerHTML="";
 
 /* 02 start get AllAccounts */
 
-let AllAccounts;
-
-await getCit(db, 'accounts').then(async (e) => {
-  AllAccounts = e;
-})
 
 async function getUserDataWithId(id){
-  return AllAccounts.find(e=>e.id==id);
+  let userData;
+  await getDoc(doc(db, "accounts", `${id}`)).then(e=>{
+    userData=e.data();
+  });
+  return userData;
 }
+
 
 /* 02 end get All Accounts */
 
