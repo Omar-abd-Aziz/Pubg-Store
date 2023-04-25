@@ -44,6 +44,15 @@ ul {
 
 
 
+.mainClassForSetColor{
+  background-image: radial-gradient(circle at 38% 55%, hsla(149,0%,62%,0.1) 0%, hsla(149,0%,62%,0.1) 23%,transparent 23%, transparent 78%,transparent 78%, transparent 100%),radial-gradient(circle at 34% 85%, hsla(149,0%,62%,0.1) 0%, hsla(149,0%,62%,0.1) 7%,transparent 7%, transparent 41%,transparent 41%, transparent 100%),radial-gradient(circle at 0% 36%, hsla(149,0%,62%,0.1) 0%, hsla(149,0%,62%,0.1) 2%,transparent 2%, transparent 59%,transparent 59%, transparent 100%),radial-gradient(circle at 42% 37%, hsla(149,0%,62%,0.1) 0%, hsla(149,0%,62%,0.1) 6%,transparent 6%, transparent 21%,transparent 21%, transparent 100%),radial-gradient(circle at 48% 39%, hsla(149,0%,62%,0.1) 0%, hsla(149,0%,62%,0.1) 8%,transparent 8%, transparent 90%,transparent 90%, transparent 100%),linear-gradient(375deg, rgb(3, 43, 136),rgb(121, 53, 201)) !important;
+}
+
+.fl-table thead th {
+  color: white !important;
+  background: transparent !important;
+}
+
 
 
 /* Start Sidebar */

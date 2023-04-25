@@ -23,6 +23,24 @@ body{
 
 
 
+
+.curved {
+  position: relative;
+  background: #f8f9fa;
+  height: 3vh;
+}
+
+.curved::after {
+  content: '';
+  border-top-left-radius: 50% 100%;
+  border-top-right-radius: 50% 100%;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #212529;
+  height: 70%;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 /* body::-webkit-scrollbar {
   display: none;
@@ -81,6 +99,9 @@ body{
   font-weight: bold !important;
   font-family: system-ui !important;
   font-size: 20px !important;
+  background-image: radial-gradient(circle at 92% 37%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 39%,transparent 39%, transparent 71%,transparent 71%, transparent 100%),radial-gradient(circle at 65% 60%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 15%,transparent 15%, transparent 67%,transparent 67%, transparent 100%),radial-gradient(circle at 18% 57%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 23%,transparent 23%, transparent 31%,transparent 31%, transparent 100%),radial-gradient(circle at 38% 0%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 27%,transparent 27%, transparent 60%,transparent 60%, transparent 100%),radial-gradient(circle at 83% 39%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 74%,transparent 74%, transparent 87%,transparent 87%, transparent 100%),linear-gradient(135deg, rgb(243, 77, 35),rgb(25, 28, 34));
+  color: white !important;
+
 }
 
 
@@ -774,6 +795,8 @@ body > div.divForCardsHasSelcDad > div > div > div.delOfCardDad > img
   background: green;
   color: white;
   padding: 5px 20px;
+
+  background-image: radial-gradient(circle at 72% 95%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 64%,transparent 64%, transparent 84%,transparent 84%, transparent 100%),radial-gradient(circle at 31% 30%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 49%,transparent 49%, transparent 51%,transparent 51%, transparent 100%),radial-gradient(circle at 72% 25%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 37%,transparent 37%, transparent 76%,transparent 76%, transparent 100%),radial-gradient(circle at 71% 16%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 2%,transparent 2%, transparent 21%,transparent 21%, transparent 100%),radial-gradient(circle at 52% 57%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 30%,transparent 30%, transparent 68%,transparent 68%, transparent 100%),linear-gradient(135deg, rgb(19, 185, 65),rgb(57, 60, 25));
 }
 
 
