@@ -242,6 +242,18 @@ async function loadMore(X){
   return array;
 }
 
+
+async function loadMoreWithFilter(X){
+
+  const q = query(collection(db, "StoreProducts"),where("ProductCategorieId",'==',`${AllProducts[0].ProductCategorieId}`), orderBy("date","desc"),startAfter(AllProducts[AllProducts.length-1].date), limit(X||8));
+  const querySnapshot = await getDocs(q);
+  const cityList = querySnapshot.docs.map(doc => doc.data());
+
+  let array=cityList;
+
+  return array;
+}
+
 /* end function loadMore start from last eelment and return array from db */
 
 
@@ -254,7 +266,6 @@ let currency = "Egp"
 /* start function to show data and display it */
 
 function ShowAll(array){
-
 array.forEach(e=>{
   document.querySelector(".cardsDad").innerHTML+=`
   
@@ -438,6 +449,15 @@ window.onclick=(e)=>{
   /* start load more */
   if(e.target.classList.value.includes("LoadMore")){
     loadMore(8).then(e=>{
+      AllProducts=e;
+      ShowAll(e);
+    });
+  };
+  /* end load more */
+
+  /* start load more */
+  if(e.target.classList.value.includes("LoadFilter")){
+    loadMoreWithFilter(4).then(e=>{
       AllProducts=e;
       ShowAll(e);
     });
@@ -784,12 +804,13 @@ document.querySelector("#AllStoreCategories").addEventListener("change",async (e
     q = query(collection(db, "StoreProducts"), orderBy("date","desc"), limit(8));
   } else {
     document.querySelector(".LoadMore").style.display="none";
-    q = query(collection(db, "StoreProducts"),where("ProductCategorieId",'==',`${FilterWith}`), orderBy("date","desc"));
+    document.querySelector(".LoadFilter").style.display="block";
+    q = query(collection(db, "StoreProducts"),where("ProductCategorieId",'==',`${FilterWith}`), orderBy("date","desc"), limit(4));
   };
   const querySnapshot = await getDocs(q);
   const cityList = querySnapshot.docs.map(doc => doc.data());
   let array=cityList;
-
+  AllProducts=array;
   document.querySelector(".cardsDad").innerHTML=``;
   ShowAll(array);
 

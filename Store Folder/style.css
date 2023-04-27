@@ -817,6 +817,18 @@ body > div.divForCardsHasSelcDad > div > div > div.delOfCardDad > img
   background-image: radial-gradient(circle at 72% 95%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 64%,transparent 64%, transparent 84%,transparent 84%, transparent 100%),radial-gradient(circle at 31% 30%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 49%,transparent 49%, transparent 51%,transparent 51%, transparent 100%),radial-gradient(circle at 72% 25%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 37%,transparent 37%, transparent 76%,transparent 76%, transparent 100%),radial-gradient(circle at 71% 16%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 2%,transparent 2%, transparent 21%,transparent 21%, transparent 100%),radial-gradient(circle at 52% 57%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 30%,transparent 30%, transparent 68%,transparent 68%, transparent 100%),linear-gradient(135deg, rgb(19, 185, 65),rgb(57, 60, 25));
 }
 
+.LoadFilter{
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  background: green;
+  color: white;
+  padding: 5px 20px;
+  display: none;
+  background-image: radial-gradient(circle at 72% 95%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 64%,transparent 64%, transparent 84%,transparent 84%, transparent 100%),radial-gradient(circle at 31% 30%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 49%,transparent 49%, transparent 51%,transparent 51%, transparent 100%),radial-gradient(circle at 72% 25%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 37%,transparent 37%, transparent 76%,transparent 76%, transparent 100%),radial-gradient(circle at 71% 16%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 2%,transparent 2%, transparent 21%,transparent 21%, transparent 100%),radial-gradient(circle at 52% 57%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 30%,transparent 30%, transparent 68%,transparent 68%, transparent 100%),linear-gradient(135deg, rgb(18, 115, 45),rgb(57, 60, 25));
+}
+
 
 .detailsBtn{
   font-weight: bold !important;
@@ -1237,12 +1249,14 @@ outline: 1px solid #5b4ebb;
 }
 #codplugin_woo_single_form input,
 #codplugin_state {
-width: 47%;
+  width: 100%;
   padding: 16px;
-  margin: 7px;
+  margin: 7px auto;
   border: 2px solid #ebe9f7;
   height: 50px;
 }
+
+
 #nrwooconfirm{
   background-color: #5b4ebb;
   width: 72%!important;
