@@ -1012,55 +1012,11 @@ function swool(orderData){
           <input style="width: 98%;" class="addOrderInput" type="number" placeholder="" dir="auto" autocomplete="off" id="phone" value="${orderData.phone}">
 
           <label for="active">النشاط:</label>
-          <select value="" dir="auto" id="active" class="addOrderInput" name="carlist" form="carform" style="font-weiht: bold; padding: 5px 5px; width: 98%; margin: auto 10px auto 0px; border: 2px solid black; border-radius: 6px;">
-              <option value="${orderData.active}">${orderData.active}</option>
-              ${(orderData.active=="Store")?``:`
-              
-              
-              <option value="تسويق الكتروني">
-              تسويق الكتروني
-              </option>
-              <option value="تصميم موقع الكترونية">
-              تصميم موقع الكترونية
-              </option>
-              <option value="تصميم متجر الكترونية">
-              تصميم متجر الكترونية
-              </option>
-              <option value="تصميم متجر علي منصة سلة">
-              تصميم متجر علي منصة سلة
-              </option>
-              <option value="تصميم متجر علي منصة زيد">
-              تصميم متجر علي منصة زيد
-              </option>
-              <option value="ربط خدامات">
-              ربط خدامات
-              </option>
-              <option value="نقاط بيع">
-              نقاط بيع
-              </option>
-              <option value="صيانة متجر سلة">
-              صيانة متجر سلة
-              </option>
-              <option value="تصميم منيو مطعم الكتروني">
-              تصميم منيو مطعم الكتروني
-              </option>
-              <option value="برامج محاسبية متاكملة">
-              برامج محاسبية متاكملة
-              </option>
-              <option value="برامج معامل تحاليل طبية">
-              برامج معامل تحاليل طبية
-              </option>
-              <option value="برامج مستوصفات طبية">
-              برامج مستوصفات طبية
-              </option>
-              <option value="audi">
-              شي اخر..
-              </option>
-              
-              
-              `}
-          </select>
-
+          ${(orderData.active=="Store")?`
+          <input style="width: 98%;" class="addOrderInput" id="active" type="text" dir="auto" autocomplete="off" readonly value="${orderData.active}">
+          `:`<input style="width: 98%;" class="addOrderInput" id="active" type="text" dir="auto" autocomplete="off" value="${orderData.active}">
+          `}
+           
           <label for="city">المدينة:</label>
           <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="city" value="${orderData.city}">
 
@@ -1151,48 +1107,7 @@ document.querySelector(".addNewOrder").addEventListener("click",()=>{
           <input style="width: 98%;" class="addOrderInput" type="number" placeholder="" dir="auto" autocomplete="off" id="phone" value="">
 
           <label for="active">النشاط:</label>
-          <select value="" dir="auto" id="active" class="addOrderInput" name="carlist" form="carform" style="font-weiht: bold; padding: 5px 5px; width: 98%; margin: auto 10px auto 0px; border: 2px solid black; border-radius: 6px;">
-              <option value=""></option>
-              <option value="تسويق الكتروني">
-              تسويق الكتروني
-              </option>
-              <option value="تصميم موقع الكترونية">
-              تصميم موقع الكترونية
-              </option>
-              <option value="تصميم متجر الكترونية">
-              تصميم متجر الكترونية
-              </option>
-              <option value="تصميم متجر علي منصة سلة">
-              تصميم متجر علي منصة سلة
-              </option>
-              <option value="تصميم متجر علي منصة زيد">
-              تصميم متجر علي منصة زيد
-              </option>
-              <option value="ربط خدامات">
-              ربط خدامات
-              </option>
-              <option value="نقاط بيع">
-              نقاط بيع
-              </option>
-              <option value="صيانة متجر سلة">
-              صيانة متجر سلة
-              </option>
-              <option value="تصميم منيو مطعم الكتروني">
-              تصميم منيو مطعم الكتروني
-              </option>
-              <option value="برامج محاسبية متاكملة">
-              برامج محاسبية متاكملة
-              </option>
-              <option value="برامج معامل تحاليل طبية">
-              برامج معامل تحاليل طبية
-              </option>
-              <option value="برامج مستوصفات طبية">
-              برامج مستوصفات طبية
-              </option>
-              <option value="audi">
-              شي اخر..
-              </option>
-          </select>
+          <input style="width: 98%;" class="addOrderInput" id="active" type="text" dir="auto" autocomplete="off">
 
           <label for="city">المدينة:</label>
           <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="city" value="">
