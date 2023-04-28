@@ -531,22 +531,25 @@ document.querySelector(".limitToFirst").addEventListener("change",(e)=>{
 /* end limitToFirst btn */
 
 function notifyMe(x){
-  console.log(x.length)
-  Notification.requestPermission().then(e=>{
-    const notification = new Notification("New Order",{
-      body: `You Have ${x.length} New Order`,
-      renotify: false,
-      tag: "Welcome Message",
-      href: window.href
+  if(x.length>0){
+
+    Notification.requestPermission().then(e=>{
+      const notification = new Notification("New Order",{
+        body: `You Have ${x.length} New Order`,
+        renotify: false,
+        tag: "Welcome Message",
+        href: window.href
+      })
+      document.title=`(${x.length}) New Orders`;
+  
+      notification.onclick = (event) => {
+        event.preventDefault(); // prevent the browser from focusing the Notification's tab
+        window.open(window.location, "_blank");
+      };
+  
     })
-    document.title=`(${x.length}) New Orders`;
-
-    notification.onclick = (event) => {
-      event.preventDefault(); // prevent the browser from focusing the Notification's tab
-      window.open(window.location, "_blank");
-    };
-
-  })
+    
+  }
 }
 
 
