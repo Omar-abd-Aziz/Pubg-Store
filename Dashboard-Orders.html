@@ -530,7 +530,24 @@ document.querySelector(".limitToFirst").addEventListener("change",(e)=>{
 
 /* end limitToFirst btn */
 
+function notifyMe(x){
+  console.log(x.length)
+  Notification.requestPermission().then(e=>{
+    const notification = new Notification("New Order",{
+      body: `You Have ${x.length} New Order`,
+      renotify: false,
+      tag: "Welcome Message",
+      href: window.href
+    })
+    document.title=`(${x.length}) New Orders`;
 
+    notification.onclick = (event) => {
+      event.preventDefault(); // prevent the browser from focusing the Notification's tab
+      window.open(window.location, "_blank");
+    };
+
+  })
+}
 
 
 
@@ -543,6 +560,11 @@ let AllPersonsData;
 async function getAllNewOrders(X){
 
   ForAllOrdersNew(X).then(AllNewOrders=>{
+    
+
+        notifyMe(AllNewOrders);
+
+
         let i = 0;
 
         document.querySelector(".NumberOfOrders").innerHTML=AllNewOrders.length;
