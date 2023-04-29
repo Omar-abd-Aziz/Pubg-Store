@@ -1128,20 +1128,25 @@ const colRef= collection(db,"Persons");
 
 onSnapshot(colRef,async ()=>{
 
-  let lastProductDate = AllOrdersNew[0].date;
-  let q = query(collection(db, "Persons"), where('isAccepted', '==', "Orders-New"), where('date', '>', lastProductDate), orderBy("date","desc"), limit(X||20));
-  let querySnapshot = await getDocs(q);
-  let cityList = querySnapshot.docs.map(doc => doc.data());
 
-  if(cityList.length!==0){
-    AllOrdersNew[0].date=cityList[0].date;
-    cityList.forEach(ee=>{
-      AllPersonsData.push(ee);
-    });
-    document.querySelector("#AllOrders").innerHTML="";
-    AllPersonsData.sort((a, b) => a.date - b.date).reverse();
-    showData(AllPersonsData);
-  }
+
+    
+    let q = query(collection(db, "Persons"), where('isAccepted', '==', "Orders-New"), where('date', '>', (AllOrdersNew[0]!==undefined)?AllOrdersNew[0].date:0), orderBy("date","desc"), limit(X||20));
+    let querySnapshot = await getDocs(q);
+    let cityList = querySnapshot.docs.map(doc => doc.data());
+  
+    if(cityList.length!==0){
+      (AllOrdersNew[0]!==undefined)?AllOrdersNew[0].date=cityList[0].date:"";
+      
+      cityList.forEach(ee=>{
+        AllPersonsData.push(ee);
+      });
+      document.querySelector("#AllOrders").innerHTML="";
+      AllPersonsData.sort((a, b) => a.date - b.date).reverse();
+      showData(AllPersonsData);
+    }
+
+
 
 });
 
