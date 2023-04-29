@@ -311,12 +311,14 @@
   <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
 
+
   <script type="module">
 
 
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js';
   import { getFirestore, collection, query, where, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js';
 
+  
   // TODO: Replace the following with your app's Firebase project configuration
   
   
@@ -325,6 +327,7 @@
   firebase.initializeApp(firebaseConfig);
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+
 
   let X;
 
@@ -530,7 +533,9 @@ document.querySelector(".limitToFirst").addEventListener("change",(e)=>{
 
 /* end limitToFirst btn */
 
+
 function notifyMe(x){
+
   if(x.length>0){
 
     Notification.requestPermission().then(e=>{
@@ -548,7 +553,7 @@ function notifyMe(x){
       };
   
     })
-    
+
   }
 }
 
@@ -565,10 +570,7 @@ async function getAllNewOrders(X){
   ForAllOrdersNew(X).then(AllNewOrders=>{
     
 
-        notifyMe(AllNewOrders);
-
-
-        let i = 0;
+        
 
         document.querySelector(".NumberOfOrders").innerHTML=AllNewOrders.length;
   
@@ -576,9 +578,25 @@ async function getAllNewOrders(X){
         if(AllNewOrders.length!==0){
           document.querySelector("#AllOrders").innerHTML="";
         }
+
+        showData(AllNewOrders);
   
   
-        AllNewOrders.forEach(el=>{
+
+  });
+
+}
+
+/* 3 End get all Orders */
+
+
+
+
+function showData(x){
+  console.log("yes")
+  
+  let i = 0;
+  x.forEach(el=>{
             
             if((el.name).trim()!==""&&(el.phone).trim()!==""&&(el.active).trim()!==""&&(el.city).trim()!==""){
               i++;
@@ -646,16 +664,10 @@ async function getAllNewOrders(X){
             }
             
         });
-  });
 
+    let count = document.querySelector("#AllOrders").children; 
+    notifyMe(count);
 }
-
-/* 3 End get all Orders */
-
-
-
-
-
 
 
 
@@ -752,39 +764,6 @@ confirmButtonText: 'Yes, Accept it!'
     });
 
     e.target.parentNode.parentNode.parentNode.remove();
-
-
-
-
-
-
-    /* Start Send Whatsapp Massage */
-
-    let HelloMassage=`
-
-عميلنا العزيز ( ${orderData.name} )
-تم الانتهاء من تنفيذ طلبك ( ${orderData.orderNumber} )
-الخدمة المقدمة لك ( ${orderData.active} )
-اجمالي قيمة الخدمات المقدمة لك ( ${orderData.price} ) ريال 
-وتم تفعيل خدمة الدعم الفني المجانية لكم ويبدأ
-من تاريخ : ( ${orderData.startTime} )
-الى تاريخ : ( ${orderData.endTime} )
-سعدنا بخدمتك ونتمنى ان تكون خدماتنا حازت على رضاك ، وفي حال واجهتك اي مشكلة لا تتردد في التواصل مع فريق الدعم الفني عن طريق وسائل التواصل التالية : 
- هاتف : 0596704007
-رابط الموقع : https://royaarakamya.com/Form.html
-
-يومك سعيد ،
-الرؤيا الرقمية لتقنية المعلومات .
-
-    `;
-    
-    HelloMassage=HelloMassage.trim();
-    let whatappAPImassage=`https://karzoun.app/api/send.php?number=${orderData.country_calling_code.slice(1)+Number(`${orderData.phone}`)}&type=text&message=${encodeURIComponent(HelloMassage)}&instance_id=63C2CA489C2CA&access_token=1757991908`;
-    
-    // fetch(whatappAPImassage);
-
-    /* End Send Whatsapp Massage */
-    
 
 
 
@@ -986,51 +965,7 @@ function swool(orderData){
           <label for="active">النشاط:</label>
           <select value="" dir="auto" id="active" class="addOrderInput" name="carlist" form="carform" style="font-weiht: bold; padding: 5px 5px; width: 98%; margin: auto 10px auto 0px; border: 2px solid black; border-radius: 6px;">
               <option value="${orderData.active}">${orderData.active}</option>
-              ${(orderData.active=="Store")?``:`
-              
-              
-              <option value="تسويق الكتروني">
-              تسويق الكتروني
-              </option>
-              <option value="تصميم موقع الكترونية">
-              تصميم موقع الكترونية
-              </option>
-              <option value="تصميم متجر الكترونية">
-              تصميم متجر الكترونية
-              </option>
-              <option value="تصميم متجر علي منصة سلة">
-              تصميم متجر علي منصة سلة
-              </option>
-              <option value="تصميم متجر علي منصة زيد">
-              تصميم متجر علي منصة زيد
-              </option>
-              <option value="ربط خدامات">
-              ربط خدامات
-              </option>
-              <option value="نقاط بيع">
-              نقاط بيع
-              </option>
-              <option value="صيانة متجر سلة">
-              صيانة متجر سلة
-              </option>
-              <option value="تصميم منيو مطعم الكتروني">
-              تصميم منيو مطعم الكتروني
-              </option>
-              <option value="برامج محاسبية متاكملة">
-              برامج محاسبية متاكملة
-              </option>
-              <option value="برامج معامل تحاليل طبية">
-              برامج معامل تحاليل طبية
-              </option>
-              <option value="برامج مستوصفات طبية">
-              برامج مستوصفات طبية
-              </option>
-              <option value="audi">
-              شي اخر..
-              </option>
-              
-              
-              `}
+              ${(orderData.active=="Store")?``:``}
               
           </select>
 
@@ -1078,7 +1013,20 @@ function swool(orderData){
               endTime: endTime,
               isAccepted: (orderData.isAccepted==undefined)?'':orderData.isAccepted,
             }).then(e=>{
-              // history.go(0);
+              let mainEditedDiv = document.querySelector(`[data-id="${orderData.id}"]`)
+              mainEditedDiv.querySelector(".Order-Name").textContent=name;
+              mainEditedDiv.querySelector(".Order-Phone").textContent=phone;
+              mainEditedDiv.querySelector(".Order-City").textContent=city;
+              mainEditedDiv.querySelector(".Order-Price").textContent=price;
+
+              let mainOrderFromAll = AllPersonsData.find(el=>el.id==`${orderData.id}`);
+              mainOrderFromAll.name=name;
+              mainOrderFromAll.price=price;
+              mainOrderFromAll.phone=phone;
+              mainOrderFromAll.city=city;
+              mainOrderFromAll.startTime=startTime;
+              mainOrderFromAll.endTime=endTime;
+              
             });
 
           };   
@@ -1174,13 +1122,27 @@ Swal.fire({
 
 
 
-
+getAllNewOrders();
 
 const colRef= collection(db,"Persons");
 
-
 onSnapshot(colRef,async ()=>{
-  getAllNewOrders();
+
+  let lastProductDate = AllOrdersNew[0].date;
+  let q = query(collection(db, "Persons"), where('isAccepted', '==', "Orders-New"), where('date', '>', lastProductDate), orderBy("date","desc"), limit(X||20));
+  let querySnapshot = await getDocs(q);
+  let cityList = querySnapshot.docs.map(doc => doc.data());
+
+  if(cityList.length!==0){
+    AllOrdersNew[0].date=cityList[0].date;
+    cityList.forEach(ee=>{
+      AllPersonsData.push(ee);
+    });
+    document.querySelector("#AllOrders").innerHTML="";
+    AllPersonsData.sort((a, b) => a.date - b.date).reverse();
+    showData(AllPersonsData);
+  }
+
 });
 
 
