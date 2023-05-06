@@ -166,6 +166,8 @@
             <button class="SearchBtn" style="cursor: pointer; font-size: 20px;background: white;color: black;padding: 5px;border: 2px solid black;border-radius: 6px;text-align: end;font-weight: bold;">Search</button>
           </div>
 
+          <button style="font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600;" class="mainClassForSetColor" onclick="ExportData()">excel</button>
+
           <button style="font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600; border: none;" class="addNewOrder mainClassForSetColor">اضافة عميل</button>
         </div>
 
@@ -580,7 +582,7 @@ async function getAllOrdersAccepted(X){
                     <td class="Order-Phone">${el.phone}</td>
                     <td class="Order-ByUser">${el.orderByUser}</td>
                     <td class="Order-Name">${el.name}</td>
-                    <td class="Order-Name">${el.orderNumber}</td>
+                    <td class="Order-Number">${el.orderNumber}</td>
                     <td class="Order-Id">#${i}</td>
                   </tr>
               
@@ -702,7 +704,7 @@ if(SearchField!==""&&SearchField!=="SearchInput"){
       <td class="Order-Phone">${el.phone}</td>
       <td class="Order-ByUser">${el.orderByUser}</td>
       <td class="Order-Name">${el.name}</td>
-      <td class="Order-Name">${el.orderNumber}</td>
+      <td class="Order-Number">${el.orderNumber}</td>
       <td class="Order-Id">#${i}</td>
     </tr>
     
@@ -1265,6 +1267,32 @@ onSnapshot(colRef,async()=>{
 
 
 
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.full.min.js"></script> 
+<script>
+    function ExportData()
+    {
+        let filename='reports.xlsx';
+
+        let AA=[]; 
+        let arrayOfNames = [...document.querySelectorAll(".Order-Name")];
+        let arrayOfPhones = [...document.querySelectorAll(".Order-Phone")];
+        let arrayOfCitys = [...document.querySelectorAll(".Order-City")];
+
+
+        for (let i=0; i<arrayOfNames.length; i++){
+          
+          AA.push({name: arrayOfNames[i].textContent, phone: arrayOfPhones[i].textContent, city: arrayOfCitys[i].textContent,});
+        }
+
+        let data = AA;
+        console.log(data);
+
+        const worksheet = XLSX.utils.json_to_sheet(AA);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Dates");
+        XLSX.writeFile(workbook,filename);
+     }
 </script>
 
 </html>
