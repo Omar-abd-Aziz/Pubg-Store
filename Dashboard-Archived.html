@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard-Archived</title>
+    <title>الارشيف</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
     <link rel="stylesheet" href="./css/framework.css" />
     <link rel="stylesheet" href="./css/master.css" />
@@ -98,6 +97,31 @@
         color: #397eaf;
         font-size: 13px;
       }
+
+
+
+
+      .OrderActiveNote{
+        width: 98%;
+        border: 2px solid black;
+        border-radius: 6px;
+        padding: 10px;
+        font-size: 20px;
+      }
+
+
+      .OrderActiveNoteTwo{
+        width: 98%;
+        border: 2px solid black;
+        border-radius: 6px;
+        padding: 10px;
+        font-size: 20px;
+      }
+
+
+
+
+
     </style>
 
   </head>
@@ -105,7 +129,7 @@
     <div class="page d-flex">
       
       <div class="content w-full">
-
+        
         <!-- Start Head -->
         <div class="head bg-white between-flex" style="padding: 0px 10px 15px; background: #f1f5f9;">
           <div class="p-relative">
@@ -114,10 +138,7 @@
         </div>
         <!-- End Head -->
 
-        
-        <div style="overflow: auto;">
-
-
+        <div style="display: flex;align-items: center;justify-content: space-between;">
           <div>
             <select class="limitToFirst">
               <option value="20">20</option>
@@ -129,11 +150,36 @@
               <option value="2000">2000</option>
               <option value="10000">10000</option>
             </select>
-            <button style="font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600;" class="mainClassForSetColor" onclick="ExportData()">excel</button>
-
           </div>
-          
 
+
+          <button class="mainClassForSetColor" style="font-size: 18px; font-family:cairo; cursor:pointer; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 10px; font-weight: 600;">
+            Total Price: 
+            <span class="TotalPrice">0</span>
+          </button>
+          <button style="font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600;" class="reports mainClassForSetColor">التقرير</button>
+        
+
+          <div class="SearchDiv mainClassForSetColor" style="background: #0a1951; border-radius: 6px; border: none; padding: 5px;">
+            <select dir="rtl" class="SearchField" style="margin: 5px 0px;font-size: 20px;background: white;color: black;padding: 5px;border: 2px solid black;border-radius: 6px;text-align: start;font-weight: bold;">
+              <option value="orderNumber">رقم الطلب</option>
+              <option value="name">اسم العميل</option>
+              <option value="orderByUser">اسم المندوب</option>
+              <option value="phone">	رقم جوال العميل</option>
+              <option value="city">	المدينة</option>
+              <option value="active">النشاط</option>
+              <option value="startTime">التاريخ</option>
+            </select>
+            <input type="text" placeholder="Search text" class="addOrderInput SearchInput" style="max-width: 150px; font-size: 20px;">
+            <button class="SearchBtn" style="cursor: pointer; font-size: 20px;background: white;color: black;padding: 5px;border: 2px solid black;border-radius: 6px;text-align: end;font-weight: bold;">Search</button>
+          </div>
+
+          <button style="font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600;" class="mainClassForSetColor" onclick="ExportData()">excel</button>
+
+          <button style="font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600; border: none;" class="addNewOrder mainClassForSetColor">اضافة </button>
+        </div>
+
+        <div style="overflow: auto;">
 
           <div class="table-wrapper">
             <table class="fl-table">
@@ -141,22 +187,19 @@
                 <tr>
                     <th>التعديل</th>
                     <th>التاريخ</th>
-                    <th>الحالة</th>
-                    <th>نهاية العقد</th>
-                    <th>صيغة العقد</th>
-                    <th>بداية العقد</th>
                     <th>المبلغ</th>
-                    <th>النشاط</th>
+                    <th>تفاصيل الطلب</th>
+                    <th>الطلب</th>
                     <th>المدينة</th>
-                    <th>رقم الجوال</th>
-                    <th>الاسم</th>
+                    <th>رقم جوال العميل</th>
+                    <th>اسم المندوب</th>
+                    <th>اسم العميل</th>
                     <th>رقم الطلب</th>
                     <th>#</th>
                 </tr>
                 </thead>
 
                 <tbody id="AllOrders">
-
                 
                 <tbody>
             </table>
@@ -167,7 +210,6 @@
       </div>
 
 
-
       <!-- Start Sidebar can copy it to anthor file -->
       <div class="sidebar bg-white p-20 p-relative">
         <div class="HelloDiv">
@@ -176,111 +218,27 @@
         </div>
         <ul>
           
-          <li>
-
-            
-
-            <a class="active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end;" href="Dashboard-Store.html">
-              <span style="font-weight: bold; font-size:20px;">المتجر</span>
-              <i class="fa-regular fa-cart-shopping" style="font-weight: bold; font-size:20px; margin-left: 10px;"></i>
-            </a>
-
-            <a class="active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end;" href="Dashboard-Orders.html">
-              <p style="position: absolute; left: 35px; font-weight: bold;" class="NumberOfOrders">0</p>
-              <span style="font-weight: bold; font-size:20px;">الطلبات</span>
-              <i class="fa-regular fa-circle-user fa-fw" style="font-weight: bold; font-size:20px; margin-left: 10px;"></i>
-            </a>
-
-            <a class="active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end;" href="Dashboard-OrdersActives.html">
-              <span style="font-weight: bold; font-size:20px;">طلبات التفعيل</span>
-              <i class="fa-solid fa-circle-check fa-fw" style="color: #1877f2;; font-weight: bold; font-size:20px; margin-left: 10px;"></i>
-            </a>
-
-            <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer;" href="Dashboard-Accepted.html">
-              <span style="font-weight: bold; font-size:20px;">العملاء</span>
-              <i class="fa-regular fa-circle-user fa-fw" style="font-weight: bold; font-size:20px; margin-left: 10px; color: green; border-radius: 50%;"></i>
-            </a>
-
-            <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer;" href="Dashboard-Archived.html">
-              <span style="font-weight: bold; font-size:20px;">الارشيف</span>
-              <i class="fa-solid fa-folder-open fa-fw" style="font-weight: bold; font-size:20px; margin-left: 10px; color: gray;"></i>
-            </a>
-
-            <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer;" href="Dashboard-Technical-Support.html">
-              <span style="font-weight: bold; font-size:20px;">الدعم الفني</span>
-              <i class="fa-solid fa-headset" style="font-weight: bold; font-size:20px; margin-left: 10px; color: gray;"></i>
-            </a>
-
-            <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer;" href="Dashboard-Suppliers.html">
-              <span style="font-weight: bold; font-size:20px;">الموردين</span>
-              <i class="fa-regular fa-truck-field" style="font-weight: bold; font-size:20px; margin-left: 10px; color: #397eaf;"></i>
-            </a>
-
-            <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer;" href="Print-Page.html">
-              <span style="font-weight: bold; font-size:20px;">عرض سعر</span>
-              <i class="fa-solid fa-file-invoice-dollar" style="font-weight: bold; font-size:20px; margin-left: 15px; color: #20a2ed;"></i>
-            </a>
-
-            <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer;" href="Dashboard-Reports.html">
-              <span style="font-weight: bold; font-size:20px;">التقارير</span>
-              <i class="fa-regular fa-book" style="font-weight: bold; font-size:20px; margin-left: 15px; color: #000000;"></i>
-            </a>
-
-            <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer; background: rgba(137, 8, 8, 0.676); color: white;" id="logOut-digital">
-              <span style="font-weight: bold; font-size:20px;">تسجيل الخروج</span>
-              <i class="fas fa-sign-out-alt fa-fw" style="font-weight: bold; font-size:20px; margin-left: 10px; color: white;"></i>
-            </a>
+          <li class="AllPagesBtns">
+           
 
           </li>
+          <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer; background: rgba(137, 8, 8, 0.676); color: white;" id="logOut-digital">
+            <span style="font-weight: bold; font-size:20px;">تسجيل الخروج</span>
+            <i class="fas fa-sign-out-alt fa-fw" style="font-weight: bold; font-size:20px; margin-left: 10px; color: white;"></i>
+          </a>
           
         </ul>
       </div>
       <!-- End Sidebar can copy it to anthor file -->
-      
+
     </div>
-  <!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
-</body>
+  </body>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
+
+  <script src="./AllPagesObject.js"></script>
 
   <script type="module">
 
@@ -290,7 +248,6 @@
 
   // TODO: Replace the following with your app's Firebase project configuration
   
-
   import { firebaseConfig } from './firebase.js';
 
   firebase.initializeApp(firebaseConfig);
@@ -309,43 +266,53 @@
 
 
 
-  
 
 
 
 
-/* start return all arcvived */
+const isAccepted = false;
 
-let AllOrdersArchived;
 
-async function ForAllOrdersArchived(X){
 
-  const q = query(collection(db, "Persons"), where("isAccepted", "==", false), orderBy("date","desc"), limit(X||20));
+
+
+
+
+
+
+
+
+
+
+
+
+/* start return All Orders Accepted */
+
+let AllOrders;
+
+async function forAllOrders(X){
+
+  const q = query(collection(db, "Persons"), where('isAccepted', '==', isAccepted), orderBy("date","desc"), limit(X||20));
   const querySnapshot = await getDocs(q);
   const cityList = querySnapshot.docs.map(doc => doc.data());
 
-  AllOrdersArchived=cityList;
+  AllOrders=cityList;
 
-  return AllOrdersArchived;
+  return AllOrders;
 };
 
-/* end return all arcvived */
+/* end return All Orders Accepted */
 
 
 //////////////////////////////////////////////////////////////////////////
 
 
 
-document.querySelector("body > div > div.sidebar.bg-white.p-20.p-relative > ul > li > a:nth-child(5)").style.background="rgb(176 206 226 / 85%)"
-document.querySelector(".NumberOfOrders").innerHTML="";
-
-
-
 /*start login cods*/
 
 
-/* 02 start get AllAccounts */
 
+/* 02 start get AllAccounts */
 
 async function getUserDataWithId(id){
   let userData;
@@ -357,8 +324,6 @@ async function getUserDataWithId(id){
 
 
 /* 02 end get All Accounts */
-
-
 
 
 
@@ -384,7 +349,6 @@ if(docId!==null&&docId.trim()!==''){
 
 
 
-
 document.querySelector("#logOut-digital").addEventListener("click",()=>{
 
   localStorage.setItem("doc-digital-id","");
@@ -399,18 +363,25 @@ document.querySelector("#logOut-digital").addEventListener("click",()=>{
 
 
 
-
-
-
-  
 /* 2 start function to get differnce between data now */
 function getDiffDate(oldDate){
- 
+        
     var starts = moment(`${oldDate}`);
     var ends   = moment();
+
     var duration = moment.duration(ends.diff(starts));
+
+    // with ###moment precise date range plugin###
+    // it will tell you the difference in human terms
+
     var diff = moment.preciseDiff(starts, ends, true); 
+    // example: { "years": 2, "months": 7, "days": 0, "hours": 6, "minutes": 29, "seconds": 17, "firstDateWasLater":  false }
+
+
+    // or as string:
     var diffHuman = moment.preciseDiff(starts, ends);
+    // example: 2 years 7 months 6 hours 29 minutes 17 seconds
+
     let diffDate=diff;
 
     if(diffDate.years!==0){
@@ -446,14 +417,18 @@ function getDiffDate(oldDate){
     }
 
     let stringDiffDate = `منذ ${diffDate.diffDateNum + " " + diffDate.diffDateName}`;
+    // منذ 1 سنة
+
     if(diffDate.diffDateName=="الان"){
       stringDiffDate="الان";
     }
+    
+    // diffDate => json like {diffDateNum: 1, diffDateName: 'سنة'}
 
     return stringDiffDate;
 }
 
-
+// console.log(getDiffDate("2022/1/1 => 5:55 PM"));
 
 /* 2 end function to get differnce between data now */
 
@@ -468,7 +443,7 @@ document.querySelector(".limitToFirst").addEventListener("change",(e)=>{
 
 let limitToFirst=e.srcElement.value;
 
-getAllOrdersArchived(limitToFirst);
+getAllOrders(limitToFirst);
   
 });
 
@@ -483,87 +458,221 @@ getAllOrdersArchived(limitToFirst);
 
 
 
-
-/* 3 start get All Orders Archived */
-
-
-async function getAllOrdersArchived(x){
+/* 3 start get all Orders */
+let AllPersonsData;
 
 
-  /* start show all orders arcvived */
 
-  ForAllOrdersArchived(x).then(AllOrdersArchived=>{
-
+async function getAllOrders(X){
+  
+  forAllOrders(X).then(AllOrders=>{
     let i = 0;
-
-    if(AllOrdersArchived.length!==0){
+  
+    AllPersonsData=AllOrders;
+  
+    if(AllOrders.length!==0){
       document.querySelector("#AllOrders").innerHTML="";
-    };
+      showData(AllOrders);
+    }
 
-    AllOrdersArchived.forEach(el=>{
-      let I=0;
-      if((el.name).trim()!==""&&(el.phone).trim()!==""&&(el.active).trim()!==""&&(el.city).trim()!==""){
-        i++;
-        document.querySelector("#AllOrders").innerHTML+=`
-  
-          <tr data-id="${el.id}" style="font-weight: 600;">
-            <td class="Order-Editing">
-  
-              <a>
-                <i title="حذف" class="fa-solid fa-trash removeOrder" data-id="${el.id}" style="font-size: 20px; color: white; background: darkred; border-radius: 50%; padding: 6px 8px; cursor: pointer;"></i>
-              </a>
-  
-              <a>
-                <i title="قبول وتحويل للعملاء" class="fa-solid fa-check acceptOrder" data-id="${el.id}" style="font-size: 20px; color: white; background: green; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
-              </a>
-  
-              <a>
-                <i title="تعديل" class="fa-solid fa-pen-to-square editOrder" data-id="${el.id}" style="font-size: 20px; color: #e0dfdf; background: #233245; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
-              </a>
-  
-              <a href="http://wa.me/${el.country_calling_code+Number(el.phone)}" target="_blank">
-                <i title="واتساب" class="fa-brands fa-whatsapp" style="font-size: 20px; color: white; background: green; border-radius: 50%; padding: 4px 5px; cursor: pointer;"></i>
-              </a>
+    
+  });
 
-              <a>
-                <i title="تفاصيل الطلب" class="fa-sharp fa-solid fa-circle-info Order-Note" data-id="${el.id}" data-note="${el.note}" style="font-size: 25px; color: #233245; background: white; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
-              </a>
+}
+
+
+/* 3 End get all Orders */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* start search in firebase doc (search in students) */
+
+
+document.querySelector(".SearchBtn").addEventListener("click",async ()=>{
+
+let SearchField = document.querySelector(".SearchField").value;
+let SearchInput = document.querySelector(".SearchInput").value;
+
+SearchField=SearchField.trim();
+SearchInput=SearchInput.trim();
+
+console.log(SearchField,SearchInput);
+
+if(SearchField!==""&&SearchField!=="SearchInput"){
+
+  const q = query(collection(db, "Persons"), where(SearchField, '==', SearchInput));
+
+  const querySnapshot = await getDocs(q);
+  const cityList = querySnapshot.docs.map(doc => doc.data());
+  let AllFromSearch=cityList;
+
+  document.querySelector("#AllOrders").innerHTML=``;
+  showData(AllFromSearch);
+};
+
+});
+
+
+/* end search in firebase doc (search in students) */
+
+
+
+
+
+
+
+
+
+
+
+
+async function showData(x){
+  
+  let TotalPrice=0;
+  let i = 0;
+
+  x.forEach(el=>{
+    i++;
+    TotalPrice+=Number(el.price);
+    document.querySelector("#AllOrders").innerHTML+=`
+
+    <tr data-id="${el.id}" style="font-weight: 600;">
+      <td class="Order-Editing">
                       
-            </td>
-            <td class="Order-Date">${getDiffDate(el.orderDate)}</td>
-            <td class="Order-Status">${(moment.preciseDiff(moment(), moment(`${el.endTime}`),true).firstDateWasLater)?"منتهي":"نشط"}</td>
-            <td class="Order-End">${(el.endTime==undefined)?0:el.endTime}</td>
-            <td class="Order-Shape">${(el.shape==undefined)?moment.preciseDiff(moment(`${el.startTime}`), moment(`${el.endTime}`)):el.shape}</td>
-            <td class="Order-Start">${(el.startTime==undefined)?0:el.startTime}</td>
-            <td class="Order-Price">${(el.price==undefined)?0:el.price}</td>
-            <td class="Order-Active">
+
+        <a>
+          <i title="حذف" class="fa-solid fa-trash removeOrder" data-id="${el.id}" style="font-size: 20px; color: white; background: darkred; border-radius: 50%; padding: 6px 8px; cursor: pointer;"></i>
+        </a>
+
+        <a style="display: none;">
+          <i title="ارشيف" class="fa-solid fa-folder-open archiveOrder" data-id="${el.id}" style="font-size: 20px; color: white; background: gray; border-radius: 50%; padding: 7px 5px 5px 6px; cursor: pointer;"></i>
+        </a>
+
+        <a>
+          <i title="تعديل" class="fa-solid fa-pen-to-square editOrder" data-id="${el.id}" style="font-size: 20px; color: #e0dfdf; background: #233245; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
+        </a>
+
+        <a href="http://wa.me/${el.country_calling_code+Number(el.phone)}" target="_blank">
+          <i title="واتساب" class="fa-brands fa-whatsapp" style="font-size: 20px; color: white; background: green; border-radius: 50%; padding: 4px 5px; cursor: pointer;"></i>
+        </a>
+
+        <a>
+          <i title="قبول وتحويل للعملاء" class="fa-solid fa-check acceptOrder" data-id="${el.id}" style="font-size: 20px; color: white; background: green; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
+        </a>
+        
+
+                      
+      </td>
+      <td class="Order-Date">${getDiffDate(el.orderDate)}</td>
+      <!--
+      <td class="Order-Status">${(moment.preciseDiff(moment(), moment(`${el.endTime}`),true).firstDateWasLater)?"منتهي":"نشط"}</td>
+      <td class="Order-End">${(el.endTime==undefined)?0:el.endTime}</td>
+      <td class="Order-Shape">${(el.shape==undefined)?moment.preciseDiff(moment(`${el.startTime}`), moment(`${el.endTime}`)):el.shape}</td>
+      <td class="Order-Start">${(el.startTime==undefined)?0:el.startTime}</td>
+      -->
+      <td class="Order-Price">${(el.price==undefined)?0:el.price}</td>
+      <td>
+        <a>
+          <i title="تفاصيل الطلب" class="fa-sharp fa-solid fa-circle-info Order-Note" data-id="${el.id}" data-note="${el.note}" style="font-size: 25px; color: #233245; background: white; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
+        </a>
+      </td>
+      <td class="Order-Active">
                       ${(el.active=="Store")?`
                         <a>
-                          <i title="تفاصيل الطلب" class="fa-sharp fa-solid fa-circle-info OrderFromStore" data-id="${el.id}" data-store='${JSON.stringify(el.dataStore)}' style="font-size: 25px; color: rebeccapurple; background: white; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
+                          <i title="سلة المنتجات" class="fa-sharp fa-solid fa-circle-info OrderFromStore" data-id="${el.id}" data-store='${JSON.stringify(el.dataStore)}' style="font-size: 25px; color: rebeccapurple; background: white; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
                         </a>
                       `:`${el.active}`}
-            </td>
-            <td class="Order-City">${el.city}</td>
-            <td class="Order-Phone">${el.phone}</td>
-            <td class="Order-Name">${el.name}</td>
-            <td class="Order-Number">${el.orderNumber}</td>
-            <td class="Order-Id">#${i}</td>
-          </tr>
-                
-        `;
+      </td>
+      <td class="Order-City">${el.city}</td>
+      <td class="Order-Phone">${el.phone}</td>
+      <td class="Order-ByUser">${el.orderByUser}</td>
+      <td class="Order-Name">${el.name}</td>
+      <td class="Order-Number">${el.orderNumber}</td>
+      <td class="Order-Id">#${i}</td>
+    </tr>
+    
+    `;
 
-      };
-       
-    });
+    document.querySelector(".TotalPrice").innerHTML=`${TotalPrice}`;
+
+  });
+}
+
+
+
+
+
+/* start report section */
+
+
+
+document.querySelector(".reports").addEventListener("click",()=>{
+
+  Swal.fire({
+      title: 'قم باختيار التاريخ',
+      html: `
+      
+      <input type="date" id="DateStarts" min="2022-01-01" style="padding: 5px; font-size: 18px;" >
+      <br><br>
+      <input type="date" id="DateEnds" min="2022-01-01" style="padding: 5px; font-size: 18px;">
+      
+      `,
+      confirmButtonText: 'عرض',
+  }).then(async (e)=>{
+    
+    let DateStarts = document.querySelector("#DateStarts").value;
+    let DateEnds = document.querySelector("#DateEnds").value;
+
+    DateStarts=DateStarts.trim();
+    DateEnds=DateEnds.trim();
+
+    DateStarts = new Date(DateStarts).getTime();
+    DateEnds = new Date(DateEnds).getTime();
+
+    const q = query(collection(db, "Persons"), where("isAccepted", "==", isAccepted), where("date", ">", DateStarts), where("date", "<", DateEnds), orderBy("date","desc"));
+    const querySnapshot = await getDocs(q);
+    const cityList = querySnapshot.docs.map(doc => doc.data());
+
+
+    document.querySelector("#AllOrders").innerHTML=``;
+    showData(cityList);
 
   });
 
-  /* end show all orders arcvived */
-
-};
+});
 
 
-/* 3 end get All Orders Archived */
+
+
+
+/* end report section */
+
+
+
+
 
 
 
@@ -573,6 +682,10 @@ async function getAllOrdersArchived(x){
 /* 4 Start set Orders Accepted and orders archived*/
 
 window.onclick=(e)=>{
+
+
+
+
 
 
 
@@ -637,6 +750,21 @@ if([...e.target.classList].includes("OrderFromStore")){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* start order detals btn*/
 if([...e.target.classList].includes("Order-Note")){
   Swal.fire(
@@ -645,41 +773,60 @@ if([...e.target.classList].includes("Order-Note")){
 }
 /* end order detals btn*/
 
+/* start order detals btn*/
+if([...e.target.classList].includes("Order-Active-Note")){
+  let orderId=e.target.dataset.id;
+  let orderData=AllPersonsData.find(el=>el.id==`${orderId}`);
+  let OrderActiveNote=orderData.OrderActiveNote;
+  
+  Swal.fire({
+    title: 'كود التفعيل',
+    html: `
+    
+    <textarea style="width: 98%;" rows="5" class="OrderActiveNote" type="text" dir="auto" autocomplete="off" readonly>${orderData.OrderActiveNote}</textarea>
+    <br>
+    <textarea style="width: 98%;" rows="5" class="OrderActiveNoteTwo" type="text" dir="auto" autocomplete="off" readonly>${orderData.OrderActiveNoteTwo}</textarea>
+    
+    `,
+    confirmButtonText: 'Ok',
+  })
+}
+/* end order detals btn*/
 
 
 /* start accept order */
 
 if([...e.target.classList].includes("acceptOrder")){
 
-  Swal.fire({
-  title: 'Are you Want To Accept It?',
-  text: "",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Yes, Accept it!'
-  }).then((result) => {
-    if (result.isConfirmed) {
+Swal.fire({
+title: 'Are you Want To Accept It?',
+text: "",
+icon: 'warning',
+showCancelButton: true,
+confirmButtonColor: '#3085d6',
+cancelButtonColor: '#d33',
+confirmButtonText: 'Yes, Accept it!'
+}).then((result) => {
+  if (result.isConfirmed) {
 
-      let orderId=e.target.dataset.id;
-      let orderData=AllOrdersArchived.find(el=>el.id==`${orderId}`);
+    let orderId=e.target.dataset.id;
+    let orderData=AllPersonsData.find(el=>el.id==`${orderId}`);
 
-      setDoc(doc(db,"Persons",orderId),{
-        ...orderData,
-        isAccepted: true,
-      });
+    setDoc(doc(db,"Persons",orderId),{
+      ...orderData,
+      isAccepted: true,
+    });
 
-      e.target.parentNode.parentNode.parentNode.remove();
+    e.target.parentNode.parentNode.parentNode.remove();
 
-      Swal.fire(
-        'Accepted!',
-        'Your Order has been Accepted.',
-        'success'
-      );
+    Swal.fire(
+      'Accepted!',
+      'Your Order has been Accepted.',
+      'success'
+    );
 
-    }
-  })
+  }
+})
 
 };
 /* end accept order */
@@ -703,7 +850,7 @@ if([...e.target.classList].includes("archiveOrder")){
     if (result.isConfirmed) {
 
       let orderId=e.target.dataset.id;
-      let orderData=AllOrdersArchived.find(el=>el.id==`${orderId}`);
+      let orderData=AllPersonsData.find(el=>el.id==`${orderId}`);
 
       setDoc(doc(db,"Persons",orderId),{
         ...orderData,
@@ -742,10 +889,10 @@ if([...e.target.classList].includes("removeOrder")){
   cancelButtonColor: '#d33',
   confirmButtonText: 'Yes, delete it!'
   }).then((result) => {
-    if(result.isConfirmed) {
+    if (result.isConfirmed) {
 
       let orderId=e.target.dataset.id;
-      let orderData=AllOrdersArchived.find(el=>el.id==`${orderId}`);
+      let orderData=AllPersonsData.find(el=>el.id==`${orderId}`);
 
       let orderDoc=doc(db, "Persons", orderId);
 
@@ -762,6 +909,7 @@ if([...e.target.classList].includes("removeOrder")){
     }
   })
 
+
 };
 /* end remove order */
 
@@ -774,7 +922,7 @@ if([...e.target.classList].includes("removeOrder")){
 if([...e.target.classList].includes("editOrder")){
 
   let orderId=e.target.dataset.id;
-  let orderData=AllOrdersArchived.find(el=>el.id==`${orderId}`);
+  let orderData=AllPersonsData.find(el=>el.id==`${orderId}`);
 
   swool(orderData);
 
@@ -782,9 +930,9 @@ if([...e.target.classList].includes("editOrder")){
 
 
 
-
 function swool(orderData){
 
+  
   Swal.fire({
       title: 'قم بتعديل البيانات التالية',
       html: `
@@ -799,66 +947,20 @@ function swool(orderData){
           <input style="width: 98%;" class="addOrderInput" type="number" placeholder="" dir="auto" autocomplete="off" id="phone" value="${orderData.phone}">
 
           <label for="active">النشاط:</label>
-          <select value="" dir="auto" id="active" class="addOrderInput" name="carlist" form="carform" style="font-weiht: bold; padding: 5px 5px; width: 98%; margin: auto 10px auto 0px; border: 2px solid black; border-radius: 6px;">
-              <option value="${orderData.active}">${orderData.active}</option>
-              ${(orderData.active=="Store")?``:`
-              
-              
-              <option value="تسويق الكتروني">
-              تسويق الكتروني
-              </option>
-              <option value="تصميم موقع الكترونية">
-              تصميم موقع الكترونية
-              </option>
-              <option value="تصميم متجر الكترونية">
-              تصميم متجر الكترونية
-              </option>
-              <option value="تصميم متجر علي منصة سلة">
-              تصميم متجر علي منصة سلة
-              </option>
-              <option value="تصميم متجر علي منصة زيد">
-              تصميم متجر علي منصة زيد
-              </option>
-              <option value="ربط خدامات">
-              ربط خدامات
-              </option>
-              <option value="نقاط بيع">
-              نقاط بيع
-              </option>
-              <option value="صيانة متجر سلة">
-              صيانة متجر سلة
-              </option>
-              <option value="تصميم منيو مطعم الكتروني">
-              تصميم منيو مطعم الكتروني
-              </option>
-              <option value="برامج محاسبية متاكملة">
-              برامج محاسبية متاكملة
-              </option>
-              <option value="برامج معامل تحاليل طبية">
-              برامج معامل تحاليل طبية
-              </option>
-              <option value="برامج مستوصفات طبية">
-              برامج مستوصفات طبية
-              </option>
-              <option value="audi">
-              شي اخر..
-              </option>
-              
-              
-              `}
-          </select>
+          ${(orderData.active=="Store")?`
+          <input style="width: 98%;" class="addOrderInput" id="active" type="text" dir="auto" autocomplete="off" readonly value="${orderData.active}">
+          `:`<input style="width: 98%;" class="addOrderInput" id="active" type="text" dir="auto" autocomplete="off" value="${orderData.active}">
+          `}
 
+          
+          <label for="price">الملاحظة:</label>
+          <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="note" value="${(orderData.note==undefined)?"":orderData.note}">
+           
           <label for="city">المدينة:</label>
           <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="city" value="${orderData.city}">
 
           <label for="price">المبلغ:</label>
           <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="price" value="${(orderData.price==undefined)?0:orderData.price}">
-
-          <label for="startTime">بداية العقد:</label>
-          <input style="width: 98%;" class="addOrderInput" type="date" dir="rtl" autocomplete="off" id="startTime" value="${(orderData.startTime==undefined)?0:orderData.startTime}">
-
-          <label for="endTime">نهاية العقد </label>
-          <input style="width: 98%;" class="addOrderInput" type="date" dir="rtl" autocomplete="off" id="endTime" value="${(orderData.endTime==undefined)?0:orderData.endTime}">
 
       </div>
       
@@ -871,16 +973,15 @@ function swool(orderData){
           let name=document.querySelector("#name").value;
           let phone=document.querySelector("#phone").value;
           let active=document.querySelector("#active").value;
+          let note=document.querySelector("#note").value;
           let city=document.querySelector("#city").value;
           let price=document.querySelector("#price").value;
-          let startTime=document.querySelector("#startTime").value;
-          let endTime=document.querySelector("#endTime").value;
 
 
 
-          SetData(name,phone,active,city,price,startTime,endTime);
+          SetData(name,phone,active,city,price);
 
-          function SetData(name,phone,active,city,price,startTime,endTime){
+          function SetData(name,phone,active,city,price){
             setDoc(doc(db,"Persons",orderData.id), {
               ...orderData,
               name: name,
@@ -888,14 +989,26 @@ function swool(orderData){
               city: city,
               active: active,
               price: price,
-              startTime: startTime,
-              endTime: endTime,
+              note: note,
               isAccepted: (orderData.isAccepted==undefined)?'':orderData.isAccepted,
-            }).then(e=>{
-              // history.go(0);
-            });
+            }).then(async (e)=>{
+              let mainEditedDiv = document.querySelector(`[data-id="${orderData.id}"]`)
+              mainEditedDiv.querySelector(".Order-Name").textContent=name;
+              mainEditedDiv.querySelector(".Order-Phone").textContent=phone;
+              mainEditedDiv.querySelector(".Order-City").textContent=city;
+              mainEditedDiv.querySelector(".Order-Price").textContent=price;
+              mainEditedDiv.querySelector(".Order-Note").dataset.note=note;
 
-          };  
+              let mainOrderFromAll = AllPersonsData.find(el=>el.id==`${orderData.id}`);
+              mainOrderFromAll.name=name;
+              mainOrderFromAll.price=price;
+              mainOrderFromAll.phone=phone;
+              mainOrderFromAll.city=city;
+              mainOrderFromAll.note=note;
+              Swal.fire(' تم التعديل ', '', 'success');
+            })
+
+          };
           
       };
   });
@@ -904,6 +1017,7 @@ function swool(orderData){
 
 /* end edit order */
 
+
 };
 
 /* 4 end set Orders Accepted and orders archived*/
@@ -911,11 +1025,194 @@ function swool(orderData){
 
 
 
+
+
+
+
+
+
+
+/* 5 start add new order */
+
+document.querySelector(".addNewOrder").addEventListener("click",()=>{
+
+
+  Swal.fire({
+      title: ' اضافة  ',
+      html: `
+      
+      
+      <div class="mainForm" style="overflow-y: hidden; overflow-c: scroll; font-size: 17px!important; font-family: 'Cairo', sans-serif; font-weight: bold!important;">
+
+          <label for="name">:الاسم</label>
+          <input style="width: 98%;" class="addOrderInput" type="text" dir="auto" autocomplete="off" id="name" value="">
+
+          <label for="phone">رقم الهاتف:</label>
+          <input style="width: 98%;" class="addOrderInput" type="number" placeholder="" dir="auto" autocomplete="off" id="phone" value="">
+
+          <label for="active">الطلب:</label>
+          <input style="width: 98%;" class="addOrderInput" id="active" type="text" dir="auto" autocomplete="off">
+
+          <label for="price">المبلغ:</label>
+          <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="price" value="">
+
+          <label for="note">الملاحظة:</label>
+          <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="note" value="">
+
+          <label for="city">المحافظة/العنوان</label>
+          <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="city" value="">
+
+          
+
+
+      </div>
+      
+      
+      `,
+      confirmButtonText: 'اضافة',
+  }).then((result) => {    
+      if (result.isConfirmed) {
+
+          let name=document.querySelector("#name").value;
+          let phone=document.querySelector("#phone").value;
+          let active=document.querySelector("#active").value;
+          let city=document.querySelector("#city").value;
+          let price=document.querySelector("#price").value;
+          let note=document.querySelector("#note").value;
+
+
+          function idGenerator() {
+            var S4 = function() {
+              return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+            };
+            return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+          };
+
+          let id = idGenerator();
+          if(name.trim()!==""&&phone.trim()!==""&&active.trim()!==""&&city.trim()!==""){
+            AddNewOrder(name,phone,active,city,price,id);
+          } else {
+            Swal.fire(
+                'برجاة كتابة البيانات بشكل صحيح',
+                '',
+                'error',
+              )
+          }
+
+          function AddNewOrder(name,phone,active,city,price,id){
+            let randomOrderNumber = (Math.random()*1000000).toFixed();
+            setDoc(doc(db,"Persons",id), {
+              id: id,
+              name: name,
+              phone: phone,
+              city: city,
+              active: active,
+              price: price,
+              note: note,
+              country_calling_code: "+20",
+              date: Date.now(),
+              isAccepted: isAccepted,
+              orderDate: showDate(),
+              orderByUser: mainPersonData.username,
+              orderNumber: randomOrderNumber,
+            }).then(e=>{
+           
+              Swal.fire(
+                'تم الاضافة بنجاح',
+                '',
+                'success',
+              )
+
+            });
+
+          };
+          
+      };
+  });
+
+});
+
+
+/* 5 end add new order */
+
+
+
+
+
+
+/* 1 start function to get data now */
+function showDate(){
+  
+  const d = new Date();
+  
+  let year = d.getFullYear();
+  let month = d.getMonth();
+  let day = d.getDate();
+  let hour = d.getHours();
+  let mint = d.getMinutes();
+  
+  if(mint<10){
+    mint=`0${mint}`
+  }
+  
+  let dateNow;
+
+  console.log(hour)
+
+  if (hour>=12){
+    
+    dateNow= `
+      ${year}/${month+1}/${day}
+      => ${hour-12}:${mint} PM
+      `;
+
+  } else if (hour<=11){
+    
+      dateNow = `
+      
+      ${year}/${month+1}/${day}
+         ${hour}:${mint} AM
+      
+      `;
+  }
+  return dateNow;
+}
+
+/* 1 end function to get data now */
+
+
+
+
+
+
+
+
 const colRef= collection(db,"Persons");
 
-onSnapshot(colRef,()=>{
-  getAllOrdersArchived();
+
+getAllOrders();
+
+
+onSnapshot(colRef,async ()=>{
+
+  let q = query(collection(db, "Persons"), where('isAccepted', '==', isAccepted), where('date', '>', (AllOrders[0]!==undefined)?AllOrders[0].date:0), orderBy("date","desc"), limit(X||20));
+  let querySnapshot = await getDocs(q);
+  let cityList = querySnapshot.docs.map(doc => doc.data());
+
+  if(cityList.length!==0){
+    (AllOrders[0]!==undefined)?AllOrders[0].date=cityList[0].date:"";
+    
+    cityList.forEach(ee=>{
+      AllPersonsData.push(ee);
+    });
+    document.querySelector("#AllOrders").innerHTML="";
+    AllPersonsData.sort((a, b) => a.date - b.date).reverse();
+    showData(AllPersonsData);
+  }
+
+
 });
+
 
 
 </script>
@@ -929,6 +1226,7 @@ onSnapshot(colRef,()=>{
         let arrayOfNames = [...document.querySelectorAll(".Order-Name")];
         let arrayOfPhones = [...document.querySelectorAll(".Order-Phone")];
         let arrayOfCitys = [...document.querySelectorAll(".Order-City")];
+
 
         for (let i=0; i<arrayOfNames.length; i++){
           
