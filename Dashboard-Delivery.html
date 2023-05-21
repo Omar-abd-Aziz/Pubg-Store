@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>العملاء</title>
+    <title>الشحن</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
     <link rel="stylesheet" href="./css/framework.css" />
     <link rel="stylesheet" href="./css/master.css" />
@@ -134,7 +134,7 @@
         <!-- Start Head -->
         <div class="head bg-white between-flex" style="padding: 0px 10px 15px; background: #f1f5f9;">
           <div class="p-relative">
-            <h1 class="p-relative" style="text-align: center;">العملاء</h1>
+            <h1 class="p-relative" style="text-align: center;">الشحن</h1>
           </div>
         </div>
         <!-- End Head -->
@@ -177,7 +177,7 @@
 
           <button style="min-width:100px;font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600;" class="mainClassForSetColor" onclick="ExportData()">excel</button>
 
-          <button style="min-width:100px;font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600; border: none;" class="addNewOrder mainClassForSetColor">اضافة عميل</button>
+          <button style="min-width:100px;font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600; border: none;" class="addNewOrder mainClassForSetColor">اضافة طلب</button>
         </div>
 
         <div style="overflow: auto;">
@@ -271,7 +271,7 @@
 
 
 
-const isAccepted = true;
+const isAccepted = "Delivery";
 
 
 
@@ -580,6 +580,9 @@ async function showData(x){
           <i title="واتساب" class="fa-brands fa-whatsapp" style="font-size: 20px; color: white; background: green; border-radius: 50%; padding: 4px 5px; cursor: pointer;"></i>
         </a>
 
+        <a>
+          <i title="قبول وتحويل للعملاء" class="fa-solid fa-check acceptOrder" data-id="${el.id}" style="font-size: 20px; color: white; background: green; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
+        </a>
         
 
                       
@@ -997,15 +1000,12 @@ function swool(orderData){
               mainEditedDiv.querySelector(".Order-Price").textContent=price;
               mainEditedDiv.querySelector(".Order-Note").dataset.note=note;
 
-
               let mainOrderFromAll = AllPersonsData.find(el=>el.id==`${orderData.id}`);
               mainOrderFromAll.name=name;
               mainOrderFromAll.price=price;
               mainOrderFromAll.phone=phone;
               mainOrderFromAll.city=city;
               mainOrderFromAll.note=note;
-             
-
               Swal.fire(' تم التعديل ', '', 'success');
             })
 

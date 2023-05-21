@@ -81,7 +81,8 @@
       /* Responsive */
 
       @media (max-width: 767px) {
-          .HelloDiv {
+        .HelloDiv,
+          #logOut-digital > span {
               display: none;
           }
       }
@@ -138,7 +139,7 @@
         </div>
         <!-- End Head -->
 
-        <div style="display: flex;align-items: center;justify-content: space-between;">
+        <div style="display: flex;align-items: center;justify-content: space-between; overflow: scroll;">
           <div>
             <select class="limitToFirst">
               <option value="20">20</option>
@@ -153,14 +154,14 @@
           </div>
 
 
-          <button class="mainClassForSetColor" style="font-size: 18px; font-family:cairo; cursor:pointer; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 10px; font-weight: 600;">
+          <button class="mainClassForSetColor" style="min-width:200px;font-size: 18px; font-family:cairo; cursor:pointer; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 10px; font-weight: 600;">
             Total Price: 
             <span class="TotalPrice">0</span>
           </button>
-          <button style="font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600;" class="reports mainClassForSetColor">التقرير</button>
+          <button style="min-width:100px;font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600;" class="reports mainClassForSetColor">التقرير</button>
         
 
-          <div class="SearchDiv mainClassForSetColor" style="background: #0a1951; border-radius: 6px; border: none; padding: 5px;">
+          <div class="SearchDiv mainClassForSetColor" style="min-width:400px;background: #0a1951; border-radius: 6px; border: none; padding: 5px;">
             <select dir="rtl" class="SearchField" style="margin: 5px 0px;font-size: 20px;background: white;color: black;padding: 5px;border: 2px solid black;border-radius: 6px;text-align: start;font-weight: bold;">
               <option value="orderNumber">رقم الطلب</option>
               <option value="name">اسم العميل</option>
@@ -174,9 +175,9 @@
             <button class="SearchBtn" style="cursor: pointer; font-size: 20px;background: white;color: black;padding: 5px;border: 2px solid black;border-radius: 6px;text-align: end;font-weight: bold;">Search</button>
           </div>
 
-          <button style="font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600;" class="mainClassForSetColor" onclick="ExportData()">excel</button>
+          <button style="min-width:100px;font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600;" class="mainClassForSetColor" onclick="ExportData()">excel</button>
 
-          <button style="font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600; border: none;" class="addNewOrder mainClassForSetColor">اضافة </button>
+          <button style="min-width:100px;font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600; border: none;" class="addNewOrder mainClassForSetColor">اضافة </button>
         </div>
 
         <div style="overflow: auto;">

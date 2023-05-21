@@ -11,6 +11,12 @@ let AllPagesObject = [
   iconClass: "fa-regular fa-circle-user fa-fw",
   iconStyle: "color: black;",
 },
+{
+  name: "الشحن",
+  link: "./Dashboard-Delivery.html",
+  iconClass: "fa-solid fa-truck",
+  iconStyle: "color: black;",
+},
 // {
 //   name: "قسم التدريب",
 //   link: "./Dashboard-Trainer.html",
