@@ -829,7 +829,17 @@ async function swool(productData){
           <option value="${productData.ProductCategorieId}">${productData.ProductCategorieName}</option>
           ${newSelect.innerHTML}
         </select>
-        <br>
+        
+        <br><br>
+
+        <label for="ProductImgInput" class="ProductImgLabel" style="border: none;border-radius: 20px;background: green;color: white;padding: 5px 15px;cursor: pointer;">اختر صور المنتج</label>
+        <input style="width: 98%; display: none;" class="addOrderInput" accept="image/*" type="file" dir="rtl" autocomplete="off" id="ProductImgInput" multiple="multiple">
+
+        <br><br>
+
+
+        <div class="ProductImgsUploadDad" style="background: black; display: none; overflow:scroll; max-height: 250px; border: 2px solid black; border-radius: 6px; padding: 5px;">
+        
 
         <p style="text-align: center;">
           Product Code ${productData.id}
@@ -845,28 +855,52 @@ async function swool(productData){
       if (result.isConfirmed) {
 
           
-          let ProductName=document.querySelector("#ProductName").value;
-          let ProductPrice=document.querySelector("#ProductPrice").value;
-          let ProductNote=document.querySelector("#ProductNote").value;
-          let ProductCategorieSelect=document.querySelector("#ProductCategorie");
-          let ProductCategorieId=ProductCategorieSelect.value;
-          let ProductCategorieName = ProductCategorieSelect.options[ProductCategorieSelect.selectedIndex].text;
+            let ProductName=document.querySelector("#ProductName").value;
+            let ProductPrice=document.querySelector("#ProductPrice").value;
+            let ProductNote=document.querySelector("#ProductNote").value;
+            let ProductImgInput = document.querySelector("#ProductImgInput");
+            let ProductCategorieSelect=document.querySelector("#ProductCategorie");
+            let ProductCategorieId=ProductCategorieSelect.value;
+            let ProductCategorieName = ProductCategorieSelect.options[ProductCategorieSelect.selectedIndex].text;
+
+            let id = productData.id;
+
+            if(ProductName.trim()!==''&&ProductPrice.trim()!==''&&ProductNote.trim()!==''&&ProductCategorieId.trim()!==''&&ProductCategorieName.trim()!==''){
 
 
-          
-          if(ProductName.trim()!==''&&ProductPrice.trim()!==''&&ProductNote.trim()!==''){
-            
-            setDoc(doc(db,"StoreProducts",productData.id), {
-              ...productData,
-              ProductName: ProductName,
-              ProductPrice: ProductPrice,
-              ProductNote: ProductNote,
-              ProductCategorieId: ProductCategorieId,
-              ProductCategorieName: `${ProductCategorieName}`,
-            }).then(e=>{});
+              if(ProductImgInput.files[0]==undefined){
+
+                setDoc(doc(db,"StoreProducts",productData.id), {
+                  ...productData,
+                  ProductName: ProductName,
+                  ProductPrice: ProductPrice,
+                  ProductNote: ProductNote,
+                  ProductCategorieId: ProductCategorieId,
+                  ProductCategorieName: `${ProductCategorieName}`,
+                }).then(e=>{
+
+                  Swal.fire(
+                    'تم التعديل',
+                    '',
+                    'success'
+                  );
+
+                });
+
+              } else {
+
+                Swal.fire({
+                  title: 'Please Wait!',
+                  didOpen: () => {
+                    Swal.showLoading()
+                  }
+                });
+                uploadImage(ProductImgInput,ProductName,ProductPrice,ProductNote,id, undefined,ProductCategorieId,ProductCategorieName);
+              }
+
+            };
 
 
-          };
 
       };
   });
