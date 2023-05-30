@@ -822,6 +822,9 @@ confirmButtonText: 'Yes, Accept it!'
 
     e.target.parentNode.parentNode.parentNode.remove();
 
+    AllOrders = AllOrders.filter(obj => obj.id !== orderId);
+    AllPersonsData = AllPersonsData.filter(obj => obj.id !== orderId);
+
     Swal.fire(
       'Accepted!',
       'Your Order has been Accepted.',
@@ -861,6 +864,9 @@ if([...e.target.classList].includes("archiveOrder")){
       });
 
       e.target.parentNode.parentNode.parentNode.remove();
+
+      AllOrders = AllOrders.filter(obj => obj.id !== orderId);
+      AllPersonsData = AllPersonsData.filter(obj => obj.id !== orderId);
 
       Swal.fire(
         'Archived!',
@@ -902,6 +908,9 @@ if([...e.target.classList].includes("removeOrder")){
       deleteDoc(orderDoc);
 
       e.target.parentNode.parentNode.parentNode.remove();
+
+      AllOrders = AllOrders.filter(obj => obj.id !== orderId);
+      AllPersonsData = AllPersonsData.filter(obj => obj.id !== orderId);
 
       Swal.fire(
         'Deleted!',

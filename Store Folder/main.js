@@ -800,6 +800,7 @@ document.querySelector("#AllStoreCategories").addEventListener("change",async (e
   let q;
 
   if(FilterWith=="AllStoreCategories"){
+    document.querySelector(".LoadFilter").style.display="none";
     document.querySelector(".LoadMore").style.display="block";
     q = query(collection(db, "StoreProducts"), orderBy("date","desc"), limit(8));
   } else {
@@ -874,6 +875,18 @@ document.querySelector(".FormToSendOrder").addEventListener("submit",(e)=>{
       active: `${active}`,
       orderNumber: id,
     }).then(e=>{
+
+
+      document.querySelector(".FormToSendOrder").querySelector("#full_name").value=""
+      document.querySelector(".FormToSendOrder").querySelector("#phone_number").value=""
+      document.querySelector(".FormToSendOrder").querySelector("#full_address").value=""
+      document.querySelector(".FormToSendOrder").querySelector("#full_note").value=""
+
+
+
+
+
+
       Swal.fire(
         'تم ارسال الطلب',
         'سنقوم بالتواصل معك قريبا',
