@@ -1,0 +1,1620 @@
+
+*
+{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body{
+  background-color: #f8f9fa!important;
+}
+
+:root
+{
+  --main-color: black;
+  --one-color: #198754;
+}
+
+
+
+.swal2-image {
+  max-width: 100%;
+  max-height: 60vh !important;
+  margin: 2em auto 1em;
+}
+
+.curved {
+  position: relative;
+  background: #f8f9fa;
+  height: 3vh;
+}
+
+.curved::after {
+  content: '';
+  border-top-left-radius: 50% 100%;
+  border-top-right-radius: 50% 100%;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #212529;
+  height: 70%;
+
+  background-image: radial-gradient(circle at 93% 71%, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 80% 77%, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 26% 66%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 57% 92%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 87% 50%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 37% 43%, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 20% 80%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 96% 20%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 98% 99%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 83% 86%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 54% 28%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 40% 66%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 87% 26%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 39% 24%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 21% 9%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 61% 29%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 58% 19%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 5%,transparent 5%, transparent 100%),linear-gradient(0deg, hsla(321,0%,14%,1),hsla(306,0%,14%,1));
+}
+
+.footer-dad{
+  background-image: radial-gradient(circle at 93% 71%, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 80% 77%, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 26% 66%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 57% 92%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 87% 50%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 37% 43%, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 20% 80%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 96% 20%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 98% 99%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 83% 86%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 54% 28%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 40% 66%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 87% 26%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 39% 24%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 21% 9%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 61% 29%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 58% 19%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 5%,transparent 5%, transparent 100%),linear-gradient(0deg, hsla(321,0%,14%,1),hsla(306,0%,14%,1));
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+/* body::-webkit-scrollbar {
+  display: none;
+} */
+
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+ 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0000007d; 
+}
+
+
+
+.imgToOpen{
+  cursor: pointer;
+}
+
+.widthContainer100{
+  width: 100%!important;
+}
+
+/*start google maps*/
+
+.maps{
+  width: 100%;
+  border-radius: 6px;
+  user-select: none;
+}
+
+@media (max-width: 450px) {
+  .maps{
+    width: 100%;
+    max-height: 250px;
+  }
+}
+
+
+/*end google maps*/
+
+/*////////////////////////////////////////*/
+
+
+
+.btnForAddToCard
+{
+  font-weight: bold !important;
+  font-family: system-ui !important;
+  font-size: 20px !important;
+  background-image: radial-gradient(circle at 92% 37%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 39%,transparent 39%, transparent 71%,transparent 71%, transparent 100%),radial-gradient(circle at 65% 60%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 15%,transparent 15%, transparent 67%,transparent 67%, transparent 100%),radial-gradient(circle at 18% 57%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 23%,transparent 23%, transparent 31%,transparent 31%, transparent 100%),radial-gradient(circle at 38% 0%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 27%,transparent 27%, transparent 60%,transparent 60%, transparent 100%),radial-gradient(circle at 83% 39%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 74%,transparent 74%, transparent 87%,transparent 87%, transparent 100%),linear-gradient(135deg, rgb(243, 77, 35),rgb(25, 28, 34));
+  color: white !important;
+  border: none !important;
+}
+
+
+/*start cardImg*/
+.card
+{
+  overflow: hidden;
+  box-shadow: 1px 2px 6px 2px rgb(219, 219, 219);
+  transition: 0.5s;
+}
+
+.card:hover{
+  box-shadow: 1px 0px 9px 1px rgba(128, 38, 0, 0.773);
+}
+
+.CardImgDad
+{
+  background-color: white;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.CardImgDad > .cardImg
+{
+  max-width: 100%;
+  transition: var(--main-transition);
+  width: 100%;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*end cardImg*/
+
+
+
+
+
+/*start form*/
+.formDad
+{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.622);
+  z-index: 6;
+  display: none;
+}
+
+.dataForm
+{
+  max-width: 500px;
+  width: 90%;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: sans-serif;
+  border: none;
+  border-radius: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 30px;
+  z-index: 5;
+}
+
+
+.dataForm > .phoneNum,
+.address,
+.NameOfPerson
+{
+  width: 100%;
+  margin: 10px auto;
+  border-radius: 6px;
+  padding: 5px 10px;
+  border: 2px solid black;
+  direction: rtl;
+}
+
+.sendData
+{
+  position: relative;
+  top: 0%;
+  left: 30%;
+  transform: translate(-50%, 0%);
+  padding: 2px 20px;
+  border: none;
+  background: green;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  font-family: sans-serif;
+  cursor: pointer;
+
+  background-image: radial-gradient(circle at 72% 95%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 64%,transparent 64%, transparent 84%,transparent 84%, transparent 100%),radial-gradient(circle at 31% 30%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 49%,transparent 49%, transparent 51%,transparent 51%, transparent 100%),radial-gradient(circle at 72% 25%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 37%,transparent 37%, transparent 76%,transparent 76%, transparent 100%),radial-gradient(circle at 71% 16%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 2%,transparent 2%, transparent 21%,transparent 21%, transparent 100%),radial-gradient(circle at 52% 57%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 30%,transparent 30%, transparent 68%,transparent 68%, transparent 100%),linear-gradient(135deg, rgb(19, 185, 65),rgb(57, 60, 25));
+}
+
+.hideForm
+{
+  position: relative;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  padding: 2px 20px;
+  border: none;
+  background: red;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  font-family: sans-serif;
+  cursor: pointer;
+
+  background-image: radial-gradient(circle at 92% 37%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 39%,transparent 39%, transparent 71%,transparent 71%, transparent 100%),radial-gradient(circle at 65% 60%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 15%,transparent 15%, transparent 67%,transparent 67%, transparent 100%),radial-gradient(circle at 18% 57%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 23%,transparent 23%, transparent 31%,transparent 31%, transparent 100%),radial-gradient(circle at 38% 0%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 27%,transparent 27%, transparent 60%,transparent 60%, transparent 100%),radial-gradient(circle at 83% 39%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 74%,transparent 74%, transparent 87%,transparent 87%, transparent 100%),linear-gradient(135deg, rgb(243, 77, 35),rgb(25, 28, 34));
+}
+/*end form*/
+
+
+
+
+/*start btn for cart*/
+.cartBtnDad
+{
+  position: fixed;
+  z-index: 5;
+  background: red;
+  left: 2%;
+  top: 90%;
+}
+.btnCart
+{
+  width: 70px;
+  height: 70px;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  position: absolute;
+  left: 2%;
+  top: 90%;
+  z-index: 1;
+  user-select: none;
+}
+
+.numOfCardsAdd
+{
+  font-weight: 500;
+  background: red;
+  color: white;
+  border: none;
+  padding: 2px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  user-select: none;
+  margin: 0px 40px;
+
+  background-image: radial-gradient(circle at 92% 37%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 39%,transparent 39%, transparent 71%,transparent 71%, transparent 100%),radial-gradient(circle at 65% 60%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 15%,transparent 15%, transparent 67%,transparent 67%, transparent 100%),radial-gradient(circle at 18% 57%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 23%,transparent 23%, transparent 31%,transparent 31%, transparent 100%),radial-gradient(circle at 38% 0%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 27%,transparent 27%, transparent 60%,transparent 60%, transparent 100%),radial-gradient(circle at 83% 39%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 74%,transparent 74%, transparent 87%,transparent 87%, transparent 100%),linear-gradient(135deg, rgb(243, 77, 35),rgb(25, 28, 34));
+}
+/*start btn for cart*/
+
+/**/
+.divForCardsHasSelcDad
+{
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.622);
+  z-index: 5;
+}
+
+.divForCardsHasSelc
+{
+  overflow: scroll;
+  max-width: 1000px;
+  width: 98%;
+  height: 90%;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: sans-serif;
+  border: none;
+  border-radius: 6px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 30px;
+  z-index: 5;
+}
+
+.cartOk
+{
+  border: none;
+  background: green;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+  background-image: radial-gradient(circle at 72% 95%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 64%,transparent 64%, transparent 84%,transparent 84%, transparent 100%),radial-gradient(circle at 31% 30%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 49%,transparent 49%, transparent 51%,transparent 51%, transparent 100%),radial-gradient(circle at 72% 25%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 37%,transparent 37%, transparent 76%,transparent 76%, transparent 100%),radial-gradient(circle at 71% 16%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 2%,transparent 2%, transparent 21%,transparent 21%, transparent 100%),radial-gradient(circle at 52% 57%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 30%,transparent 30%, transparent 68%,transparent 68%, transparent 100%),linear-gradient(135deg, rgb(19, 185, 65),rgb(57, 60, 25));
+}
+
+.totalPrice
+{
+  color: rgb(20, 151, 181);
+}
+
+
+.low,
+.height
+{
+  user-select: none;
+}
+
+
+.btnToHide
+{
+  font-size: 28px;
+  font-weight: bold;
+  font-family: sans-serif;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  top: 4%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  background: red;
+  padding: 7px 20px;
+  z-index: 5;
+
+  background-image: radial-gradient(circle at 92% 37%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 39%,transparent 39%, transparent 71%,transparent 71%, transparent 100%),radial-gradient(circle at 65% 60%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 15%,transparent 15%, transparent 67%,transparent 67%, transparent 100%),radial-gradient(circle at 18% 57%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 23%,transparent 23%, transparent 31%,transparent 31%, transparent 100%),radial-gradient(circle at 38% 0%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 27%,transparent 27%, transparent 60%,transparent 60%, transparent 100%),radial-gradient(circle at 83% 39%, hsla(94,0%,12%,0.07) 0%, hsla(94,0%,12%,0.07) 74%,transparent 74%, transparent 87%,transparent 87%, transparent 100%),linear-gradient(135deg, rgb(243, 77, 35),rgb(25, 28, 34));
+}
+/**/
+
+
+/**/
+.cartDiv
+{
+  background: #eee;
+  width: 100%;
+  margin: 20px auto; 
+  border-radius: 6px;
+  padding: 20px 20px;
+  display: flex;
+}
+
+.cartDiv > img
+{
+  max-height: 70px;
+  width: auto;
+  border-radius: 6px;
+}
+
+.cartDiv h2
+{
+  margin-bottom: 0 !important;
+}
+
+.cartDiv > .nameOfCardDad
+{
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 22px !important;
+  color: #1a1817;
+  width: 250px;
+  margin-top: 0;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 10px;
+}
+
+.cartDiv > .priceOfCardDad
+{
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 22px !important;
+  color: #1a1817;
+  width: 150px;
+  margin-top: 0;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 10px;
+}
+
+.cartDiv > .quantityOfCardDad
+{
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  color: #1a1817;
+  width: 100px;
+  margin-top: 0;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 10px;
+}
+
+.cartDiv > .totalPriceOfCardDad
+{
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  color: #1a1817;
+  width: 150px;
+  margin-top: 0;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 10px;
+}
+
+.cartDiv > .delOfCardDad
+{
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  color: #1a1817;
+  width: 40px;
+  margin-top: 0;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 10px;
+}
+
+body > div.divForCardsHasSelcDad > div > div > div.delOfCardDad > img
+{
+  cursor: pointer;
+  font-style: normal;
+  width: 40px;
+  margin-top: 0;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 10px;
+}
+
+.cartDiv > .quantityOfCardDad > span
+{
+  margin: 0px 5px;
+}
+
+.cartDiv > .quantityOfCardDad > .low,
+.cartDiv > .quantityOfCardDad > .height
+{
+  cursor: pointer;
+}
+
+
+
+@media (max-width: 600px) { 
+  .cartDiv
+  {
+    display: grid;
+    grid-template: repeat(2,auto) / repeat(1,1fr);
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .cartDiv > img
+  {
+    margin: auto;
+  }
+
+  body > div.divForCardsHasSelcDad > div > div > div.priceOfCardDad,
+  .quantityOfCardDad,
+  .totalPriceOfCardDad,
+  .delOfCardDad,
+  .nameOfCardDad
+  {
+    margin: auto !important;
+  }
+
+  .quantityOfCardDad > span
+  {
+    font-size: 22px !important;
+  }
+
+  body > div.divForCardsHasSelcDad > div > div > div.totalPriceOfCardDad > span
+  {
+    font-size: 20px;
+  }
+  
+  .cartDiv > img 
+  {
+    max-height: 140px;
+    width: auto;
+    border-radius: 6px;
+  }
+
+}
+
+/**/
+
+
+
+#btnup
+{
+  border: none;
+  padding: 5px;
+  border-radius: 30px;
+  font-size: 30px;
+  cursor: pointer;
+  background: transparent;
+  position: fixed;
+  right: 1%;
+  top: 90%;
+  display: none;
+  z-index: 1;
+  user-select: none;
+  color: white;
+  font-size: 40px;
+
+  background-image: linear-gradient(346deg, rgba(55, 55, 55,0.04) 0%, rgba(55, 55, 55,0.04) 22%,rgba(140, 140, 140,0.04) 22%, rgba(140, 140, 140,0.04) 69%,rgba(225, 225, 225,0.04) 69%, rgba(225, 225, 225,0.04) 100%),linear-gradient(31deg, rgba(55, 55, 55,0.04) 0%, rgba(55, 55, 55,0.04) 42%,rgba(140, 140, 140,0.04) 42%, rgba(140, 140, 140,0.04) 85%,rgba(225, 225, 225,0.04) 85%, rgba(225, 225, 225,0.04) 100%),linear-gradient(55deg, rgba(55, 55, 55,0.04) 0%, rgba(55, 55, 55,0.04) 13%,rgba(140, 140, 140,0.04) 13%, rgba(140, 140, 140,0.04) 72%,rgba(225, 225, 225,0.04) 72%, rgba(225, 225, 225,0.04) 100%),linear-gradient(90deg, rgb(0,0,0),rgb(0,0,0));
+}
+
+
+
+@media (max-width: 450px) {
+  body > div.home-dad > div > div > h4
+  {
+    font-size: 15px;
+  }
+
+  body > div.home-dad > div > div > h4 > span
+  {
+    font-size: 17px !important;
+  }
+
+  body > div.footer-dad.bg-dark.card-footer > div > h5
+  {
+    font-size: 15px !important;
+  }
+
+  #contact > div > h2.text-primary
+  {
+    font-size: 18px !important;
+  }
+
+  #about > div > div > div > h3
+  {
+    font-size: 16px !important;
+  }
+}
+
+
+
+.div-center
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.br-50
+{
+  border-radius: 50%;
+}
+
+
+
+
+.navbar-nav
+{
+  text-align: center;
+  font-weight: bold;
+}
+
+
+.nav-link
+{
+  border-bottom: 2px solid transparent;
+  border-radius: 20%;
+}
+
+
+.nav-link:hover
+{
+  border-radius: 20%;
+}
+
+
+
+
+
+.card-title
+{
+  font-size: 22px;
+  color: var(--main-color) !important;
+}
+
+.text-color
+{
+  color: var(--main-color);
+}
+
+
+
+
+
+
+
+
+.services-dad
+{
+  padding: 0 0 50px 0;
+}
+
+
+
+.my-xxl-3
+{
+  padding: 20px 0;
+}
+
+
+
+
+
+
+
+
+@media (max-width: 450px) {
+
+  body > div.home-dad > div > div
+  {
+    width: 280px;
+  }
+
+  body > div.home-dad > div > div > h1
+  {
+   font-size: 30px;
+  }
+
+  body > div.home-dad > div > div > h4
+  {
+   font-size: 19px;
+  }
+
+}
+
+
+
+
+
+
+.price
+{
+  font-size: 20px;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: green;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* start Grid with scss */
+
+@media (max-width: 450px) {
+  .grid {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (minmax(230px, 1fr))[auto-fill];
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-gap: 20px;
+  }
+}
+
+@media (min-width: 451px) and (max-width: 767px) {
+  .grid {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (minmax(230px, 1fr))[auto-fill];
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-gap: 20px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .grid {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (minmax(280px, 1fr))[auto-fill];
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-gap: 20px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .grid {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (minmax(250px, 1fr))[auto-fill];
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .grid {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (minmax(300px, 1fr))[auto-fill];
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+  }
+}
+
+/* end Grid with scss */
+/*# sourceMappingURL=main.css.map */
+
+
+
+
+
+
+
+
+/* start new style ////////////////////////////////////////////////////////////*/
+
+
+.TheHeader{
+  width: 100%;
+  position: fixed;
+  top: 0%;
+  background-color: white;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
+  z-index: 1;
+}
+
+
+
+.TheHeader nav {
+  margin: 0px 20px;
+  background: transparent;
+}
+
+
+
+.cartBtnDad {
+  position: absolute;
+  z-index: 2;
+  background: red;
+  left: 80px;
+  top: 5px;
+}
+
+
+
+.CardImgDad {
+  background: white;
+  overflow: hidden;
+  height: 100%;
+}
+
+.services-dad {
+  padding: 0 0 50px 0;
+  margin: 0px 0px 0px;
+}
+
+
+
+
+.LoadMore{
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  background: green;
+  color: white;
+  padding: 5px 20px;
+
+  background-image: radial-gradient(circle at 72% 95%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 64%,transparent 64%, transparent 84%,transparent 84%, transparent 100%),radial-gradient(circle at 31% 30%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 49%,transparent 49%, transparent 51%,transparent 51%, transparent 100%),radial-gradient(circle at 72% 25%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 37%,transparent 37%, transparent 76%,transparent 76%, transparent 100%),radial-gradient(circle at 71% 16%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 2%,transparent 2%, transparent 21%,transparent 21%, transparent 100%),radial-gradient(circle at 52% 57%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 30%,transparent 30%, transparent 68%,transparent 68%, transparent 100%),linear-gradient(135deg, rgb(19, 185, 65),rgb(57, 60, 25));
+}
+
+.LoadFilter{
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  background: green;
+  color: white;
+  padding: 5px 20px;
+  display: none;
+  background-image: radial-gradient(circle at 72% 95%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 64%,transparent 64%, transparent 84%,transparent 84%, transparent 100%),radial-gradient(circle at 31% 30%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 49%,transparent 49%, transparent 51%,transparent 51%, transparent 100%),radial-gradient(circle at 72% 25%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 37%,transparent 37%, transparent 76%,transparent 76%, transparent 100%),radial-gradient(circle at 71% 16%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 2%,transparent 2%, transparent 21%,transparent 21%, transparent 100%),radial-gradient(circle at 52% 57%, hsla(313,0%,4%,0.07) 0%, hsla(313,0%,4%,0.07) 30%,transparent 30%, transparent 68%,transparent 68%, transparent 100%),linear-gradient(135deg, rgb(18, 115, 45),rgb(57, 60, 25));
+}
+
+
+.detailsBtn{
+  font-weight: bold !important;
+  font-family: system-ui !important;
+  font-size: 20px !important;
+}
+
+
+
+.card-body {
+  padding: 0.5rem 1rem !important;
+}
+
+
+.divForCardsHasSelcDad{
+  z-index: 1;
+}
+
+
+.btnToHide {
+  top: 6%;
+}
+
+
+
+.noteFromPerson {
+  width: 100%;
+  margin: 10px auto;
+  border-radius: 6px;
+  padding: 5px 10px;
+  border: 2px solid black;
+  direction: rtl;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Slideshow container */
+.slideshow-container {
+  position: relative;
+  margin: 80px 0px 0px;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+
+.mySlides img {
+  max-height: 800px;
+}
+
+
+
+
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 22px;
+  transition: 0.6s ease;
+  border-radius: 0 5px 5px 0;
+  user-select: none;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.5);
+  background-image: radial-gradient(circle at 46% 12%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 43% 86%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 36% 69%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 74% 62%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 11% 65%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 44% 92%, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 68% 61%, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 88% 9%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 59% 86%, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 91% 23%, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 67% 78%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 0% 17%, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 93% 12%, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 93% 94%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 90% 17%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 5%,transparent 5%, transparent 100%),linear-gradient(90deg, rgb(138, 11, 69),rgb(218, 103, 37));
+  transition: 0.5s;
+}
+
+
+@media (max-width: 500px) {
+
+  .prev, .next {
+    font-size: 15px;
+  }
+  
+  
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+  color: black;
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+.fade:not(.show) {
+  opacity: 10!important;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#containerProduct
+{
+  margin: 80px 0 0 0;
+}
+
+
+
+#containerProduct #details > textarea
+{
+  width: 100%;
+  height: 400px;
+  padding: 10px;
+  font-size: 20px;
+  border: 2px solid #5b4ebb;
+  border-radius: 6px;
+  font-weight: bold;
+  color: rgb(99, 99, 99);
+}
+
+
+
+#containerProduct #details > textarea::-webkit-scrollbar {
+  width: 5px;
+}
+
+#containerProduct #details > textarea::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+#containerProduct #details > textarea::-webkit-scrollbar-thumb {
+background-color: #5b4ebb;
+outline: 1px solid #5b4ebb;
+}
+
+#containerProduct #containerD
+{
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1.5fr;
+    padding: 10px;
+}
+#containerProduct #imageSection
+{
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+}
+#containerProduct #imageSection img
+{
+    width: 100%;
+    float: right;
+    border-radius: 10px;
+    box-shadow: 1px 2px 6px 2px rgb(219, 219, 219);
+}
+#containerProduct #imageSection img:hover
+{
+  box-shadow: 1px 0px 9px 1px #5b4ebb;
+
+}
+
+#containerProduct #productDetails
+{
+  width: 80%;
+  margin: 20px auto;
+  text-align: end;
+}
+#containerProduct h1
+{
+  font-size: 35px;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  text-align: center;
+  background: #ffffff;
+  line-height: 50px;
+  padding: 0 20px;
+  font-weight: 700;
+  color: #5b4ebb;
+  border: 2px solid #5b4ebb;
+  border-radius: 6px;
+  
+}
+#containerProduct h4
+{
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(45 119 167);
+    letter-spacing: 1px;
+    word-spacing: 2px;
+}
+#containerProduct #productPreview
+{
+    padding-bottom: 10px;
+}
+#containerProduct #productPreview > img
+{
+  width: 50px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 2px solid rgb(3, 122, 122);
+  padding: 3px;
+}
+#containerProduct p
+{
+    font-size: 25px;
+    word-spacing: 2px;
+    color: #00000099;
+    font-weight: 500;
+    font-family: inherit;
+    background: transparent;
+    padding: 5px 5px 10px;
+    border: 2px solid #00000099;
+    border-radius: 6px;
+}
+#containerProduct button
+{
+    padding: 10px 15px;
+    color: white;
+    background-color: #5b4ebb;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 20px;
+}
+#containerProduct button a
+{
+    text-decoration: none;
+    font-size: 18px;
+}
+#containerProduct button:hover
+{
+    background-color: #5b4ebb;
+}
+#containerProduct button a:focus
+{
+    outline: none;
+}
+
+
+#details > h3:nth-child(1) > span.ProductPrice{
+  order: 2;
+  color: white;
+  background: #5b4ebb;
+  padding: 3px 5px;
+  border-radius: 6px;
+}
+
+
+
+
+
+
+
+
+
+/*///////////////////////////////////////////////////////////////////////////////*/
+
+#codplugin-checkout{
+  position: relative;
+  padding: 30px;
+  border: 2px solid #5b4ebb;
+  border-radius: 6px;
+  margin-top: 50px;
+}
+.codplugin-checkout-title {    
+  position: absolute;
+  top: -25px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+.codplugin-checkout-title h3{
+  background: #ffffff;
+  line-height: 50px;
+  padding: 0 20px;
+  display: inline-block;
+  color: #5b4ebb;
+  border: 2px solid #5b4ebb;
+  border-radius: 6px;
+}
+#codplugin_woo_single_form input,
+#codplugin_state {
+  width: 100%;
+  padding: 16px;
+  margin: 7px auto;
+  border: 2px solid #ebe9f7;
+  height: 50px;
+}
+
+
+#nrwooconfirm{
+  background-color: #5b4ebb;
+  width: 72%!important;
+  border: none;
+  margin: 7px;
+  margin-right: 9px;
+  float: right;
+  color: #fff !important;
+}
+#nrwooconfirm.atc-buy-button {
+  display: flex;
+  background: none;
+}
+.custom-atc-btn, 
+#nrwooconfirm.atc-buy-button .added_to_cart,
+#nrwooconfirm.atc-buy-button input {
+  display: inline-block;
+  flex: 0 0 50%;
+  margin: 0 2px;
+  padding-left: 0;
+  padding-right: 0;
+}
+#codplugin_add_button,#codplugin_count_button,#codplugin_remove_button{
+  color: black;
+  font-size: 20px;
+  text-align: center;
+  line-height: 46px;
+  cursor: pointer;
+  line-height: 46px;
+  width: 50px;
+  float: left;
+}
+#codplugin_woo_radio{
+width: 17px!important;
+height: 17px!important;
+}
+#codplugin_state{
+  cursor: pointer;
+  color: #888;
+}
+
+span#codplugin_h_o {
+  line-height: 50px;
+  font-size: 16px;
+}
+span#codplugin_h_o i {
+  font-size: 20px;
+  color: #ebe8f7;
+  margin-right: 5px;
+}
+div#codplugin_h_left {
+  float: right;
+} 
+div#codplugin_h_left i {
+  color: #ebe9f7;
+  line-height: 50px;
+  font-size: 25px;
+}
+div#codplugin_h_right {
+float: left;
+}
+div#codplugin_order_history {
+  height: 50px;
+  cursor: pointer;
+  border-bottom: 2px solid #ebe9f7;
+  margin: 7px;
+}
+
+#codplugin_show_hide{
+  display: none;
+}
+#codplugin_gif{
+  margin: auto;
+  width: 50px;
+  height: 50px;
+  display: none;
+}
+
+
+
+
+
+
+
+.btnNext{
+  font-size: 25px;
+  font-weight: bold;
+  background: #5b4ebb;
+  color: white;
+  padding: 5px 10px;
+  margin: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.btnNext:hover{
+  color: black;
+}
+
+
+
+/* -----------------------------------------
+   Global Mediaqueries
+----------------------------------------- */
+
+@media (max-width: 1349px) and (min-width: 992px) {
+
+  #codplugin-checkout {
+      padding: 30px 10px;
+  }
+  .codplugin-checkout-title h3 {
+      font-size: 22px;
+  }
+  #codplugin_woo_single_form input, #codplugin_state, #codplugin-checkout .chosen-container{
+      width: 46% !important;
+  }
+  #nrwooconfirm {
+      width: 62%!important;
+  }
+  #codplugin_show_hide {
+      padding: 0 10px;
+  }
+
+}
+
+@media (max-width: 767px) {
+
+  #codplugin-checkout {
+      padding: 30px 10px;
+  }
+  .codplugin-checkout-title h3 {
+      font-size: 22px;
+  }
+  #codplugin_woo_single_form input, #codplugin_state {
+      width: 46%;
+  }
+  #nrwooconfirm {
+      width: 63%!important;
+  }
+
+}
+
+@media (max-width: 488px) {
+  #codplugin_woo_single_form input, #codplugin_state, #codplugin-checkout .chosen-container{
+      width: 100% !important;
+      margin: 0;
+      margin-bottom: 10px;
+  }
+  #nrwooconfirm.atc-buy-button {
+      width: 100% !important;
+      float: none;
+      flex-direction: column;
+  }
+  .custom-atc-btn, #nrwooconfirm.atc-buy-button .added_to_cart, #nrwooconfirm.atc-buy-button input {
+      -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  margin: 10px 0 3px;
+
+
+  }
+
+  .codplugin-checkout-title {
+      position: relative; 
+  }
+  .codplugin-checkout-title h3 {
+      margin: 0 !important;
+  }
+ 
+}
+
+@media (max-width: 417px) {
+  .form-qte {
+      float: none;
+      width: 100%;
+      margin-bottom: 10px;
+  }
+  #codplugin_remove_button,
+  #codplugin_add_button {
+      width: 15%;
+      float: none;
+      border: none;
+  }
+  #codplugin_count_button {
+      float: none;
+      width: 60%;
+  }
+  #nrwooconfirm{
+      float: none;
+      width: 100% !important;
+      display: block;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ----------------------------- MEDIA QUERY --------------------------- */
+
+@media(max-width: 1300px)
+{
+    #containerProduct h1
+    {
+        font-size: 28px;
+    }
+    #containerProduct #productPreview > img
+    {
+        width: 40px;
+        padding: 3px;
+    }
+    #containerProduct button
+    {
+        padding: 8px 13px;
+        background-color: #5b4ebb;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+}
+
+@media(max-width: 1170px)
+{
+    #containerProduct h1
+    {
+        font-size: 22px;
+    }
+    #containerProduct #productPreview > img
+    {
+        width: 40px;
+        padding: 3px;
+    }
+    #containerProduct button a
+    {
+        font-size: 15px;
+
+    }
+    #containerProduct h4, p
+    {
+        font-size: 13px;
+    }
+    #containerProduct h3
+    {
+      font-size: 20px;
+    }
+
+}
+
+@media(max-width: 900px)
+{
+    /* #containerProduct */
+    #containerProduct #containerD
+    {
+        width: 80%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    #containerProduct #imageSection
+    {
+        width: 100%;
+        text-align: center;
+        order: 1;
+    }
+    #containerProduct #imageSection img
+    {
+        text-align: center;
+        width: 70%;
+        float: none;
+    }
+    #containerProduct #productDetails
+    {
+        width: 100%;
+        order: 2;
+    }
+    #containerProduct #button
+    {
+        text-align: center;
+    }
+}
+
+@media(max-width: 650px)
+{
+    #containerProduct #containerD
+    {
+        width: 95%;
+    }
+}
+
+
+
+@media (max-width: 500px){
+  .grid {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (minmax(230px, 1fr))[auto-fill];
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+    grid-gap: 5px;
+  }
+
+  div.card-body > .card-title{
+    font-size: 15px;
+  }
+
+  div.card-body .priceDad{
+    margin-bottom: 0px;
+  }
+
+  div.card-body .price{
+    font-size: 15px;
+  }
+
+  div.card-body .btnForAddToCard{
+    font-size: 15px!important;
+  }
+
+  
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

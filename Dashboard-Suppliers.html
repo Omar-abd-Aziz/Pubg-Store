@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الموردين</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link rel="stylesheet" href="./css/framework.css" />
+    <link rel="stylesheet" href="./css/master.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
+
+
+    <link rel="icon" type="image/x-icon" href="./imgs/pubg icon.png">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="./js cdn/momentCdn.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+
+
+    <style>
+
+
+      html{
+        min-width: 1200px;
+        overflow: scroll;
+      }
+
+
+      @font-face {
+        font-family: myFirstFont;
+        src: url(./Fonts/Ethnocentric.ttf);
+      }
+
+      
+      /* Table Styles */
+
+      .table-wrapper{
+          box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+      }
+
+      .fl-table {
+          border-radius: 5px;
+          font-size: 17px;
+          font-weight: normal;
+          border: none;
+          border-collapse: collapse;
+          width: 100%;
+          max-width: 100%;
+          white-space: nowrap;
+          background-color: white;
+      }
+
+      .fl-table td{
+          text-align: center;
+          padding: 3px;
+          border: 2px solid #0a1951;
+      }
+
+
+      .fl-table th {
+          text-align: center;
+          padding: 8px;
+          border: 2px solid #0a1951;
+      }
+
+
+      .fl-table td {
+          border-right: 1px solid #f8f8f8;
+          font-size: 14px;
+          font-family: 'Cairo';
+      }
+
+
+      .fl-table thead th {
+          color: #ffffff;
+          background: #0a1951;
+      }
+
+      .fl-table tr {
+        border: 1px solid rgb(0, 0, 0);
+      }
+
+      /* Responsive */
+
+      @media (max-width: 767px) {
+        .HelloDiv,
+          #logOut-digital > span {
+              display: none;
+          }
+      }
+
+
+
+      .CompanyName::before{
+        content: "Digital vision for information technology";
+        position: relative;
+        bottom: -28px;
+        left: 300px;
+        font-family: myFirstFont;
+        color: #397eaf;
+        font-size: 13px;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div class="page d-flex">
+      
+      <div class="content w-full">
+        
+        <!-- Start Head -->
+        <div class="head bg-white between-flex" style="padding: 0px 10px 15px; background: #f1f5f9;">
+          <div class="p-relative">
+            <h1 class="p-relative" style="text-align: center;">الموردين</h1>
+          </div>
+        </div>
+        <!-- End Head -->
+
+        <div style="display: flex;align-items: center;justify-content: space-between;">
+          <div></div>
+          <button style="font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600;" class="addNewOrder">اضافة مورد</button>
+        </div>
+
+        <div style="overflow: auto;">
+
+          <div class="table-wrapper">
+            <table class="fl-table">
+                <thead class="mainClassForSetColor">
+                <tr>
+                    <th>التعديل</th>
+                    <th>passwoard</th>
+                    <th>username</th>
+                    <th>المدينة</th>
+                    <th>رقم الجوال</th>
+                    <th>اسم المورد</th>
+                    <th>كود المورد</th>
+                    <th>#</th>
+                </tr>
+                </thead>
+
+                <tbody id="AllSuppliers">
+                
+                <tbody>
+            </table>
+        </div>
+          
+        </div>
+
+      </div>
+
+
+      <!-- Start Sidebar can copy it to anthor file -->
+      <div class="sidebar bg-white p-20 p-relative">
+        <div class="HelloDiv">
+          <i class="fa-regular fa-circle-user fa-fw" style="font-weight: bold;font-size: 50px;width: 100%;"></i>
+          <h2>Hello <span id="AdminName" style="color: #397eaf"></span></h2>
+        </div>
+        <ul>
+          
+          <li class="AllPagesBtns">
+           
+
+          </li>
+          <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer; background: rgba(137, 8, 8, 0.676); color: white;" id="logOut-digital">
+            <span style="font-weight: bold; font-size:20px;">تسجيل الخروج</span>
+            <i class="fas fa-sign-out-alt fa-fw" style="font-weight: bold; font-size:20px; margin-left: 10px; color: white;"></i>
+          </a>
+          
+        </ul>
+      </div>
+      <!-- End Sidebar can copy it to anthor file -->
+
+    </div>
+  </body>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
+
+  
+  <script src="./AllPagesObject.js"></script>
+
+  <script type="module">
+
+
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js';
+  import { getFirestore, collection, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js';
+
+  // TODO: Replace the following with your app's Firebase project configuration
+  
+  import { firebaseConfig } from './firebase.js';
+
+  firebase.initializeApp(firebaseConfig);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  let X;
+
+  async function getCit(db,X) {
+  const citiesCol = collection(db,`${X}`);
+  const citySnapshot = await getDocs(citiesCol);
+  const cityList = citySnapshot.docs.map(doc => doc.data());
+  return cityList;
+  };
+
+
+//////////////////////////////////////////////////////////////////////////
+
+
+
+
+document.querySelector("body > div > div.sidebar.bg-white.p-20.p-relative > ul > li > a:nth-child(7)").style.background="rgb(176 206 226 / 85%)"
+
+
+
+
+/*start login cods*/
+
+
+
+/* 01 start get AllAccounts */
+
+let AllAccounts;
+
+await getCit(db, 'accounts').then(async (e) => {
+  AllAccounts = e;
+})
+
+async function getUserDataWithId(id){
+  return AllAccounts.find(e=>e.id==id);
+}
+
+/* 01 end get All Accounts */
+
+
+
+/* 02 start check and get user doc */
+
+let mainPersonData;
+let docId = await localStorage.getItem("doc-digital-id");
+
+if(docId!==null&&docId.trim()!==''){
+    
+    mainPersonData=await getUserDataWithId(docId);
+
+    if(mainPersonData.isAdmin==false){
+      location.href="./Dashboard-notAdmin.html";
+    };
+
+    document.querySelector("#AdminName").textContent=`${mainPersonData.username}..`;
+} else {
+  location.href="./login/login.html"
+}
+
+/* 02 end check and get user doc */
+
+
+
+
+
+
+
+
+
+document.querySelector("#logOut-digital").addEventListener("click",()=>{
+
+  localStorage.setItem("doc-digital-id","");
+  location.href="./login/login.html";
+
+});
+
+
+/*end login cods*/
+
+
+
+
+
+
+  
+/* 2 start function to get differnce between data now */
+function getDiffDate(oldDate){
+        
+    var starts = moment(`${oldDate}`);
+    var ends   = moment();
+
+    var duration = moment.duration(ends.diff(starts));
+
+    // with ###moment precise date range plugin###
+    // it will tell you the difference in human terms
+
+    var diff = moment.preciseDiff(starts, ends, true); 
+    // example: { "years": 2, "months": 7, "days": 0, "hours": 6, "minutes": 29, "seconds": 17, "firstDateWasLater":  false }
+
+
+    // or as string:
+    var diffHuman = moment.preciseDiff(starts, ends);
+    // example: 2 years 7 months 6 hours 29 minutes 17 seconds
+
+    let diffDate=diff;
+
+    if(diffDate.years!==0){
+        diffDate={
+            "diffDateNum": diffDate.years,
+            "diffDateName": "سنة",
+        };
+    } else if(diff.months!==0){
+        diffDate={
+            "diffDateNum": diffDate.months,
+            "diffDateName": "شهر",
+        };
+    } else if(diff.days!==0){
+        diffDate={
+            "diffDateNum": diffDate.days,
+            "diffDateName": "يوم",
+        };
+    } else if(diff.hours!==0){
+        diffDate={
+            "diffDateNum": diffDate.hours,
+            "diffDateName": "ساعة",
+        };
+    } else if(diff.minutes!==0){
+        diffDate={
+            "diffDateNum": diffDate.minutes,
+            "diffDateName": "دقيقة",
+        };
+    } else {
+        diffDate={
+            "diffDateNum": 0,
+            "diffDateName": "الان",
+        };
+    }
+
+    let stringDiffDate = `منذ ${diffDate.diffDateNum + " " + diffDate.diffDateName}`;
+    // منذ 1 سنة
+
+    if(diffDate.diffDateName=="الان"){
+      stringDiffDate="الان";
+    }
+    
+    // diffDate => json like {diffDateNum: 1, diffDateName: 'سنة'}
+
+    return stringDiffDate;
+}
+
+// console.log(getDiffDate("2022/1/1 => 5:55 PM"));
+
+/* 2 end function to get differnce between data now */
+
+
+
+
+
+
+
+
+
+/* 3 start get all Suppliers */
+let AllSuppliers;
+
+getAllSuppliers();
+
+async function getAllSuppliers(){
+  
+  await getCit(db,"accounts").then(AllSuppliers=>{
+        let i = 0;
+
+        AllSuppliers=AllSuppliers.sort(function(a, b) {
+            return a.date - b.date;
+        });
+  
+       
+        AllSuppliers=AllSuppliers.filter(el=>el.isAdmin==false);
+
+        
+        document.querySelector(".NumberOfOrders").innerHTML="";
+  
+
+        if(AllSuppliers.length!==0){
+          document.querySelector("#AllSuppliers").innerHTML="";
+        }
+  
+        AllSuppliers.forEach(el=>{
+            let I=0;
+            if((el.name).trim()!==""&&(el.phone).trim()!==""&&(el.city).trim()!==""&&(el.username).trim()!==""&&(el.password).trim()!==""){
+              i++;
+              document.querySelector("#AllSuppliers").innerHTML+=`
+
+                  <tr data-id="${el.id}" style="font-weight: 600;">
+                    <td class="Supplier-Editing">
+                      
+                      <a>
+                        <i title="حذف" class="fa-solid fa-trash removeSupplier" data-id="${el.id}" style="font-size: 20px; color: white; background: darkred; border-radius: 50%; padding: 6px 8px; cursor: pointer;"></i>
+                      </a>
+  
+                      <a>
+                        <i title="تعديل" class="fa-solid fa-pen-to-square editSupplier" data-id="${el.id}" style="font-size: 20px; color: #e0dfdf; background: #233245; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
+                      </a>
+  
+                      <a href="http://wa.me/${Number(el.phone)}" target="_blank">
+                        <i title="واتساب" class="fa-brands fa-whatsapp" style="font-size: 20px; color: white; background: green; border-radius: 50%; padding: 4px 5px; cursor: pointer;"></i>
+                      </a>
+                      
+                    </td>
+                    <td class="SupplierPassword">${el.password}</td>
+                    <td class="SupplierUsername">${el.username}</td>
+                    <td class="SupplierCity">${el.city}</td>
+                    <td class="SupplierPhone">${el.phone}</td>
+                    <td class="SupplierName">${el.name}</td>
+                    <td class="SupplierNumber">${el.SupplierNumber}</td>
+                    <td class="SupplierId">#${i}</td>
+                  </tr>
+
+              `;
+            }
+        });
+    });
+}
+
+
+/* 3 End get all Suppliers */
+
+
+
+
+
+
+
+
+
+
+/* 4 Start window onclick*/
+
+window.onclick=(e)=>{
+
+
+
+/* start remove Supplier */
+if([...e.target.classList].includes("removeSupplier")){
+
+
+  Swal.fire({
+  title: 'Are you want to delet it?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+      let supplierId=e.target.dataset.id;
+      let supplierDate=AllAccounts.find(el=>el.id==`${supplierId}`);
+
+      let supplierDoc=doc(db, "accounts", supplierId);
+
+      deleteDoc(supplierDoc);
+
+      e.target.parentNode.parentNode.parentNode.remove();
+
+      Swal.fire(
+        'Deleted!',
+        'تم حذف المورد',
+        'success'
+      );
+
+    }
+  })
+
+
+};
+/* end remove order */
+
+
+
+
+
+
+
+
+/* start edit order */
+
+if([...e.target.classList].includes("editSupplier")){
+
+  let supplierId=e.target.dataset.id;
+  let supplierData=AllAccounts.find(el=>el.id==`${supplierId}`);
+  swool(supplierData);
+
+};
+
+
+function swool(supplierData){
+  
+  Swal.fire({
+      title: 'قم بتعديل البيانات التالية',
+      html: `
+      
+      <div class="mainForm" style="overflow-y: hidden; overflow-c: scroll; font-size: 17px!important; font-family: 'Cairo', sans-serif; font-weight: bold!important;">
+
+        <label for="name">:اسم المورد</label>
+        <input style="width: 98%;" class="addOrderInput" type="text" dir="auto" autocomplete="off" id="name" value="${supplierData.name}">
+
+        <label for="phone">رقم الجوال:</label>
+        <input style="width: 98%;" class="addOrderInput" type="number" placeholder="" dir="auto" autocomplete="off" id="phone" value="${supplierData.phone}">
+
+        <label for="city">المدينة:</label>
+        <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="city" value="${supplierData.city}">
+
+        <label for="username">username:</label>
+        <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="username" value="${supplierData.username}">
+
+        <label for="passwoard">password:</label>
+        <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="password" value="${supplierData.password}">
+
+      </div>
+      
+      `,
+      confirmButtonText: 'حفظ',
+  }).then((result) => {
+      if (result.isConfirmed) {
+
+        let name=document.querySelector("#name").value;
+        let phone=document.querySelector("#phone").value;
+        let city=document.querySelector("#city").value;
+        let username=document.querySelector("#username").value;
+        let password=document.querySelector("#password").value;
+
+        if(name!==""&&phone!==""&&city!==""&&username!==""&&password!==""){
+          
+          if(
+              name==supplierData.name&&
+              phone==supplierData.phone&&
+              city==supplierData.city&&
+              username==supplierData.username&&
+              password==supplierData.password
+            )
+          {
+            Swal.fire(
+              'تم الحفظ',
+              '',
+              'success'
+            )
+          } else{
+            SetSupplierData(name,phone,city,username,password,supplierData);
+          }
+
+
+        }else {
+          Swal.fire(
+            'قم بملي البيانات بشكل صحيح',
+          )
+        }
+
+        function SetSupplierData(name,phone,city,username,password,supplierDate){
+          setDoc(doc(db,"accounts",supplierData.id), {
+            ...supplierData,
+            name: name,
+            phone: phone,
+            city: city,
+            username: username,
+            password: password,
+          }).then(e=>{
+            Swal.fire(
+              'تم الحفظ',
+              '',
+              'success'
+            )
+          })
+        };
+      };
+  });
+};
+
+/* end edit order */
+
+};
+
+/* end window onClick */
+
+
+
+
+
+
+/* 5 start add new Supplier */
+
+document.querySelector(".addNewOrder").addEventListener("click",()=>{
+
+
+  Swal.fire({
+      title: ' اضافة مورد جديد ',
+      html: `
+      
+      
+      <div class="mainForm" style="overflow-y: hidden; overflow-c: scroll; font-size: 17px!important; font-family: 'Cairo', sans-serif; font-weight: bold!important;">
+
+          <label for="name">:اسم المورد</label>
+          <input style="width: 98%;" class="addOrderInput" type="text" dir="auto" autocomplete="off" id="name" value="">
+
+          <label for="phone">رقم الجوال:</label>
+          <input style="width: 98%;" class="addOrderInput" type="number" placeholder="" dir="auto" autocomplete="off" id="phone" value="">
+
+          <label for="city">المدينة:</label>
+          <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="city" value="">
+
+          <label for="username">username:</label>
+          <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="username" value="">
+
+          <label for="passwoard">password:</label>
+          <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="password" value="">
+
+      </div>
+      
+      
+      `,
+      confirmButtonText: 'اضافة',
+  }).then((result) => {    
+      if (result.isConfirmed) {
+
+          let name=document.querySelector("#name").value;
+          let phone=document.querySelector("#phone").value;
+          let city=document.querySelector("#city").value;
+          let username=document.querySelector("#username").value;
+          let password=document.querySelector("#password").value;
+
+
+          if(name!==""&&phone!==""&&city!==""&&username!==""&&password!=="")
+          {
+
+            function idGenerator() {
+              var S4 = function() {
+                return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+              };
+              return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+            };
+  
+            let id = idGenerator();
+  
+            AddNewSupplier(name,phone,city,username,password,id);
+
+          } else{
+            Swal.fire(
+                'قم بملي البيانات بشكل صحيح',
+              )
+          }
+
+
+
+          function AddNewSupplier(name,phone,city,username,password,id){
+            let randomSupplierNumber = (Math.random()*1000000).toFixed();
+            setDoc(doc(db,"accounts",id), {
+              isAdmin: false,
+              id: id,
+              name: name,
+              phone: phone,
+              city: city,
+              username: username,
+              password: password,
+              date: Date.now(),
+              SupplierDate: showDate(),
+              SupplierNumber: randomSupplierNumber,
+            }).then(e=>{
+              getAllSuppliers();
+              Swal.fire(
+                'تم اضافة المورد',
+                '',
+                'success'
+              );
+            });
+
+          };
+          
+      };
+  });
+
+});
+
+
+/* 5 end add new Supplier */
+
+
+
+
+
+
+/* 1 start function to get data now */
+function showDate(){
+  
+  const d = new Date();
+  
+  let year = d.getFullYear();
+  let month = d.getMonth();
+  let day = d.getDate();
+  let hour = d.getHours();
+  let mint = d.getMinutes();
+  
+  if(mint<10){
+    mint=`0${mint}`
+  }
+  
+  let dateNow;
+
+  console.log(hour)
+
+  if (hour>=12){
+    
+    dateNow= `
+      ${year}/${month+1}/${day}
+      => ${hour-12}:${mint} PM
+      `;
+
+  } else if (hour<=11){
+    
+      dateNow = `
+      
+      ${year}/${month+1}/${day}
+         ${hour}:${mint} AM
+      
+      `;
+  }
+  return dateNow;
+}
+
+/* 1 end function to get data now */
+
+
+
+
+
+
+// const colRef= collection(db,"accounts");
+
+// onSnapshot(colRef,async()=>{
+//   // getAllOrdersAccepted();
+// });
+
+
+
+</script>
+
+</html>
