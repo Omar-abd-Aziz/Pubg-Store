@@ -715,18 +715,21 @@ if([...e.target.classList].includes("RemoveCategorie")){
 
 /* start order detals btn*/
 if([...e.target.classList].includes("Order-Note")){
-  Swal.fire(
-      `${e.target.dataset.note}`
-    );
+
+  let productId=e.target.dataset.id;
+  let productData=AllPersonsData.find(el=>el.id==`${productId}`);
+  console.log(productData)
 
     Swal.fire({
-      title: 'وصف المنتج',
-      text: `${e.target.dataset.note}`,
+      title: `${productData.ProductName}`,
+      html: `<textarea readonly dir="auto" style="cursor: auto; width: 100%;padding: 10px;font-size: 25px; font-weight: bold; border-radius:20px; border: 2px solid #5b4ebb;">${e.target.dataset.note}</textarea>`,
       imageUrl: `${e.target.dataset.img}`,
       imageWidth: 400,
-      imageHeight: 200,
+      imageHeight: 400,
       imageAlt: 'Custom image',
     })
+
+
 }
 /* end order detals btn*/
 
@@ -924,6 +927,25 @@ if([...e.target.classList].includes("ProductImgLabel")){
 
   let imgInput = e.target.parentNode.querySelector("#ProductImgInput");
   let img = e.target.parentNode.querySelector(".ProductImgUpload");
+
+  if(imgInput==null){
+    imgInput=e.target.parentNode.querySelector("#BannerImgInput");
+
+    imgInput.addEventListener("change",(e)=>{
+
+      let x = imgInput.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(imgInput.files[0]);
+      reader.onload = () => {
+        document.querySelector(".ProductImgUpload").style.display="block"
+        document.querySelector(".ProductImgUpload").src=reader.result
+      };
+
+    })
+
+  } else if(imgInput!==null)
+  {
+    
   imgInput.addEventListener("change",(e)=>{
 
     document.querySelector(".ProductImgsUploadDad").innerHTML=``;
@@ -939,11 +961,15 @@ if([...e.target.classList].includes("ProductImgLabel")){
         `;
       };
     };
-  
+
     // e.target.value=null;
     document.querySelector(".ProductImgLabel").style.display="none";
     document.querySelector(".ProductImgsUploadDad").style.display="block";
-  });
+    });
+    
+  }
+
+
 
   
 };
@@ -1256,6 +1282,14 @@ Swal.fire({
 
 
         if(BannarNumber.trim()!==''&&BannarLink.trim()!==''){
+
+
+          Swal.fire({
+              title: 'Please Wait!',
+              didOpen: () => {
+                Swal.showLoading()
+              }
+          });
           
           const ref = firebase.storage().ref();
           const file =  BannerImgInput.files[0];
@@ -1274,11 +1308,15 @@ Swal.fire({
             setDoc(doc(db,"Bannar",`${id}`),{
               BannarImg: url,
               BannarLink: BannarLink,
-            });
+            }).then(e=>{
+              Swal.fire(' تم التعديل ', '', 'success');
+            })
             
           });
 
-        };
+        } else{
+          Swal.fire(' برجاء كتابة لينك البانر واختيار الصوره', '', 'error');
+        }
 
     };
 });

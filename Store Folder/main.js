@@ -122,7 +122,7 @@ if(product==null){
   document.querySelector(".mainPage").style.display="none";
   document.querySelector(".productPage").style.display="block";
   document.querySelector(".nav-link").textContent="المتجر";
-  document.querySelector(".nav-link").href="./store.html";
+  document.querySelector(".nav-link").href="./index.html";
   
   await getProductData(product).then(e=>{
  

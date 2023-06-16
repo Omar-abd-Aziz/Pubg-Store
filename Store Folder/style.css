@@ -921,7 +921,7 @@ body > div.divForCardsHasSelcDad > div > div > div.delOfCardDad > img
 
 
 .mySlides img {
-  max-height: 800px;
+  max-height: 850px;
 }
 
 
@@ -987,7 +987,8 @@ body > div.divForCardsHasSelcDad > div > div > div.delOfCardDad > img
   font-size: 12px;
   padding: 8px 12px;
   position: absolute;
-  top: 0;
+  bottom: 0;
+  right: 0;
 }
 
 
