@@ -1235,29 +1235,41 @@ onSnapshot(colRef,async ()=>{
 </script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.full.min.js"></script> 
 <script>
-    function ExportData()
-    {
-        let filename='reports.xlsx';
+  function ExportData()
+  {
+      let filename='reports.xlsx';
 
-        let AA=[]; 
-        let arrayOfNames = [...document.querySelectorAll(".Order-Name")];
-        let arrayOfPhones = [...document.querySelectorAll(".Order-Phone")];
-        let arrayOfCitys = [...document.querySelectorAll(".Order-City")];
+      let AA=[]; 
+      let arrayOfNames = [...document.querySelectorAll(".Order-Name")];
+      let arrayOfPhones = [...document.querySelectorAll(".Order-Phone")];
+      let arrayOfCitys = [...document.querySelectorAll(".Order-City")];
+      let arrayOfOrderActives = [...document.querySelectorAll(".Order-Active")];
+      let arrayOfOrderPrices = [...document.querySelectorAll(".Order-Price")];
+      let arrayOfOrderNumbers= [...document.querySelectorAll(".Order-Number")];
+      // let arrayOfCitys = [...document.querySelectorAll(".Order-City")];
 
+      for (let i=0; i<arrayOfNames.length; i++){
+        
+        AA.push(
+          {
+            phone: arrayOfPhones[i].textContent, 
+            name: arrayOfNames[i].textContent, 
+            city: arrayOfCitys[i].textContent,
+            OrderActive: (arrayOfOrderActives[i].querySelector("a")===null)?`${arrayOfOrderActives[i].textContent.trim()}`:`بعض المنتجات من المتجر`,
+            OrderPrice: arrayOfOrderPrices[i].textContent,
+            OrderNumber: arrayOfOrderNumbers[i].textContent,
+          }
+        );
+      }
 
-        for (let i=0; i<arrayOfNames.length; i++){
-          
-          AA.push({name: arrayOfNames[i].textContent, phone: arrayOfPhones[i].textContent, city: arrayOfCitys[i].textContent,});
-        }
+      let data = AA;
+      console.log(data);
 
-        let data = AA;
-        console.log(data);
-
-        const worksheet = XLSX.utils.json_to_sheet(AA);
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Dates");
-        XLSX.writeFile(workbook,filename);
-     }
+      const worksheet = XLSX.utils.json_to_sheet(AA);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Dates");
+      XLSX.writeFile(workbook,filename);
+   }
 </script>
 
 </html>
