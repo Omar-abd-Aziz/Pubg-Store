@@ -41,7 +41,7 @@ document.querySelector(".btn-sign-in").addEventListener("click",async()=>{
 
         const querySnapshot = await getDocs(q);
         if(querySnapshot.docs.length==0){
-            Swal.fire("","Usename Or Password Are Wrong");
+            Swal.fire("","Usename Or Password Are Wrong","error");
         }
         querySnapshot.forEach((doc) => {  
             if(doc.data().id!==undefined){
@@ -52,11 +52,11 @@ document.querySelector(".btn-sign-in").addEventListener("click",async()=>{
                 /**/
                 location.href="../Dashboard-Orders.html"
             } else {
-                Swal.fire("","Usename Or Password Are Wrong");
+                Swal.fire("","Usename Or Password Are Wrong","error");
             }
         });
 
-    } else {Swal.fire("","Enter Usename And Password")}
+    } else {Swal.fire("","Enter Usename And Password","error")}
 
 })
 
@@ -75,7 +75,7 @@ const AdminCode="951";
 
 /* start create account */
 
-document.querySelector(".btn-sign-up").addEventListener("click",()=>{
+document.querySelector(".btn-sign-up").addEventListener("click",async()=>{
     var username = document.querySelector(".username-up").value
     var password = document.querySelector(".password-up").value
     var password2 = document.querySelector(".password-up-2").value
@@ -87,46 +87,58 @@ document.querySelector(".btn-sign-up").addEventListener("click",()=>{
     if(username!=""&&password!=""&&password2!=""&&email==AdminCode&&password==password2)
     {
 
-      function idGenerator() {
-        var S4 = function() {
-            return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+        function idGenerator() {
+            var S4 = function() {
+                return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+            };
+            return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
         };
-        return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
-      };
 
-      let id = idGenerator();
+        let id = idGenerator();
 
-      setDoc(doc(db,"accounts",id),{
-        isAdmin: true,
-        id: id,
-        name: name,
-        username: username,
-        password: password,
-        date: Date.now(),
-      }).then(e=>{
-        Swal.fire(
-            'تم انشاء الحساب',
-            'يمكنك الان تسجيل الدخول',
-            'success'
-        )
-      });
-  
+        let q = query(collection(db, "accounts"), where("username", "==", `${username}`));
 
-      document.querySelector(".username-up").value=""
-      document.querySelector(".password-up").value=""
-      document.querySelector(".email-up").value=""
-      document.querySelector(".password-up-2").value=""
+        const querySnapshot = await getDocs(q);
+        if(querySnapshot.docs.length==0){
+            setDoc(doc(db,"accounts",id),{
+                isAdmin: true,
+                id: id,
+                name: name,
+                username: username,
+                password: password,
+                date: Date.now(),
+            }).then(e=>{
+                Swal.fire(
+                    'تم انشاء الحساب',
+                    'يمكنك الان تسجيل الدخول',
+                    'success'
+                )
+            });
+        
 
+            document.querySelector(".username-up").value=""
+            document.querySelector(".password-up").value=""
+            document.querySelector(".email-up").value=""
+            document.querySelector(".password-up-2").value=""
 
+            document.querySelector("#tab-1").click()
+    
+        } else {
+            Swal.fire(
+                'الاسم موجود بالفعل',
+                'برجاء اختيار اسم اخر',
+                'error'
+            )
+        }
 
-      document.querySelector("#tab-1").click()
+      
 
     }else if(email!=AdminCode) {
         Swal.fire("","Error, Admin Code Not True","")
     } else if(username!=""&&password!=password2) {
-        Swal.fire("","The Two Password Should be the Same and Enter Admin Code","")
+        Swal.fire("","The Two Password Should be the Same and Enter Admin Code","error")
     } else {
-        Swal.fire("","Enter Username,Password,admin code and Email","")
+        Swal.fire("","Enter Username,Password,admin code and Email","error")
     }
 })
 

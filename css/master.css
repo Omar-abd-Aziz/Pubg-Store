@@ -1426,3 +1426,62 @@ ul {
     width: 40%;
  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ///////////////////////////////////////////////////////////// */
+
+.PageOrdersCountDad{
+  background-image: radial-gradient(circle at top right, rgb(78, 78, 78) 0%, rgb(78, 78, 78) 1%,rgb(72, 72, 72) 1%, rgb(72, 72, 72) 10%,rgb(65, 65, 65) 10%, rgb(65, 65, 65) 22%,rgb(59, 59, 59) 22%, rgb(59, 59, 59) 23%,rgb(53, 53, 53) 23%, rgb(53, 53, 53) 28%,rgb(46, 46, 46) 28%, rgb(46, 46, 46) 37%,rgb(40, 40, 40) 37%, rgb(40, 40, 40) 100%);
+  text-align: center;
+  color: white;
+  padding: 5px 10px;
+  font-size: 25px;
+  font-family: sans-serif;
+  border: none;
+  border-radius: 15px;
+  font-weight: 900;
+}
+
+
+.PageOrdersCount{
+  text-align: center;
+  background: white;
+  color: black;
+  padding: 0px 5px;
+  font-size: 23px;
+  font-family: sans-serif;
+  border: none;
+  border-radius: 10px;
+  font-weight: 900;
+}
+
+
+
+/* ///////////////////////////////////////////////////////////// */

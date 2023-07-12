@@ -1,15 +1,14 @@
 window.open('', '_self', '');
 
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js';
-import { getFirestore, collection, getDocs,getDoc, setDoc, addDoc, doc } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js';
+  /**/
+  import { initializeApp } from './firebase.js';
+  import { getFirestore, collection, query, where, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from './firebase.js';
+  import { firebaseConfig } from './firebase.js';
 
-// TODO: Replace the following with your app's Firebase project configuration
-
-import { firebaseConfig } from './firebase.js';
-
-firebase.initializeApp(firebaseConfig);
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+  firebase.initializeApp(firebaseConfig);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  /**/
 
 let X;
 

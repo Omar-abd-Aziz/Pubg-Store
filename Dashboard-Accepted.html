@@ -128,6 +128,9 @@
 
 
 
+
+
+
     </style>
 
   </head>
@@ -139,7 +142,10 @@
         <!-- Start Head -->
         <div class="head bg-white between-flex" style="padding: 0px 10px 15px; background: #f1f5f9;">
           <div class="p-relative">
-            <h1 class="p-relative" style="text-align: center;">العملاء</h1>
+            <h1 class="p-relative PageOrdersCountDad" style="text-align: center;">
+              العملاء
+              <span class="PageOrdersCount">0</span>
+            </h1>
           </div>
         </div>
         <!-- End Head -->
@@ -250,16 +256,15 @@
   <script type="module">
 
 
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js';
-  import { getFirestore, collection, query, where, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js';
-
-  // TODO: Replace the following with your app's Firebase project configuration
-  
+  /**/
+  import { initializeApp } from './firebase.js';
+  import { getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from './firebase.js';
   import { firebaseConfig } from './firebase.js';
 
   firebase.initializeApp(firebaseConfig);
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+  /**/
 
   let X;
 
@@ -283,11 +288,13 @@ const isAccepted = true;
 
 
 
+/* start getOrdersCount */
 
+let q = query(collection(db, "Persons"), where('isAccepted', '==', isAccepted));
+let snapshot = await getCountFromServer(q);
+document.querySelector(".PageOrdersCount").textContent=snapshot.data().count;
 
-
-
-
+/* end getOrdersCount */
 
 
 
@@ -1197,6 +1204,12 @@ function showDate(){
 }
 
 /* 1 end function to get data now */
+
+
+
+
+
+
 
 
 

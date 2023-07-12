@@ -1,6 +1,7 @@
 /*1*/
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js';
-import { getFirestore, collection, query, where, getDocs,getDoc, setDoc,startAfter, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from 'https://www.gstatic.com/firebasejs/9.8.2/firebase-firestore.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js';
+import { getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt, startAfter,endAt } from 'https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js';
+
 
 var firebaseConfig = {
   apiKey: "AIzaSyCxhFz0o6GZZr0xLC4qBbrDNRJWv2Wi0bI",
