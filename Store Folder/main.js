@@ -769,17 +769,23 @@ async function AllStoreCategoriesInSelect(){
   const cityList = querySnapshot.docs.map(doc => doc.data());
   let array=cityList;
 
+
   document.querySelector("#AllStoreCategories").innerHTML=`
   
-  <option value="AllStoreCategories">كل الاقسام</option>
+  <option value="AllStoreCategories">
+  كل الاقسام 
+  </option>
 
   `;
 
-  array.forEach(e=>{
+  array.forEach(async (e)=>{
 
+    let q = query(collection(db, "StoreProducts"), where('ProductCategorieId', '==', `${e.id}`));
+    let snapshot = await getCountFromServer(q);
+    console.log(snapshot.data().count);
     document.querySelector("#AllStoreCategories").innerHTML+=`
       
-      <option value="${e.id}">${e.name}</option>
+      <option value="${e.id}">${e.name} (${snapshot.data().count})</option>
     
     `;
 
