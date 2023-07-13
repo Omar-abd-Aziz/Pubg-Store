@@ -58,14 +58,14 @@
       .fl-table td{
           text-align: center;
           padding: 3px;
-          border: 2px solid #0a1951;
+          border: 2px solid black;
       }
 
 
       .fl-table th {
           text-align: center;
           padding: 8px;
-          border: 2px solid #0a1951;
+          border: 2px solid black;
       }
 
 
@@ -392,7 +392,7 @@
 
 let q = query(collection(db, "StoreProducts"));
 let snapshot = await getCountFromServer(q);
-document.querySelector(".PageOrdersCount").textContent=snapshot.data().count;
+document.querySelector(".PageOrdersCount").textContent=`${snapshot.data().count}`;
 
 /* end getOrdersCount */
 
@@ -419,10 +419,6 @@ async function forAllStoreProducts(X){
 
 //////////////////////////////////////////////////////////////////////////
 
-
-
-
-document.querySelector("body > div > div.sidebar.bg-white.p-20.p-relative > ul > li > a:nth-child(1)").style.background="rgb(176 206 226 / 85%)"
 
 
 
@@ -907,7 +903,7 @@ async function swool(productData){
                     Swal.showLoading()
                   }
                 });
-                uploadImage(ProductImgInput,ProductName,ProductPrice,ProductNote,id, undefined,ProductCategorieId,ProductCategorieName);
+                uploadImage(ProductImgInput,ProductName,ProductPrice,ProductNote,id, undefined,ProductCategorieId,ProductCategorieName,productData.ProductDate,productData.date);
               }
 
             };
@@ -1093,7 +1089,7 @@ document.querySelector(".addNewOrder").addEventListener("click",async ()=>{
 
 
 
-function AddNewProduct(ProductName,ProductPrice,ProductNote,id,ProductImage,ProductCategorieId,ProductCategorieName,ArrayOfProductImages){
+function AddNewProduct(ProductName,ProductPrice,ProductNote,id,ProductImage,ProductCategorieId,ProductCategorieName,ArrayOfProductImages,ProductDate,date){
   setDoc(doc(db,"StoreProducts",id), {
       id: id,
       ProductName: ProductName,
@@ -1102,8 +1098,8 @@ function AddNewProduct(ProductName,ProductPrice,ProductNote,id,ProductImage,Prod
       ProductCategorieId: ProductCategorieId,
       ProductCategorieName: `${ProductCategorieName}`,
       ProductImage: ProductImage,
-      ProductDate: showDate(),
-      date: Date.now(),
+      ProductDate: ProductDate||showDate(),
+      date: date||Date.now(),
       ArrayOfProductImages: ArrayOfProductImages,
     }).then(e=>{});
 
@@ -1120,7 +1116,7 @@ function AddNewProduct(ProductName,ProductPrice,ProductNote,id,ProductImage,Prod
 
 
 
-async function uploadImage(input,ProductName,ProductPrice,ProductNote,id,ProductImage,ProductCategorieId,ProductCategorieName) {
+async function uploadImage(input,ProductName,ProductPrice,ProductNote,id,ProductImage,ProductCategorieId,ProductCategorieName,ProductDate,date) {
 
 
 
@@ -1148,8 +1144,8 @@ if(input!=="noNewImg"){
     
     };
 
-    Swal.fire("Done");
-    AddNewProduct(ProductName,ProductPrice,ProductNote,id, ArrayOfProductImages[0].src,ProductCategorieId,ProductCategorieName,ArrayOfProductImages);
+    Swal.fire("Done","","success");
+    AddNewProduct(ProductName,ProductPrice,ProductNote,id, ArrayOfProductImages[0].src,ProductCategorieId,ProductCategorieName,ArrayOfProductImages,ProductDate,date);
   };
 
 

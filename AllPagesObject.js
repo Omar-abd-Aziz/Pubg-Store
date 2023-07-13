@@ -67,14 +67,18 @@ let AllPagesObject = [
 // },
 
 ]
+
+
+
+let bg=`background-image: radial-gradient(circle at top right, rgb(78, 78, 78) 0%, rgb(78, 78, 78) 1%,rgb(72, 72, 72) 1%, rgb(72, 72, 72) 10%,rgb(65, 65, 65) 10%, rgb(65, 65, 65) 22%,rgb(59, 59, 59) 22%, rgb(59, 59, 59) 23%,rgb(53, 53, 53) 23%, rgb(53, 53, 53) 28%,rgb(46, 46, 46) 28%, rgb(46, 46, 46) 37%,rgb(40, 40, 40) 37%, rgb(40, 40, 40) 100%);`
   
 document.querySelector(".AllPagesBtns").innerHTML=""
 AllPagesObject.forEach(e=>{
   document.querySelector(".AllPagesBtns").innerHTML+=`
       
-      <a class="active d-flex align-center fs-14 c-black rad-6 p-10" style="${(`.${location.pathname}`==`${e.link}`)?"background: rgba(176, 206, 226, 0.85)":"background: white;"};display: flex; justify-content: end;" href="${e.link}">
+      <a class="active d-flex align-center fs-14 c-black rad-6 p-10" style="${(`.${location.pathname}`==`${e.link}`)?`${bg} color: white;`:"background: white;"};display: flex; justify-content: end;" href="${e.link}">
         <span style="font-weight: bold; font-size:20px;">${e.name}</span>
-        <i class="${e.iconClass}" style=" ${e.iconStyle}  font-weight: bold; font-size:20px; margin-left: 10px;"></i>
+        <i class="${e.iconClass}" style="${(`.${location.pathname}`==`${e.link}`)?`color: white;`:`${e.iconStyle}`}  font-weight: bold; font-size:20px; margin-left: 10px;"></i>
       </a>
       
   `
