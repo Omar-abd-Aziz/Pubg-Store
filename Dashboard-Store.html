@@ -243,7 +243,17 @@
 }
 
 
-
+.removeFile{
+    cursor: pointer;
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 25px;
+    background: darkred;
+    padding: 12px 35px 12px 14px;
+    width: 50px;
+    border-radius: 50%;
+    user-select: none;
+}
 
 
 
@@ -374,6 +384,8 @@
   firebase.initializeApp(firebaseConfig);
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+
+  const storage = firebase.storage();
   /**/
 
   let X;
@@ -550,6 +562,10 @@ async function getAllStoreProducts(X){
                       <a>
                         <i title="تفاصيل المنتج" class="fa-sharp fa-solid fa-circle-info Order-Note" data-id="${el.id}" data-img="${el.ProductImage}" data-note="${el.ProductNote}" style="font-size: 25px; color: #233245; background: white; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
                       </a>
+
+                      <a>
+                        <i title="الملفات" class="fa-sharp fa-solid fa-file Order-file" data-id="${el.id}" data-file='${(el.ArrayOfOrderFilesLinks==undefined)?'[]':JSON.stringify(el.ArrayOfOrderFilesLinks)}' style="font-size: 25px; color: #233245; background: white; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
+                      </a>
   
                       
                     </td>
@@ -643,6 +659,10 @@ if(SearchField!==""&&SearchField!=="SearchInput"){
                       <a>
                         <i title="تفاصيل المنتج" class="fa-sharp fa-solid fa-circle-info Order-Note" data-id="${el.id}" data-img="${el.ProductImage}" data-note="${el.ProductNote}" style="font-size: 25px; color: #233245; background: white; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
                       </a>
+
+                      <a>
+                        <i title="الملفات" class="fa-sharp fa-solid fa-file Order-file" data-id="${el.id}" data-file='${(el.ArrayOfOrderFilesLinks==undefined)?'[]':JSON.stringify(el.ArrayOfOrderFilesLinks)}' style="font-size: 25px; color: #233245; background: white; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
+                      </a>
   
                       
                     </td>
@@ -696,6 +716,113 @@ if(SearchField!==""&&SearchField!=="SearchInput"){
 window.onclick=(e)=>{
 
 
+
+
+
+
+/* start remove file btn*/
+if([...e.target.classList].includes("removeFile")){
+
+Swal.fire({
+title: 'هل تريد حذف هذا الملف؟',
+text: "",
+icon: 'warning',
+showCancelButton: true,
+confirmButtonColor: '#3085d6',
+cancelButtonColor: '#d33',
+confirmButtonText: 'Yes'
+}).then((result) => {
+  if (result.isConfirmed) {
+
+    let productId=e.target.dataset.orderid;
+    let productData=AllPersonsData.find(el=>el.id==`${productId}`);
+    let ArrayOfProductImages=productData.ArrayOfProductImages;
+    ArrayOfProductImages = ArrayOfProductImages.filter(obj => obj.src !== e.target.dataset.filesrc);
+
+    let firebaseStorageUrl = e.target.dataset.filesrc
+    let startIndex = firebaseStorageUrl.indexOf('o/') + 2;
+    let endIndex = firebaseStorageUrl.indexOf('?alt=media');
+    let filePathAndName = firebaseStorageUrl.substring(startIndex, endIndex);
+    let fileName = decodeURIComponent(filePathAndName);
+
+
+    var imageRef = storage.ref().child(fileName);
+    // Delete the file
+    imageRef.delete().then(function() {
+      console.log("done")
+    }).catch(function(error) {
+      console.log("error")
+    });
+
+    setDoc(doc(db,"StoreProducts",productId),{
+      ...productData,
+      ArrayOfProductImages: ArrayOfProductImages,
+    });
+
+    productData.ArrayOfProductImages=ArrayOfProductImages;
+
+    Swal.fire(
+      'Done!',
+      'تم حذف الملف',
+      'success'
+    );
+
+  }
+})
+
+
+};
+
+
+/* end remove file btn*/
+
+
+
+  
+
+
+
+/* start order file btn*/
+if([...e.target.classList].includes("Order-file")){
+
+  let productId=e.target.dataset.id;
+  let productData=AllPersonsData.find(el=>el.id==`${productId}`);
+  // console.log(productData)
+
+  let ArrayOfProductImages;
+  if(productData.ArrayOfProductImages==undefined){
+    ArrayOfProductImages=[]
+  } else {
+    ArrayOfProductImages=productData.ArrayOfProductImages;
+  }
+  
+
+  // console.log(ArrayOfProductImages)
+
+
+  let div = document.createElement("div")
+  
+
+  for(let i=0; i<ArrayOfProductImages.length; i++){
+    div.innerHTML+=`
+    <div style="display: flex;justify-content: space-around;align-items: center; margin: 15px;">
+      <img style="width: 300px;height: 300px;border-radius: 10px;" src="${ArrayOfProductImages[i].src}">
+      <i data-orderid="${productId}" data-filesrc="${ArrayOfProductImages[i].src}" class="removeFile fa-regular fa-trash fa-fw" ></i>
+    </div>
+    `;
+  }
+  
+  
+  Swal.fire({
+    title: 'جميع الصور',
+    html: div,
+    confirmButtonText: 'Ok',
+  })
+}
+/* end order file btn*/
+
+
+
   
 /* start btn to  add Categorie */
 if([...e.target.classList].includes("AddNewCategorie")){
@@ -726,7 +853,7 @@ if([...e.target.classList].includes("Order-Note")){
 
     Swal.fire({
       title: `${productData.ProductName}`,
-      html: `<textarea readonly dir="auto" style="cursor: auto; width: 100%;padding: 10px;font-size: 25px; font-weight: bold; border-radius:20px; border: 2px solid #5b4ebb;">${e.target.dataset.note}</textarea>`,
+      html: `<textarea readonly dir="auto" style="min-height: 150px; cursor: auto; width: 100%;padding: 10px;font-size: 25px; font-weight: bold; border-radius:2px; border: 2px solid #00000096;">${e.target.dataset.note}</textarea>`,
       imageUrl: `${e.target.dataset.img}`,
       imageWidth: 400,
       imageHeight: 400,
@@ -903,7 +1030,7 @@ async function swool(productData){
                     Swal.showLoading()
                   }
                 });
-                uploadImage(ProductImgInput,ProductName,ProductPrice,ProductNote,id, undefined,ProductCategorieId,ProductCategorieName,productData.ProductDate,productData.date);
+                uploadImage(ProductImgInput,ProductName,ProductPrice,ProductNote,id, undefined,ProductCategorieId,ProductCategorieName,productData.ProductDate,productData.date,productData.ArrayOfProductImages);
               }
 
             };
@@ -1116,13 +1243,13 @@ function AddNewProduct(ProductName,ProductPrice,ProductNote,id,ProductImage,Prod
 
 
 
-async function uploadImage(input,ProductName,ProductPrice,ProductNote,id,ProductImage,ProductCategorieId,ProductCategorieName,ProductDate,date) {
+async function uploadImage(input,ProductName,ProductPrice,ProductNote,id,ProductImage,ProductCategorieId,ProductCategorieName,ProductDate,date,ArrayOfProductImagesOld) {
 
-
+console.log(ArrayOfProductImagesOld);
 
 if(input!=="noNewImg"){
 
-  let ArrayOfProductImages = [];
+  let ArrayOfProductImages = ArrayOfProductImagesOld||[];
   for(let i=0; i<input.files.length; i++){
 
     const ref = firebase.storage().ref();
