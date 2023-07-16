@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
 
+    <script src="./js cdn/circle.js"></script>
 
     <link rel="icon" type="image/x-icon" href="./imgs/pubg icon.png">
 
@@ -169,8 +170,20 @@
             Total Price: 
             <span class="TotalPrice">0</span>
           </button>
-          <button style="min-width:100px;font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600;" class="reports mainClassForSetColor">التقرير</button>
+
+          
+          <button style="min-width:100px;font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600;" class="TheGoal mainClassForSetColor">
+            الهدف
+          </button>
+          
+
+          <button style="min-width:100px;font-size: 18px; font-family:cairo; cursor:pointer; width: 120px; margin: 20px; border-radius: 10px; background: #0a1951; color: white; padding: 5px 0px; font-weight: 600;" class="reports mainClassForSetColor">
+            التقرير          
+          </button>
         
+
+
+
 
           <div class="SearchDiv mainClassForSetColor" style="min-width:400px;background: #0a1951; border-radius: 6px; border: none; padding: 5px;">
             <select dir="rtl" class="SearchField" style="margin: 5px 0px;font-size: 20px;background: white;color: black;padding: 5px;border: 2px solid black;border-radius: 6px;text-align: start;font-weight: bold;">
@@ -684,6 +697,73 @@ document.querySelector(".reports").addEventListener("click",()=>{
 
 
 
+/* start TheGoal section*/
+
+
+document.querySelector(".TheGoal").addEventListener("click",async ()=>{
+
+  let value = 100;
+  let goal = 1000;
+  let d = new Date;
+  let x = `${d.getFullYear()}/${Number(d.getMonth())+1}`;
+
+  let DateStarts=new Date(x).getTime();
+  let DateEnds = Date.now();
+
+  const q = query(collection(db, "Persons"), where("isAccepted", "==", isAccepted), where("date", ">", DateStarts), where("date", "<", DateEnds), orderBy("date","desc"));
+  const querySnapshot = await getDocs(q);
+  const cityList = querySnapshot.docs.map(doc => doc.data());
+
+  let totalPrice=0;
+  cityList.forEach(el=>{
+    totalPrice+=parseInt(el.price);
+  });
+
+  value = totalPrice;
+
+  await getDoc(doc(db,"last-month","TheGoal")).then(e=>{
+    // console.log(e.data().goal);
+    if(e.data()!==undefined){
+      goal=e.data().goal;
+    };
+  });
+
+
+
+
+Swal.fire({
+    title: ``,
+    html: `
+    <h1>${Math.round((value*100)/goal)}%  هدف الشهر</h1>
+    <div class="progress"></div>
+    
+    `,
+});
+
+
+const cp = new CircleProgress('.progress', {
+  value: value,
+  max: goal,
+});
+
+document.querySelector(".circle-progress-text").innerHTML=`${value}/${goal}`;
+
+document.querySelector(".circle-progress-text").style=`
+fill: black;
+font-size: 14px;
+font-weight: bold;
+padding: 10px;
+`;
+document.querySelector(".circle-progress").style.height="200px";
+document.querySelector(".circle-progress").style.width="100%";
+
+
+});
+
+
+/* end TheGoal section */
+
+
 
 
 
@@ -696,7 +776,28 @@ window.onclick=(e)=>{
 
 
 
+  if([...e.target.classList].includes("circle-progress-text")){
 
+     
+    Swal.fire({
+      title: 'ادخل هدف الشهر',
+      html: `
+      
+      <input style="padding: 10px;font-size: 25px;font-weight: bold;border-radius: 10px;" id="goal" type="number" value=0>
+      
+      `,
+      confirmButtonText: 'Ok',
+    }).then(e=>{
+      let goal = document.querySelector("#goal").value;
+      
+      if(Number(goal)!==0){
+        setDoc(doc(db,"last-month","TheGoal"),{
+          goal: goal,
+        })
+      }
+    })
+    
+  }
 
 
 
