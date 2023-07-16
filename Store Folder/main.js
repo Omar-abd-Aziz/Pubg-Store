@@ -37,12 +37,12 @@ let AllProducts;
 
 async function forAllProducts(X){
 
-  const q = query(collection(db, "StoreProducts"), orderBy("date","desc"), limit(X||8));
+  const q = query(collection(db, "StoreProducts"), where('isHidden', '==', false), orderBy("date","desc"), limit(X||8));
   const querySnapshot = await getDocs(q);
   const cityList = querySnapshot.docs.map(doc => doc.data());
 
   let array=cityList;
-
+  
   return array;
 };
 
@@ -780,9 +780,9 @@ async function AllStoreCategoriesInSelect(){
 
   array.forEach(async (e)=>{
 
-    let q = query(collection(db, "StoreProducts"), where('ProductCategorieId', '==', `${e.id}`));
+    let q = query(collection(db, "StoreProducts"), where('isHidden', '!=', true), where('ProductCategorieId', '==', `${e.id}`));
     let snapshot = await getCountFromServer(q);
-    console.log(snapshot.data().count);
+    // console.log(snapshot.data().count);
     document.querySelector("#AllStoreCategories").innerHTML+=`
       
       <option value="${e.id}">${e.name} (${snapshot.data().count})</option>
@@ -809,11 +809,11 @@ document.querySelector("#AllStoreCategories").addEventListener("change",async (e
   if(FilterWith=="AllStoreCategories"){
     document.querySelector(".LoadFilter").style.display="none";
     document.querySelector(".LoadMore").style.display="block";
-    q = query(collection(db, "StoreProducts"), orderBy("date","desc"), limit(8));
+    q = query(collection(db, "StoreProducts"), where('isHidden', '==', false), orderBy("date","desc"), limit(8));
   } else {
     document.querySelector(".LoadMore").style.display="none";
     document.querySelector(".LoadFilter").style.display="block";
-    q = query(collection(db, "StoreProducts"),where("ProductCategorieId",'==',`${FilterWith}`), orderBy("date","desc"), limit(4));
+    q = query(collection(db, "StoreProducts"), where('isHidden', '==', false),where("ProductCategorieId",'==',`${FilterWith}`), orderBy("date","desc"), limit(4));
   };
   const querySnapshot = await getDocs(q);
   const cityList = querySnapshot.docs.map(doc => doc.data());
