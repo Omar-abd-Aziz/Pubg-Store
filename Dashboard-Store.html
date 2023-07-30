@@ -1028,6 +1028,11 @@ async function swool(productData){
         <label for="ProductName">اسم المنتج</label>
         <input style="width: 98%;" class="addOrderInput" type="text" dir="auto" autocomplete="off" id="ProductName" value="${productData.ProductName}">
 
+
+        <label for="ProductPriceBeforeRival">سعر المنتج قبل الخصم</label>
+        <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="ProductPriceBeforeRival" value="${productData.ProductPriceBeforeRival==undefined?"":productData.ProductPriceBeforeRival}">
+
+
         <label for="ProductPrice">سعر المنتج</label>
         <input style="width: 98%;" class="addOrderInput" type="text" dir="rtl" autocomplete="off" id="ProductPrice" value="${productData.ProductPrice}">
 
@@ -1067,6 +1072,7 @@ async function swool(productData){
 
           
             let ProductName=document.querySelector("#ProductName").value;
+            let ProductPriceBeforeRival=document.querySelector("#ProductPriceBeforeRival").value;
             let ProductPrice=document.querySelector("#ProductPrice").value;
             let ProductNote=document.querySelector("#ProductNote").value;
             let ProductImgInput = document.querySelector("#ProductImgInput");
@@ -1084,6 +1090,7 @@ async function swool(productData){
                 setDoc(doc(db,"StoreProducts",productData.id), {
                   ...productData,
                   ProductName: ProductName,
+                  ProductPriceBeforeRival: ProductPriceBeforeRival.trim()==""?"":ProductPriceBeforeRival,
                   ProductPrice: ProductPrice,
                   ProductNote: ProductNote,
                   ProductCategorieId: ProductCategorieId,
@@ -1106,7 +1113,7 @@ async function swool(productData){
                     Swal.showLoading()
                   }
                 });
-                uploadImage(ProductImgInput,ProductName,ProductPrice,ProductNote,id, undefined,ProductCategorieId,ProductCategorieName,productData.ProductDate,productData.date,productData.ArrayOfProductImages);
+                uploadImage(ProductImgInput,ProductName,ProductPrice,ProductNote,id, undefined,ProductCategorieId,ProductCategorieName,productData.ProductDate,productData.date,productData.ArrayOfProductImages,ProductPriceBeforeRival);
               }
 
             };
@@ -1292,10 +1299,11 @@ document.querySelector(".addNewOrder").addEventListener("click",async ()=>{
 
 
 
-function AddNewProduct(ProductName,ProductPrice,ProductNote,id,ProductImage,ProductCategorieId,ProductCategorieName,ArrayOfProductImages,ProductDate,date){
+function AddNewProduct(ProductName,ProductPrice,ProductNote,id,ProductImage,ProductCategorieId,ProductCategorieName,ArrayOfProductImages,ProductDate,date,ProductPriceBeforeRival){
   setDoc(doc(db,"StoreProducts",id), {
       id: id,
       ProductName: ProductName,
+      ProductPriceBeforeRival: ProductPriceBeforeRival||"",
       ProductPrice: ProductPrice,
       ProductNote: ProductNote,
       ProductCategorieId: ProductCategorieId,
@@ -1320,7 +1328,7 @@ function AddNewProduct(ProductName,ProductPrice,ProductNote,id,ProductImage,Prod
 
 
 
-async function uploadImage(input,ProductName,ProductPrice,ProductNote,id,ProductImage,ProductCategorieId,ProductCategorieName,ProductDate,date,ArrayOfProductImagesOld) {
+async function uploadImage(input,ProductName,ProductPrice,ProductNote,id,ProductImage,ProductCategorieId,ProductCategorieName,ProductDate,date,ArrayOfProductImagesOld,ProductPriceBeforeRival) {
 
 console.log(ArrayOfProductImagesOld);
 
@@ -1349,7 +1357,7 @@ if(input!=="noNewImg"){
     };
 
     Swal.fire("Done","","success");
-    AddNewProduct(ProductName,ProductPrice,ProductNote,id, ArrayOfProductImages[0].src,ProductCategorieId,ProductCategorieName,ArrayOfProductImages,ProductDate,date);
+    AddNewProduct(ProductName,ProductPrice,ProductNote,id, ArrayOfProductImages[0].src,ProductCategorieId,ProductCategorieName,ArrayOfProductImages,ProductDate,date,ProductPriceBeforeRival);
   };
 
 

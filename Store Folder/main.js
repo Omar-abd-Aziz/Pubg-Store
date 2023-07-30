@@ -130,6 +130,14 @@ if(product==null){
     let productDivDad=document.querySelector("#productDetails");
     productDivDad.querySelector(".ProductName").textContent=`${e.ProductName}`;
     productDivDad.querySelector(".ProductPrice").textContent=`${e.ProductPrice}`;
+    productDivDad.querySelector(".ProductPriceBeforeRivalSpanInProductPage").innerHTML=`
+    جنية مصري
+    ${(e.ProductPriceBeforeRival==""||e.ProductPriceBeforeRival==undefined)?"":`
+    بدلا من
+    <del>${e.ProductPriceBeforeRival}</del>
+    `}
+    
+    `;
     productDivDad.querySelector(".ProductNote").textContent=`${e.ProductNote}`;
     productDivDad.querySelector(".ProductId").dataset.id=`${e.id}`;
     document.querySelector("#imageSection").querySelector(".ProductImage").src=`${e.ProductImage}`;
@@ -267,6 +275,8 @@ let currency = "Egp"
 /* start function to show data and display it */
 
 function ShowAll(array){
+
+  console.log(array)
 array.forEach(e=>{
   document.querySelector(".cardsDad").innerHTML+=`
   
@@ -280,6 +290,12 @@ array.forEach(e=>{
       <div class="card-body">
           <h1 class="card-title text-color cardName">${e.ProductName}</h1>
           <p class="priceDad">
+             
+              
+              <del class="ProductPriceBeforeRivalSpan">${e.ProductPriceBeforeRival||""}</del>
+              
+              
+  
               <span class="price">${e.ProductPrice}</span>
               <span>${currency}</span>
           </p>

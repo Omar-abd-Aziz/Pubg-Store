@@ -238,6 +238,23 @@ body{
 
 
 
+
+.ProductPriceBeforeRivalSpan{
+  font-size: 17px;
+  font-weight: 500;
+  color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
 /*start btn for cart*/
 .cartBtnDad
 {
