@@ -14,12 +14,21 @@
 
     <script src="./js cdn/circle1.js"></script>
 
-    <link rel="icon" type="image/x-icon" href="./imgs/pubg icon.png">
+    <link rel="icon" type="image/x-icon" href="./imgs/dashboard.png">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="./js cdn/momentCdn.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+
+
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.min.js" ></script>
 
 
     <style>
@@ -86,12 +95,7 @@
 
       /* Responsive */
 
-      @media (max-width: 767px) {
-        .HelloDiv,
-          #logOut-digital > span {
-              display: none;
-          }
-      }
+
 
 
 
@@ -192,10 +196,11 @@
               <option value="orderByUser">اسم المندوب</option>
               <option value="phone">	رقم جوال العميل</option>
               <option value="city">	المدينة</option>
-              <option value="active">النشاط</option>
+              <option value="price">المبلغ</option>
+              <option value="active">الطلب</option>
               <option value="startTime">التاريخ</option>
             </select>
-            <input type="text" placeholder="Search text" class="addOrderInput SearchInput" style="max-width: 150px; font-size: 20px;">
+            <input type="text" dir="auto" placeholder="Search text" class="addOrderInput SearchInput" style="max-width: 150px; font-size: 20px;">
             <button class="SearchBtn" style="cursor: pointer; font-size: 20px;background: white;color: black;padding: 5px;border: 2px solid black;border-radius: 6px;text-align: end;font-weight: bold;">Search</button>
           </div>
 
@@ -228,6 +233,20 @@
                 
                 <tbody>
             </table>
+
+
+            <!-- start load more div and btn -->
+            <div style="display: flex;justify-content: center;padding: 10px 0px;">
+              <button class="loadMoreBtn">Load More</button>
+              <div class="loaderIcon" style="display: none;">
+                <i style="font-size: 35px;padding: 5px; " class="fa-solid fa-spinner fa-spin"></i>
+              </div>
+            </div>
+            <!-- end load more div and btn -->
+
+
+
+
         </div>
           
         </div>
@@ -238,7 +257,16 @@
       <!-- Start Sidebar can copy it to anthor file -->
       <div class="sidebar bg-white p-20 p-relative">
         <div class="HelloDiv">
-          <i class="fa-regular fa-circle-user fa-fw" style="font-weight: bold;font-size: 50px;width: 100%;"></i>
+
+          <div style="display: flex; justify-content: center;">
+
+            <input style="display: none;" id="personImgInput" type="file" name="img" accept="image/*">
+            <label for="personImgInput" style="cursor: pointer;">
+              <img style="width: 100px;" class="personImg" src="https://img.freepik.com/free-icon/user_318-159711.jpg" alt="">
+            </label>
+
+          </div>
+
           <h2>Hello <span id="AdminName" style="color: #397eaf"></span></h2>
         </div>
         <ul>
@@ -265,18 +293,19 @@
   <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
 
   <script src="./AllPagesObject.js"></script>
+  <script src="./js cdn/chart.js"></script>
 
   <script type="module">
 
 
   /**/
-  import { initializeApp } from './firebase.js';
-  import { getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from './firebase.js';
-  import { firebaseConfig } from './firebase.js';
+  import {docName, initializeApp,firebaseConfig, getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from './firebase.js';
 
   firebase.initializeApp(firebaseConfig);
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+
+  const storage = firebase.storage();
   /**/
 
   let X;
@@ -301,13 +330,6 @@ const isAccepted = true;
 
 
 
-/* start getOrdersCount */
-
-let q = query(collection(db, "Persons"), where('isAccepted', '==', isAccepted));
-let snapshot = await getCountFromServer(q);
-document.querySelector(".PageOrdersCount").textContent=snapshot.data().count;
-
-/* end getOrdersCount */
 
 
 
@@ -319,7 +341,7 @@ let AllOrders;
 
 async function forAllOrders(X){
 
-  const q = query(collection(db, "Persons"), where('isAccepted', '==', isAccepted), orderBy("date","desc"), limit(X||20));
+  const q = query(collection(db, "Persons"), where('isAccepted', '==', isAccepted), orderBy("date","desc"), limit(X||10));
   const querySnapshot = await getDocs(q);
   const cityList = querySnapshot.docs.map(doc => doc.data());
 
@@ -357,17 +379,30 @@ async function getUserDataWithId(id){
 /* 04 start check and get user doc */
 
 let mainPersonData;
-let docId = await localStorage.getItem("doc-digital-id");
+let docId = await localStorage.getItem(`${docName}`);
 
 if(docId!==null&&docId.trim()!==''){
     // document.querySelector('.profile-btn').dataset.personid=docId;
-    mainPersonData=await getUserDataWithId(docId);
+    // mainPersonData=await getUserDataWithId(docId);
+    mainPersonData= JSON.parse(localStorage.getItem(`${docName}_personData`));
 
     if(mainPersonData.isAdmin==false){
       location.href="./Dashboard-notAdmin.html";
     };
 
-    document.querySelector("#AdminName").textContent=`${mainPersonData.username}..`;
+    document.querySelector("#AdminName").textContent=`${mainPersonData.username}`;
+    document.querySelector(".personImg").src=mainPersonData.personImg||"https://img.freepik.com/free-icon/user_318-159711.jpg"
+
+   
+    /* start getOrdersCount */
+
+    let q = query(collection(db, "Persons"), where('isAccepted', '==', isAccepted));
+    let snapshot = await getCountFromServer(q);
+    document.querySelector(".PageOrdersCount").textContent=snapshot.data().count;
+    getAllOrders();
+    /* end getOrdersCount */
+
+
 } else {
   location.href="./login/login.html"
 }
@@ -376,15 +411,96 @@ if(docId!==null&&docId.trim()!==''){
 
 
 
-document.querySelector("#logOut-digital").addEventListener("click",()=>{
 
-  localStorage.setItem("doc-digital-id","");
-  location.href="./login/login.html";
+/*end login cods*/
+
+
+
+
+
+
+
+
+
+
+/* start img upload and show */
+
+
+
+let personImgInput = document.querySelector("#personImgInput")
+personImgInput.addEventListener("change",()=>{
+
+  Swal.fire({
+    title: 'Please Wait!',
+    didOpen: () => {
+      Swal.showLoading()
+    }
+  });
+
+
+
+  let firebaseStorageUrl = document.querySelector('.personImg').src;
+  let startIndex = firebaseStorageUrl.indexOf('o/') + 2;
+  let endIndex = firebaseStorageUrl.indexOf('?alt=media');
+  let filePathAndName = firebaseStorageUrl.substring(startIndex, endIndex);
+  let fileName = decodeURIComponent(filePathAndName);
+
+
+  let imageRef = storage.ref().child(fileName);
+  // Delete the file
+  imageRef.delete().then(function() {
+    console.log("done")
+  }).catch(function(error) {
+    console.log("error")
+  });
+
+
+
+
+
+
+  let ref = firebase.storage().ref();
+  let file = personImgInput.files[0];
+  let name = +new Date() + "-" + file.name;
+  let metadata = {
+    contentType: file.type
+  };
+
+  let task = ref.child(name).put(file, metadata);
+  task
+  .then(async snapshot => snapshot.ref.getDownloadURL())
+  .then(async url => {
+
+    console.log(mainPersonData.id)
+
+    setDoc(doc(db, "accounts", `${mainPersonData.id}`), {
+      ...mainPersonData,
+      personImg: url,
+    }).then(e=>{
+      Swal.fire("Done","","success")
+      console.log(url);
+      document.querySelector('.personImg').src=url;
+      mainPersonData.personImg=url;
+      localStorage.setItem(`${docName}_personData`,JSON.stringify(mainPersonData));
+    })
+    
+
+  })
+  .catch(console.error);
+
 
 });
 
 
-/*end login cods*/
+/* end img upload and show */
+
+
+
+
+
+
+
+
 
 
 
@@ -546,18 +662,29 @@ let SearchInput = document.querySelector(".SearchInput").value;
 SearchField=SearchField.trim();
 SearchInput=SearchInput.trim();
 
-console.log(SearchField,SearchInput);
+// console.log(SearchField,SearchInput);
 
 if(SearchField!==""&&SearchField!=="SearchInput"){
 
-  const q = query(collection(db, "Persons"), where(SearchField, '==', SearchInput));
+  const q = query(collection(db, "Persons"), where("isAccepted", '==', isAccepted), where(SearchField, '==', SearchInput), orderBy("date","desc"),limit(5));
 
   const querySnapshot = await getDocs(q);
   const cityList = querySnapshot.docs.map(doc => doc.data());
   let AllFromSearch=cityList;
 
+  AllPersonsData=AllFromSearch;
+  AllOrders=AllPersonsData;
+
+  
   document.querySelector("#AllOrders").innerHTML=``;
   showData(AllFromSearch);
+
+
+  document.querySelector(".loadMoreBtn").dataset.search=`${JSON.stringify({
+    SearchField: SearchField,
+    SearchInput: SearchInput
+  })}`;
+
 };
 
 });
@@ -623,17 +750,25 @@ async function showData(x){
           <i title="تفاصيل الطلب" class="fa-sharp fa-solid fa-circle-info Order-Note" data-id="${el.id}" data-note="${el.note}" style="font-size: 25px; color: #233245; background: white; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
         </a>
       </td>
-      <td class="Order-Active">
-                      ${(el.active=="Store")?`
-                        <a>
-                          <i title="سلة المنتجات" class="fa-sharp fa-solid fa-circle-info OrderFromStore" data-id="${el.id}" data-store='${JSON.stringify(el.dataStore)}' style="font-size: 25px; color: rebeccapurple; background: white; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
-                        </a>
-                      `:`${el.active}`}
+      <td>
+
+      <bdi class="Order-Active">
+        ${(el.active=="Store")?`
+        <a>
+          <i title="سلة المنتجات" class="fa-sharp fa-solid fa-circle-info OrderFromStore" data-id="${el.id}" data-store='${JSON.stringify(el.dataStore)}' style="font-size: 25px; color: rebeccapurple; background: white; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
+        </a>
+        `:`${el.active}`}
+      </bdi>
+
       </td>
       <td class="Order-City">${el.city}</td>
       <td class="Order-Phone">${el.phone}</td>
       <td class="Order-ByUser">${el.orderByUser}</td>
-      <td class="Order-Name">${el.name}</td>
+      <td>
+        <bdi class="Order-Name">
+          ${el.name}
+        </bdi>
+      </td>
       <td class="Order-Number">${el.orderNumber}</td>
       <td class="Order-Id">#${i}</td>
     </tr>
@@ -665,24 +800,33 @@ document.querySelector(".reports").addEventListener("click",()=>{
       
       `,
       confirmButtonText: 'عرض',
+      showCancelButton: true
   }).then(async (e)=>{
+
+    if(e.isConfirmed){
+
+      let DateStarts = document.querySelector("#DateStarts").value;
+      let DateEnds = document.querySelector("#DateEnds").value;
+  
+      DateStarts=DateStarts.trim();
+      DateEnds=DateEnds.trim();
+  
+      DateStarts = new Date(DateStarts).getTime();
+      DateEnds = new Date(DateEnds).getTime();
+  
+      const q = query(collection(db, "Persons"), where("isAccepted", "==", isAccepted), where("date", ">", DateStarts), where("date", "<", DateEnds), orderBy("date","desc"));
+      const querySnapshot = await getDocs(q);
+      const cityList = querySnapshot.docs.map(doc => doc.data());
+  
+      AllPersonsData=cityList;
+      AllOrders=AllPersonsData;
+  
+      document.querySelector("#AllOrders").innerHTML=``;
+      showData(cityList);
+      document.querySelector(".loadMoreBtn").style.display="none";
+
+    }
     
-    let DateStarts = document.querySelector("#DateStarts").value;
-    let DateEnds = document.querySelector("#DateEnds").value;
-
-    DateStarts=DateStarts.trim();
-    DateEnds=DateEnds.trim();
-
-    DateStarts = new Date(DateStarts).getTime();
-    DateEnds = new Date(DateEnds).getTime();
-
-    const q = query(collection(db, "Persons"), where("isAccepted", "==", isAccepted), where("date", ">", DateStarts), where("date", "<", DateEnds), orderBy("date","desc"));
-    const querySnapshot = await getDocs(q);
-    const cityList = querySnapshot.docs.map(doc => doc.data());
-
-
-    document.querySelector("#AllOrders").innerHTML=``;
-    showData(cityList);
 
   });
 
@@ -702,23 +846,42 @@ document.querySelector(".reports").addEventListener("click",()=>{
 
 document.querySelector(".TheGoal").addEventListener("click",async ()=>{
 
-  let value = 100;
-  let goal = 1000;
-  let d = new Date;
-  let x = `${d.getFullYear()}/${Number(d.getMonth())+1}`;
 
-  let DateStarts=new Date(x).getTime();
-  let DateEnds = Date.now();
-
-  const q = query(collection(db, "Persons"), where("isAccepted", "==", isAccepted), where("date", ">", DateStarts), where("date", "<", DateEnds), orderBy("date","desc"));
-  const querySnapshot = await getDocs(q);
-  const cityList = querySnapshot.docs.map(doc => doc.data());
-
-  let totalPrice=0;
-  cityList.forEach(el=>{
-    totalPrice+=parseInt(el.price);
+  Swal.fire({
+    title: 'Please Wait!',
+    didOpen: () => {
+      Swal.showLoading()
+    }
   });
 
+ 
+
+
+
+
+
+
+  let value = 0;
+  let goal = 1000;
+
+
+
+  let currentDate = new Date();
+  currentDate.setDate(1);
+  currentDate.setHours(0, 0, 0, 0);
+  let DateStarts = currentDate.getTime();
+
+  let DateEnds = Date.now();
+
+  let q = query(collection(db, "Persons"), where("isAccepted", "==", isAccepted), where("date", ">", DateStarts), where("date", "<", DateEnds), orderBy("date","desc"));
+  let querySnapshot = await getDocs(q);
+  let OrdersLastMonth = querySnapshot.docs.map(doc => doc.data());
+
+  let totalPrice=0;
+  OrdersLastMonth.forEach(el=>{
+    totalPrice+=parseInt(el.price);
+  });
+  let CountOrdersLastMonth=OrdersLastMonth.length;
   value = totalPrice;
 
   await getDoc(doc(db,"last-month","TheGoal")).then(e=>{
@@ -729,15 +892,133 @@ document.querySelector(".TheGoal").addEventListener("click",async ()=>{
   });
 
 
+/* start get count last day and last weak */
 
+/* start get time from lastSaturday*/
+
+  let today = new Date();
+  let dayOfWeek = today.getDay();
+  let lastSaturday = new Date(today.getFullYear(), today.getMonth(), today.getDate() - (dayOfWeek + 1));
+  lastSaturday=lastSaturday.getTime();
+
+  let OrdersFromLastSaturday = OrdersLastMonth.filter(el=>el.date>=lastSaturday);
+  let CountOrdersLastWeek=OrdersFromLastSaturday.length;
+  
+
+  let OrdersFromLastSaturdayTotalPrice = 0;
+
+  OrdersFromLastSaturday.forEach(e=>{
+    OrdersFromLastSaturdayTotalPrice+=parseInt(e.price);
+  });
+
+  console.log(OrdersFromLastSaturdayTotalPrice);
+  console.log(CountOrdersLastWeek);
+  
+
+/* end get time from lastSaturday*/
+
+
+/* start get time FromStartOfDay*/
+  let FromStartOfDay= new Date().setHours(0, 0, 0, 0); // from day  start not last 24 hour
+
+
+  let OrdersFromStartOfDay = OrdersLastMonth.filter(el=>el.date>=FromStartOfDay);
+  let CountOrdersLastDay = OrdersFromStartOfDay.length;
+
+  let OrdersFromStartOfDayTotalPrice = 0;
+
+  OrdersFromStartOfDay.forEach(e=>{
+    OrdersFromStartOfDayTotalPrice+=parseInt(e.price);
+  });
+
+  // console.log(OrdersFromStartOfDayTotalPrice);
+  // console.log(CountOrdersLastDay);
+
+/* end get time FromStartOfDay*/
+
+
+/* end get count last day and last weak */
+
+let DateNow = new Date;
+let thisMonthDate = `${DateNow.getFullYear()}-${DateNow.getMonth()+1}`;
+
+setDoc(doc(db,"last-months",`${thisMonthDate}`),{
+  CountOrdersThisMonth: CountOrdersLastMonth,
+  totalPrice: totalPrice,
+  goal: goal,
+  thisMonthDate: thisMonthDate,
+  date: Date.now()
+}).then(e=>{
+  // console("تم تحديث وحفظ بيانات هذا الشهر في قاعدة البيانات ضمن الاشهر السابقة")
+})
+
+  
+
+  
 
 Swal.fire({
     title: ``,
     html: `
     <h1>${Math.round((value*100)/goal)}%  هدف الشهر</h1>
     <div class="progress"></div>
-    
+
+    <hr>
+
+    <div>
+
+      <div class="PageOrdersCountDad" style="margin: 10px 0px; text-align: center; display: flex; justify-content: space-between;">
+
+        <div>
+          المجموع
+          <span class="PageOrdersCount">${OrdersFromStartOfDayTotalPrice}</span>
+        </div>
+
+        <div>
+          عدد العملاء اليوم 
+          <span class="PageOrdersCount">${CountOrdersLastDay}</span>
+        </div>
+
+      </div>
+
+      <div class="PageOrdersCountDad" style="margin: 10px 0px; text-align: center; display: flex; justify-content: space-between;">
+
+        <div>
+          المجموع
+          <span class="PageOrdersCount">${OrdersFromLastSaturdayTotalPrice}</span>
+        </div>
+
+        <div>
+          عدد العملاء هذا الاسبوع
+          <span class="PageOrdersCount">${CountOrdersLastWeek}</span>
+        </div>
+
+      </div>
+
+      <div class="PageOrdersCountDad" style="margin: 10px 0px; text-align: center; display: flex; justify-content: space-between;">
+
+        <div>
+          المجموع
+          <span class="PageOrdersCount">${totalPrice}</span>
+        </div>
+
+        <div>
+          عدد العملاء هذا الشهر
+          <span class="PageOrdersCount">${CountOrdersLastMonth}</span>
+        </div>
+
+      </div>
+
+      <button class="showAllLastMonths mainClassForSetColor">
+        
+        عرض الاشهر السابقة
+        
+      </button>
+
+      
+    </div>
     `,
+    showCloseButton: true,
+    showConfirmButton: false
 });
 
 
@@ -747,7 +1028,7 @@ const cp = new CircleProgress('.progress', {
 });
 
 document.querySelector(".circle-progress-text").innerHTML=`${value}/${goal}`;
-
+document.querySelector(".circle-progress-text").dataset.goal=goal;
 document.querySelector(".circle-progress-text").style=`
 fill: black;
 font-size: 14px;
@@ -772,29 +1053,258 @@ document.querySelector(".circle-progress").style.width="100%";
 
 /* 4 Start set Orders Accepted and orders archived*/
 
-window.onclick=(e)=>{
+window.onclick=async(e)=>{
 
+
+/* start showAllLastMonths btn*/
+
+if([...e.target.classList].includes("showAllLastMonths")){
+
+  let q = query(collection(db, "last-months"), orderBy("date","desc"));
+  let querySnapshot = await getDocs(q);
+  let AllLastMonths = querySnapshot.docs.map(doc => doc.data());
+
+  console.log(AllLastMonths);
+
+  let AllMonthsDate=[];
+  let AllMonthsTotalPrice=[];
+  let AllMonthsGoals=[];
+  let CountOrdersThisMonth=[];
+
+
+  let htmlElement = document.createElement("div")
+
+  AllLastMonths.forEach(e=>{
+
+    AllMonthsDate.push(e.thisMonthDate);
+    AllMonthsTotalPrice.push(e.totalPrice);
+    AllMonthsGoals.push(e.goal);
+    CountOrdersThisMonth.push(e.CountOrdersThisMonth);
+
+    htmlElement.innerHTML+=`
+    
+    <div class="PageOrdersCountDad" style="margin: 10px 0px; text-align: center; display: flex; justify-content: space-between;">
+      
+      <div>
+        <span class="PageOrdersCount">${e.CountOrdersThisMonth}</span>
+      </div>
+
+      <div>
+        <span class="PageOrdersCount">${e.totalPrice}</span>
+      </div>
+
+      <div>
+        <span class="PageOrdersCount">${e.thisMonthDate}</span>
+      </div>
+
+    </div>
+    
+    `;
+  })
+  
+
+Swal.fire({
+    title: ``,
+    html: `
+
+    <div>
+      <canvas id="myChart1"></canvas>
+    </div>
+    <br>
+    <div>
+      <canvas id="myChart2"></canvas>
+    </div>
+
+    <div style="margin: 10px 0px; display: none;">
+
+      <div class="PageOrdersCountDad" style="margin: 10px 0px; text-align: center; display: flex; justify-content: space-between;">
+
+        <div>
+          العملاء
+        </div>
+
+        <div>
+          المجموع
+        </div>
+
+        <div>
+          تاريخ الشهر
+        </div>
+
+      </div>
+
+      <hr>
+
+      ${htmlElement.innerHTML}
+
+
+    </div>
+    `,
+    showCloseButton: true,
+    showConfirmButton: false
+});
+
+let ctx1 = document.getElementById('myChart1');
+
+new Chart(ctx1, {
+  type: 'bar',
+  data: {
+    labels: AllMonthsDate,
+    datasets: [
+    {
+      label: 'Month TotalPrice',
+      data: AllMonthsTotalPrice,
+      borderWidth: 1
+    },
+    {
+      label: 'Month Goal',
+      data: AllMonthsGoals,
+      borderWidth: 1
+    },
+  ]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+
+
+let ctx2 = document.getElementById('myChart2');
+
+new Chart(ctx2, {
+  type: 'bar',
+  data: {
+    labels: AllMonthsDate,
+    datasets: [
+    {
+      label: 'Month Count Orders',
+      data: CountOrdersThisMonth,
+      borderWidth: 1
+    }
+  ]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+
+
+}
+
+/* end showAllLastMonths btn*/
+  
+
+
+/* start loadMoreBtn btn*/
+
+if([...e.target.classList].includes("loadMoreBtn")){
+
+e.target.style.display="none";
+document.querySelector(".loaderIcon").style.display="block";
+
+
+let lastElementDate=AllPersonsData[AllPersonsData.length-1].date;
+let q;
+
+if(e.target.dataset.search!==undefined){
+
+  let search = JSON.parse(e.target.dataset.search);
+  q = query(collection(db, "Persons"),where(search.SearchField,"==",search.SearchInput), where('isAccepted', '==', isAccepted),where("date","<",lastElementDate), orderBy("date","desc"), limit(X||5));
+
+} else{
+  q = query(collection(db, "Persons"), where('isAccepted', '==', isAccepted),where("date","<",lastElementDate), orderBy("date","desc"), limit(X||5));
+}
+
+let querySnapshot = await getDocs(q);
+let cityList = querySnapshot.docs.map(doc => doc.data());
+let AllElementFromLoadMore=cityList;
+
+AllPersonsData=[...AllPersonsData,...AllElementFromLoadMore];
+AllOrders=AllPersonsData;
+
+
+document.querySelector("#AllOrders").innerHTML=``;
+await showData(AllPersonsData);
+
+e.target.style.display="block";
+document.querySelector(".loaderIcon").style.display="none";
+
+};
+
+
+
+/* end loadMoreBtn btn*/
+
+
+
+
+
+if([...e.target.classList].includes("saveSala")){
+  
+
+  let div = document.querySelector("#swal2-html-container > div")
+  document.querySelector(".saveSala").style.opacity="0"
+
+  html2canvas(div, {
+    allowTaint: false,
+    useCORS: true,
+  }).then((canvas) => {
+    const dataImg = new Image();
+    var link = document.createElement('a');
+    link.download = `  `;
+    link.href = canvas.toDataURL('image/png', 1.0);
+    link.click();
+    document.querySelector(".saveSala").style.opacity="100"
+  });
+
+
+}
 
 
   if([...e.target.classList].includes("circle-progress-text")){
 
-     
+     let goal = document.querySelector(".circle-progress-text").dataset.goal;
     Swal.fire({
       title: 'ادخل هدف الشهر',
       html: `
       
-      <input style="padding: 10px;font-size: 25px;font-weight: bold;border-radius: 10px;" id="goal" type="number" value=0>
+      <input style="padding: 10px;font-size: 25px;font-weight: bold;border-radius: 10px;" id="goal" type="number" value=${goal}>
       
       `,
       confirmButtonText: 'Ok',
+      showCancelButton: true
     }).then(e=>{
-      let goal = document.querySelector("#goal").value;
-      
-      if(Number(goal)!==0){
-        setDoc(doc(db,"last-month","TheGoal"),{
-          goal: goal,
-        })
+
+      if(e.isConfirmed){
+
+        let goal = document.querySelector("#goal").value;
+        
+        if(Number(goal)!==0){
+          setDoc(doc(db,"last-month","TheGoal"),{
+            goal: goal,
+          }).then(e=>{
+            Swal.fire({
+              title: 'تم تعيين هدف الشهر',
+              icon: "success"
+            })
+          })
+  
+        }
+
       }
+
+
+      
     })
     
   }
@@ -804,57 +1314,99 @@ window.onclick=(e)=>{
 
 
 
+
 /* start order detals btn*/
 if([...e.target.classList].includes("OrderFromStore")){
-  let arrayOfProducts = JSON.parse(e.target.dataset.store);
-  console.log(arrayOfProducts);
-  const div = document.createElement("div");
-  let totalPrice=0;
-  div.innerHTML=`<div class="shopping-cart">
-    
-    <div class="column-labels">
-      <label class="product-image">الصورة</label>
-      <label class="product-details">اسم المنتج</label>
-      <label class="product-price">السعر</label>
-      <label class="product-quantity">الكمية</label>
-      <label class="product-line-price">الاجمالي</label>
-    </div>
-    
-  </div>`;
 
-  arrayOfProducts.forEach(e=>{
-    totalPrice+=Number(e.productPrice)*Number(e.productAmount);
-    div.innerHTML+=`
-    
-    <div class="product">
-      <div class="product-image">
-        <img src="${e.productImage}">
-      </div>
-      <div class="product-details">
-        <div class="product-title">${e.productName}</div>
-      </div>
-      <div class="product-price">${e.productPrice}</div>
-      <div class="product-quantity">
-        ${e.productAmount}
-      </div>
-      <div class="product-line-price">${Number(e.productPrice)*Number(e.productAmount)}</div>
-    </div>
 
-    `;
-  });
+  
+let orderData = AllOrders.find(order => order.id === e.target.dataset.id)
 
+
+let arrayOfProducts = JSON.parse(e.target.dataset.store);
+console.log(arrayOfProducts);
+const div = document.createElement("div");
+let totalPrice=0;
+div.innerHTML=`
+
+<div style="
+display: flex;
+justify-content: space-around; 
+font-family: 'cairo'; 
+font-size: 15px;">
+<h2 style="order: 2;">
+  اسم العميل 
+  : ${orderData.name}
+</h2>
+
+<h2>
+  رقم الهاتف
+  : 
+  <span style="font-size: 25px;">${orderData.phone}</span>
+</h2>
+</div>
+
+<hr>
+
+<div class="shopping-cart">
+  
+  <div class="column-labels">
+    <label class="product-image">صورة المنتج</label>
+    <label class="product-details">اسم المنتج</label>
+    <label class="product-price">السعر</label>
+    <label class="product-quantity">الكمية</label>
+    <label class="product-line-price">الاجمالي</label>
+  </div>
+  
+</div>`;
+
+arrayOfProducts.forEach(e=>{
+  totalPrice+=Number(e.productPrice)*Number(e.productAmount);
   div.innerHTML+=`
-  <p>Total Price: ${totalPrice} $</p>
-  `
+  
+  <div class="product" >
+    <div class="product-image">
+      <img src="${e.productImage}">
+    </div>
+    <div class="product-details">
+      <div class="product-title" style="font-family: 'cairo'">${e.productName}</div>
+    </div>
+    <div class="product-price">${e.productPrice}</div>
+    <div class="product-quantity">
+      ${e.productAmount}
+    </div>
+    <div class="product-line-price">${Number(e.productPrice)*Number(e.productAmount)}</div>
+  </div>
 
-  Swal.fire({
-    html: div,
-    confirmButtonText: 'ok',
-    showCloseButton: true
-  })
+  `;
+});
+
+div.innerHTML+=`
+<p style="font-family: 'cairo'">
+  
+  اجمالي السعر 
+  ${totalPrice}
+  جنية
+  
+</p>
+<button class="saveSala">Save</button>
+`
+
+Swal.fire({
+  html: div,
+  width: "800px",
+  confirmButtonText: 'ok',
+  showCloseButton: true,
+  showConfirmButton: false,
+})
 
 }
 /* end order detals btn*/
+
+
+
+
+
 
 
 
@@ -879,31 +1431,53 @@ if([...e.target.classList].includes("OrderFromStore")){
 
 /* start order detals btn*/
 if([...e.target.classList].includes("Order-Note")){
-  Swal.fire(
-      `${e.target.dataset.note}`
-    );
+
+let orderId=e.target.dataset.id;
+let orderData=AllPersonsData.find(el=>el.id==`${orderId}`);
+console.log(orderData.orderDate)
+Swal.fire({
+  html:`
+  <div style="display: flex;justify-content: space-around; font-family: 'cairo'; font-size: 15px;">
+    <h2 style="order: 2; margin: 10px 0;">
+      ${orderData.name}
+    </h2>
+
+    <h2 style="margin: 10px 0;">
+      <span style="font-size: 25px;">${orderData.phone}</span>
+    </h2>
+  </div>
+
+  <hr>
+
+  <h2 style="margin: 5px 0px; font-family: cairo;">
+    <bdi>
+      ${orderData.active}
+    </bdi>
+  </h2>
+
+  <hr>
+
+  <h2 style="margin: 30px 0px; font-family: cairo;">
+    <bdi>
+      ${e.target.dataset.note}
+    </bdi>
+  </h2>
+
+  <hr>
+
+  <p style="color: white;background: var(--main-bg);padding: 10px;border-radius: 10px;font-weight: 400;">
+    ${orderData.orderDate}
+  </p>
+
+  
+  `,
+  showCancelButton: false,
+  showConfirmButton: false,
+  showCloseButton: true
+});
 }
 /* end order detals btn*/
 
-/* start order detals btn*/
-if([...e.target.classList].includes("Order-Active-Note")){
-  let orderId=e.target.dataset.id;
-  let orderData=AllPersonsData.find(el=>el.id==`${orderId}`);
-  let OrderActiveNote=orderData.OrderActiveNote;
-  
-  Swal.fire({
-    title: 'كود التفعيل',
-    html: `
-    
-    <textarea style="width: 98%;" rows="5" class="OrderActiveNote" type="text" dir="auto" autocomplete="off" readonly>${orderData.OrderActiveNote}</textarea>
-    <br>
-    <textarea style="width: 98%;" rows="5" class="OrderActiveNoteTwo" type="text" dir="auto" autocomplete="off" readonly>${orderData.OrderActiveNoteTwo}</textarea>
-    
-    `,
-    confirmButtonText: 'Ok',
-  })
-}
-/* end order detals btn*/
 
 
 /* start accept order */
@@ -1067,7 +1641,7 @@ function swool(orderData){
           <label for="phone">رقم الجوال:</label>
           <input style="width: 98%;" class="addOrderInput" type="number" placeholder="" dir="auto" autocomplete="off" id="phone" value="${orderData.phone}">
 
-          <label for="active">النشاط:</label>
+          <label for="active">الطلب:</label>
           ${(orderData.active=="Store")?`
           <input style="width: 98%;" class="addOrderInput" id="active" type="text" dir="auto" autocomplete="off" readonly value="${orderData.active}">
           `:`<input style="width: 98%;" class="addOrderInput" id="active" type="text" dir="auto" autocomplete="off" value="${orderData.active}">
@@ -1322,12 +1896,11 @@ function showDate(){
 const colRef= collection(db,"Persons");
 
 
-getAllOrders();
 
 
 onSnapshot(colRef,async ()=>{
 
-  let q = query(collection(db, "Persons"), where('isAccepted', '==', isAccepted), where('date', '>', (AllOrders[0]!==undefined)?AllOrders[0].date:0), orderBy("date","desc"), limit(X||20));
+  let q = query(collection(db, "Persons"), where('isAccepted', '==', isAccepted), where('date', '>', (AllOrders[0]!==undefined)?AllOrders[0].date:0), orderBy("date","desc"), limit(X||10));
   let querySnapshot = await getDocs(q);
   let cityList = querySnapshot.docs.map(doc => doc.data());
 

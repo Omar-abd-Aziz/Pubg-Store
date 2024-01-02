@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
 
 
-    <link rel="icon" type="image/x-icon" href="./imgs/pubg icon.png">
+    <link rel="icon" type="image/x-icon" href="./imgs/dashboard.png">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="./js cdn/momentCdn.js"></script>
@@ -85,12 +85,7 @@
 
       /* Responsive */
 
-      @media (max-width: 767px) {
-        .HelloDiv,
-          #logOut-digital > span {
-              display: none;
-          }
-      }
+
 
 
 
@@ -155,7 +150,16 @@
       <!-- Start Sidebar can copy it to anthor file -->
       <div class="sidebar bg-white p-20 p-relative">
         <div class="HelloDiv">
-          <i class="fa-regular fa-circle-user fa-fw" style="font-weight: bold;font-size: 50px;width: 100%;"></i>
+
+          <div style="display: flex; justify-content: center;">
+
+            <input style="display: none;" id="personImgInput" type="file" name="img" accept="image/*">
+            <label for="personImgInput" style="cursor: pointer;">
+              <img style="width: 100px;" class="personImg" src="https://img.freepik.com/free-icon/user_318-159711.jpg" alt="">
+            </label>
+
+          </div>
+
           <h2>Hello <span id="AdminName" style="color: #397eaf"></span></h2>
         </div>
         <ul>
@@ -194,6 +198,8 @@
   firebase.initializeApp(firebaseConfig);
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+
+  const storage = firebase.storage();
   /**/
 
   let X;
@@ -239,7 +245,7 @@ async function getUserDataWithId(id){
 /* 02 start check and get user doc */
 
 let mainPersonData;
-let docId = await localStorage.getItem("doc-digital-id");
+let docId = await localStorage.getItem("pubg-store-doc-id");
 
 if(docId!==null&&docId.trim()!==''){
     
@@ -249,7 +255,7 @@ if(docId!==null&&docId.trim()!==''){
       location.href="./Dashboard-notAdmin.html";
     };
 
-    document.querySelector("#AdminName").textContent=`${mainPersonData.username}..`;
+    document.querySelector("#AdminName").textContent=`${mainPersonData.username}`;
 } else {
   location.href="./login/login.html"
 }
@@ -264,15 +270,69 @@ if(docId!==null&&docId.trim()!==''){
 
 
 
-document.querySelector("#logOut-digital").addEventListener("click",()=>{
 
-  localStorage.setItem("doc-digital-id","");
-  location.href="./login/login.html";
+
+
+/*end login cods*/
+
+
+
+
+
+
+
+
+/* start img upload and show */
+
+document.querySelector(".personImg").src=mainPersonData.personImg||"https://img.freepik.com/free-icon/user_318-159711.jpg"
+
+
+let personImgInput = document.querySelector("#personImgInput")
+personImgInput.addEventListener("change",()=>{
+
+  Swal.fire({
+    title: 'Please Wait!',
+    didOpen: () => {
+      Swal.showLoading()
+    }
+  });
+
+  let ref = firebase.storage().ref();
+  let file = personImgInput.files[0];
+  let name = +new Date() + "-" + file.name;
+  let metadata = {
+    contentType: file.type
+  };
+
+  let task = ref.child(name).put(file, metadata);
+  task
+  .then(async snapshot => snapshot.ref.getDownloadURL())
+  .then(async url => {
+
+    console.log(url);
+    document.querySelector('.personImg').src=url;
+
+    setDoc(doc(db, "accounts", mainPersonData.id), {
+      ...mainPersonData,
+      personImg: url,
+    }).then(e=>{
+      Swal.fire("Done","","success")
+    })
+
+  })
+  .catch(console.error);
+
 
 });
 
 
-/*end login cods*/
+/* end img upload and show */
+
+
+
+
+
+
 
 
 

@@ -11,11 +11,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="./imgs/pubg icon.png">
+    <link rel="icon" type="image/x-icon" href="./imgs/dashboard.png">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="./js cdn/momentCdn.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.min.js" ></script>
 
 
     <style>
@@ -82,12 +90,7 @@
 
       /* Responsive */
 
-      @media (max-width: 767px) {
-        .HelloDiv,
-          #logOut-digital > span {
-              display: none;
-          }
-      }
+
 
 
 
@@ -169,10 +172,11 @@
               <option value="orderByUser">اسم المندوب</option>
               <option value="phone">	رقم جوال العميل</option>
               <option value="city">	المدينة</option>
-              <option value="active">النشاط</option>
+              <option value="active">الطلب</option>
+              <option value="price">المبلغ</option>
               <option value="startTime">التاريخ</option>
             </select>
-            <input type="text" placeholder="Search text" class="addOrderInput SearchInput" style="max-width: 150px; font-size: 20px;">
+            <input type="text" dir="auto" placeholder="Search text" class="addOrderInput SearchInput" style="max-width: 150px; font-size: 20px;">
             <button class="SearchBtn" style="cursor: pointer; font-size: 20px;background: white;color: black;padding: 5px;border: 2px solid black;border-radius: 6px;text-align: end;font-weight: bold;">Search</button>
           </div>
 
@@ -203,8 +207,20 @@
 
                 <tbody id="AllOrders">
                 
-                <tbody>
+                </tbody>
+
             </table>
+
+            <!-- start load more div and btn -->
+            <div style="display: flex;justify-content: center;padding: 10px 0px;">
+              <button class="loadMoreBtn">Load More</button>
+              <div class="loaderIcon" style="display: none;">
+                <i style="font-size: 35px;padding: 5px; " class="fa-solid fa-spinner fa-spin"></i>
+              </div>
+            </div>
+            <!-- end load more div and btn -->
+
+
         </div>
           
         </div>
@@ -215,7 +231,16 @@
       <!-- Start Sidebar can copy it to anthor file -->
       <div class="sidebar bg-white p-20 p-relative">
         <div class="HelloDiv">
-          <i class="fa-regular fa-circle-user fa-fw" style="font-weight: bold;font-size: 50px;width: 100%;"></i>
+
+          <div style="display: flex; justify-content: center;">
+
+            <input style="display: none;" id="personImgInput" type="file" name="img" accept="image/*">
+            <label for="personImgInput" style="cursor: pointer;">
+              <img style="width: 100px;" class="personImg" src="https://img.freepik.com/free-icon/user_318-159711.jpg" alt="">
+            </label>
+
+          </div>
+
           <h2>Hello <span id="AdminName" style="color: #397eaf"></span></h2>
         </div>
         <ul>
@@ -236,6 +261,7 @@
     </div>
   </body>
   <script src="./js cdn/swalCdn.js"></script>
+  
   <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
@@ -245,13 +271,15 @@
   <script type="module">
 
   /**/
-  import { initializeApp } from './firebase.js';
-  import { getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from './firebase.js';
-  import { firebaseConfig } from './firebase.js';
+
+  import {docName, initializeApp,firebaseConfig,getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from './firebase.js';
+ 
 
   firebase.initializeApp(firebaseConfig);
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+
+  const storage = firebase.storage();
 
   /**/
 
@@ -280,13 +308,6 @@ const isAccepted = "Orders-New";
 
 
 
-/* start getOrdersCount */
-
-let q = query(collection(db, "Persons"), where('isAccepted', '==', isAccepted));
-let snapshot = await getCountFromServer(q);
-document.querySelector(".PageOrdersCount").textContent=snapshot.data().count;
-
-/* end getOrdersCount */
 
 
 
@@ -302,7 +323,7 @@ let AllOrders;
 
 async function forAllOrders(X){
 
-  const q = query(collection(db, "Persons"), where('isAccepted', '==', isAccepted), orderBy("date","desc"), limit(X||20));
+  const q = query(collection(db, "Persons"), where('isAccepted', '==', isAccepted), orderBy("date","desc"), limit(X||10));
   const querySnapshot = await getDocs(q);
   const cityList = querySnapshot.docs.map(doc => doc.data());
 
@@ -340,17 +361,31 @@ async function getUserDataWithId(id){
 /* 04 start check and get user doc */
 
 let mainPersonData;
-let docId = await localStorage.getItem("doc-digital-id");
+let docId = await localStorage.getItem(`${docName}`);
 
 if(docId!==null&&docId.trim()!==''){
     // document.querySelector('.profile-btn').dataset.personid=docId;
-    mainPersonData=await getUserDataWithId(docId);
+      // mainPersonData=await getUserDataWithId(docId);
+      mainPersonData= JSON.parse(localStorage.getItem(`${docName}_personData`));
 
     if(mainPersonData.isAdmin==false){
       location.href="./Dashboard-notAdmin.html";
     };
 
-    document.querySelector("#AdminName").textContent=`${mainPersonData.username}..`;
+    document.querySelector("#AdminName").textContent=`${mainPersonData.username}`;
+    document.querySelector(".personImg").src=mainPersonData.personImg||"https://img.freepik.com/free-icon/user_318-159711.jpg"
+
+   
+
+    /* start getOrdersCount */
+
+    let q = query(collection(db, "Persons"), where('isAccepted', '==', isAccepted));
+    let snapshot = await getCountFromServer(q);
+    document.querySelector(".PageOrdersCount").textContent=snapshot.data().count;
+    getAllOrders();
+    /* end getOrdersCount */
+
+
 } else {
   location.href="./login/login.html"
 }
@@ -359,15 +394,95 @@ if(docId!==null&&docId.trim()!==''){
 
 
 
-document.querySelector("#logOut-digital").addEventListener("click",()=>{
 
-  localStorage.setItem("doc-digital-id","");
-  location.href="./login/login.html";
+
+
+/*end login cods*/
+
+
+
+
+
+/* start img upload and show */
+
+
+
+let personImgInput = document.querySelector("#personImgInput")
+personImgInput.addEventListener("change",()=>{
+
+  Swal.fire({
+    title: 'Please Wait!',
+    didOpen: () => {
+      Swal.showLoading()
+    }
+  });
+
+
+
+  let firebaseStorageUrl = document.querySelector('.personImg').src;
+  let startIndex = firebaseStorageUrl.indexOf('o/') + 2;
+  let endIndex = firebaseStorageUrl.indexOf('?alt=media');
+  let filePathAndName = firebaseStorageUrl.substring(startIndex, endIndex);
+  let fileName = decodeURIComponent(filePathAndName);
+
+
+  let imageRef = storage.ref().child(fileName);
+  // Delete the file
+  imageRef.delete().then(function() {
+    console.log("done")
+  }).catch(function(error) {
+    console.log("error")
+  });
+
+
+
+
+
+
+  let ref = firebase.storage().ref();
+  let file = personImgInput.files[0];
+  let name = +new Date() + "-" + file.name;
+  let metadata = {
+    contentType: file.type
+  };
+
+  let task = ref.child(name).put(file, metadata);
+  task
+  .then(async snapshot => snapshot.ref.getDownloadURL())
+  .then(async url => {
+
+    console.log(mainPersonData.id)
+
+    setDoc(doc(db, "accounts", `${mainPersonData.id}`), {
+      ...mainPersonData,
+      personImg: url,
+    }).then(e=>{
+      Swal.fire("Done","","success")
+      console.log(url);
+      document.querySelector('.personImg').src=url;
+      mainPersonData.personImg=url;
+      localStorage.setItem(`${docName}_personData`,JSON.stringify(mainPersonData));
+    })
+    
+
+  })
+  .catch(console.error);
+
 
 });
 
 
-/*end login cods*/
+/* end img upload and show */
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -533,14 +648,24 @@ console.log(SearchField,SearchInput);
 
 if(SearchField!==""&&SearchField!=="SearchInput"){
 
-  const q = query(collection(db, "Persons"), where(SearchField, '==', SearchInput));
+  const q = query(collection(db, "Persons"), where("isAccepted", '==', isAccepted), where(SearchField, '==', SearchInput), orderBy("date","desc"),limit(5));
 
   const querySnapshot = await getDocs(q);
   const cityList = querySnapshot.docs.map(doc => doc.data());
   let AllFromSearch=cityList;
 
+  AllPersonsData=AllFromSearch;
+  AllOrders=AllPersonsData;
+
   document.querySelector("#AllOrders").innerHTML=``;
   showData(AllFromSearch);
+
+  document.querySelector(".loadMoreBtn").dataset.search=`${JSON.stringify({
+    SearchField: SearchField,
+    SearchInput: SearchInput
+  })}`;
+
+
 };
 
 });
@@ -613,17 +738,25 @@ async function showData(x){
           <i title="تفاصيل الطلب" class="fa-sharp fa-solid fa-circle-info Order-Note" data-id="${el.id}" data-note="${el.note}" style="font-size: 25px; color: #233245; background: white; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
         </a>
       </td>
-      <td class="Order-Active">
-                      ${(el.active=="Store")?`
-                        <a>
-                          <i title="سلة المنتجات" class="fa-sharp fa-solid fa-circle-info OrderFromStore" data-id="${el.id}" data-store='${JSON.stringify(el.dataStore)}' style="font-size: 25px; color: rebeccapurple; background: white; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
-                        </a>
-                      `:`${el.active}`}
+      <td>
+
+        <bdi class="Order-Active">
+          ${(el.active=="Store")?`
+          <a>
+            <i title="سلة المنتجات" class="fa-sharp fa-solid fa-circle-info OrderFromStore" data-id="${el.id}" data-store='${JSON.stringify(el.dataStore)}' style="font-size: 25px; color: rebeccapurple; background: white; border-radius: 50%; padding: 5px 5px; cursor: pointer;"></i>
+          </a>
+          `:`${el.active}`}
+        </bdi>
+
       </td>
       <td class="Order-City">${el.city}</td>
       <td class="Order-Phone">${el.phone}</td>
       <td class="Order-ByUser">${el.orderByUser}</td>
-      <td class="Order-Name">${el.name}</td>
+      <td>
+        <bdi class="Order-Name">
+          ${el.name}
+        </bdi>
+      </td>
       <td class="Order-Number">${el.orderNumber}</td>
       <td class="Order-Id">#${i}</td>
     </tr>
@@ -655,25 +788,33 @@ document.querySelector(".reports").addEventListener("click",()=>{
       
       `,
       confirmButtonText: 'عرض',
+      showCancelButton: true
   }).then(async (e)=>{
+
+    if(e.isConfirmed){
+
+      let DateStarts = document.querySelector("#DateStarts").value;
+      let DateEnds = document.querySelector("#DateEnds").value;
+  
+      DateStarts=DateStarts.trim();
+      DateEnds=DateEnds.trim();
+  
+      DateStarts = new Date(DateStarts).getTime();
+      DateEnds = new Date(DateEnds).getTime();
+  
+      const q = query(collection(db, "Persons"), where("isAccepted", "==", isAccepted), where("date", ">", DateStarts), where("date", "<", DateEnds), orderBy("date","desc"));
+      const querySnapshot = await getDocs(q);
+      const cityList = querySnapshot.docs.map(doc => doc.data());
+  
+      AllPersonsData=cityList;
+      AllOrders=AllPersonsData;
+  
+      document.querySelector("#AllOrders").innerHTML=``;
+      showData(cityList);
+      document.querySelector(".loadMoreBtn").style.display="none";
+
+    };
     
-    let DateStarts = document.querySelector("#DateStarts").value;
-    let DateEnds = document.querySelector("#DateEnds").value;
-
-    DateStarts=DateStarts.trim();
-    DateEnds=DateEnds.trim();
-
-    DateStarts = new Date(DateStarts).getTime();
-    DateEnds = new Date(DateEnds).getTime();
-
-    const q = query(collection(db, "Persons"), where("isAccepted", "==", isAccepted), where("date", ">", DateStarts), where("date", "<", DateEnds), orderBy("date","desc"));
-    const querySnapshot = await getDocs(q);
-    const cityList = querySnapshot.docs.map(doc => doc.data());
-
-
-    document.querySelector("#AllOrders").innerHTML=``;
-    showData(cityList);
-
   });
 
 });
@@ -695,11 +836,88 @@ document.querySelector(".reports").addEventListener("click",()=>{
 
 /* 4 Start set Orders Accepted and orders archived*/
 
-window.onclick=(e)=>{
+window.onclick=async(e)=>{
 
 
 
 
+
+
+
+
+
+/* start loadMoreBtn btn*/
+
+if([...e.target.classList].includes("loadMoreBtn")){
+
+  e.target.style.display="none";
+  document.querySelector(".loaderIcon").style.display="block";
+
+ 
+  let lastElementDate=AllPersonsData[AllPersonsData.length-1].date;
+  let q;
+
+  if(e.target.dataset.search!==undefined){
+
+    let search = JSON.parse(e.target.dataset.search);
+    q = query(collection(db, "Persons"),where(search.SearchField,"==",search.SearchInput), where('isAccepted', '==', isAccepted),where("date","<",lastElementDate), orderBy("date","desc"), limit(X||2));
+
+  } else{
+    q = query(collection(db, "Persons"), where('isAccepted', '==', isAccepted),where("date","<",lastElementDate), orderBy("date","desc"), limit(X||2));
+  }
+
+  let querySnapshot = await getDocs(q);
+  let cityList = querySnapshot.docs.map(doc => doc.data());
+  let AllElementFromLoadMore=cityList;
+
+  AllPersonsData=[...AllPersonsData,...AllElementFromLoadMore];
+  AllOrders=AllPersonsData;
+
+
+
+  document.querySelector("#AllOrders").innerHTML=``;
+  await showData(AllPersonsData);
+
+  e.target.style.display="block";
+  document.querySelector(".loaderIcon").style.display="none";
+
+
+  };
+
+
+
+/* end loadMoreBtn btn*/
+
+
+
+
+
+
+
+
+
+
+
+if([...e.target.classList].includes("saveSala")){
+  
+
+  let div = document.querySelector("#swal2-html-container > div")
+  document.querySelector(".saveSala").style.opacity="0"
+
+  html2canvas(div, {
+    allowTaint: false,
+    useCORS: true,
+  }).then((canvas) => {
+    const dataImg = new Image();
+    var link = document.createElement('a');
+    link.download = `  `;
+    link.href = canvas.toDataURL('image/png', 1.0);
+    link.click();
+    document.querySelector(".saveSala").style.opacity="100"
+  });
+
+
+}
 
 
 
@@ -708,14 +926,41 @@ window.onclick=(e)=>{
 
 /* start order detals btn*/
 if([...e.target.classList].includes("OrderFromStore")){
+
+
+  
+  let orderData = AllOrders.find(order => order.id === e.target.dataset.id)
+
+
   let arrayOfProducts = JSON.parse(e.target.dataset.store);
   console.log(arrayOfProducts);
   const div = document.createElement("div");
   let totalPrice=0;
-  div.innerHTML=`<div class="shopping-cart">
+  div.innerHTML=`
+
+  <div style="
+  display: flex;
+  justify-content: space-around; 
+  font-family: 'cairo'; 
+  font-size: 15px;">
+  <h2 style="order: 2;">
+    اسم العميل 
+    : ${orderData.name}
+  </h2>
+
+  <h2>
+    رقم الهاتف
+    : 
+    <span style="font-size: 25px;">${orderData.phone}</span>
+  </h2>
+  </div>
+  
+  <hr>
+
+  <div class="shopping-cart">
     
     <div class="column-labels">
-      <label class="product-image">الصورة</label>
+      <label class="product-image">صورة المنتج</label>
       <label class="product-details">اسم المنتج</label>
       <label class="product-price">السعر</label>
       <label class="product-quantity">الكمية</label>
@@ -728,12 +973,12 @@ if([...e.target.classList].includes("OrderFromStore")){
     totalPrice+=Number(e.productPrice)*Number(e.productAmount);
     div.innerHTML+=`
     
-    <div class="product">
+    <div class="product" >
       <div class="product-image">
         <img src="${e.productImage}">
       </div>
       <div class="product-details">
-        <div class="product-title">${e.productName}</div>
+        <div class="product-title" style="font-family: 'cairo'">${e.productName}</div>
       </div>
       <div class="product-price">${e.productPrice}</div>
       <div class="product-quantity">
@@ -746,13 +991,22 @@ if([...e.target.classList].includes("OrderFromStore")){
   });
 
   div.innerHTML+=`
-  <p>Total Price: ${totalPrice} $</p>
+  <p style="font-family: 'cairo'">
+    
+    اجمالي السعر 
+    ${totalPrice}
+    جنية
+    
+  </p>
+  <button class="saveSala">Save</button>
   `
 
   Swal.fire({
     html: div,
+    width: "800px",
     confirmButtonText: 'ok',
-    showCloseButton: true
+    showCloseButton: true,
+    showConfirmButton: false,
   })
 
 }
@@ -781,11 +1035,55 @@ if([...e.target.classList].includes("OrderFromStore")){
 
 /* start order detals btn*/
 if([...e.target.classList].includes("Order-Note")){
-  Swal.fire(
-      `${e.target.dataset.note}`
-    );
+
+let orderId=e.target.dataset.id;
+let orderData=AllPersonsData.find(el=>el.id==`${orderId}`);
+console.log(orderData.orderDate)
+Swal.fire({
+  html:`
+  <div style="display: flex;justify-content: space-around; font-family: 'cairo'; font-size: 15px;">
+    <h2 style="order: 2; margin: 10px 0;">
+      ${orderData.name}
+    </h2>
+
+    <h2 style="margin: 10px 0;">
+      <span style="font-size: 25px;">${orderData.phone}</span>
+    </h2>
+  </div>
+
+  <hr>
+
+  <h2 style="margin: 5px 0px; font-family: cairo;">
+    <bdi>
+      ${orderData.active}
+    </bdi>
+  </h2>
+
+  <hr>
+
+  <h2 style="margin: 30px 0px; font-family: cairo;">
+    <bdi>
+      ${e.target.dataset.note}
+    </bdi>
+  </h2>
+
+  <hr>
+
+  <p style="color: white;background: var(--main-bg);padding: 10px;border-radius: 10px;font-weight: 400;">
+    ${orderData.orderDate}
+  </p>
+
+  
+  `,
+  showCancelButton: false,
+  showConfirmButton: false,
+  showCloseButton: true
+});
 }
 /* end order detals btn*/
+
+
+
 
 /* start order detals btn*/
 if([...e.target.classList].includes("Order-Active-Note")){
@@ -879,8 +1177,8 @@ confirmButtonText: 'Yes'
     AllPersonsData = AllPersonsData.filter(obj => obj.id !== orderId);
 
     Swal.fire(
-      'Accepted!',
       'Done',
+      '',
       'success'
     );
 
@@ -1008,7 +1306,7 @@ function swool(orderData){
           <label for="phone">رقم الجوال:</label>
           <input style="width: 98%;" class="addOrderInput" type="number" placeholder="" dir="auto" autocomplete="off" id="phone" value="${orderData.phone}">
 
-          <label for="active">النشاط:</label>
+          <label for="active">الطلب:</label>
           ${(orderData.active=="Store")?`
           <input style="width: 98%;" class="addOrderInput" id="active" type="text" dir="auto" autocomplete="off" readonly value="${orderData.active}">
           `:`<input style="width: 98%;" class="addOrderInput" id="active" type="text" dir="auto" autocomplete="off" value="${orderData.active}">
@@ -1204,6 +1502,24 @@ document.querySelector(".addNewOrder").addEventListener("click",()=>{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 1 start function to get data now */
 function showDate(){
   
@@ -1254,7 +1570,7 @@ function showDate(){
 const colRef= collection(db,"Persons");
 
 
-getAllOrders();
+
 
 
 onSnapshot(colRef,async ()=>{

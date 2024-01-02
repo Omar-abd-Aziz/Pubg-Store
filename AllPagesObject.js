@@ -1,3 +1,6 @@
+
+
+
 let AllPagesObject = [
 {
   name: "المتجر",
@@ -40,6 +43,12 @@ let AllPagesObject = [
   link: "./Dashboard-Archived.html",
   iconClass: "fa-solid fa-folder-open fa-fw",
   iconStyle: "color: gray;",
+},
+{
+  name: "تخصيص ثيم",
+  link: "./Store-Theme.html",
+  iconClass: "fa-brands fa-css3-alt",
+  iconStyle: "color: black; font-size: 25px !important; padding-left: 5px; padding-right: 4px;",
 },
 // {
 //   name: "الدعم الفني",
@@ -123,3 +132,23 @@ document.querySelector(".HiddeLeftPar").addEventListener("click",(e)=>{
 })
 
   
+
+
+
+
+document.querySelector("#logOut-digital").addEventListener("click",()=>{
+
+  localStorage.setItem("pubg-store-doc-id","");
+  location.href="./login/login.html";
+
+});
+
+
+
+
+
+
+
+
+
+

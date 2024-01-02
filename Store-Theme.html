@@ -1,0 +1,603 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Store Theme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link rel="stylesheet" href="./css/framework.css" />
+    <link rel="stylesheet" href="./css/master.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&display=swap" rel="stylesheet" />
+
+
+    <link rel="icon" type="image/x-icon" href="./imgs/dashboard.png">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="./js cdn/momentCdn.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+
+
+    <style>
+
+      html{
+        min-width: 1200px;
+        overflow: scroll;
+      }
+
+
+      @font-face {
+        font-family: myFirstFont;
+        src: url(./Fonts/Ethnocentric.ttf);
+      }
+
+      
+
+      
+      /* Table Styles */
+
+      .table-wrapper{
+          box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+      }
+
+      .fl-table {
+          border-radius: 5px;
+          font-size: 17px;
+          font-weight: normal;
+          border: none;
+          border-collapse: collapse;
+          width: 100%;
+          max-width: 100%;
+          white-space: nowrap;
+          background-color: white;
+      }
+
+      .fl-table td{
+          text-align: center;
+          padding: 3px;
+          border: 2px solid black;
+      }
+
+
+      .fl-table th {
+          text-align: center;
+          padding: 8px;
+          border: 2px solid black;
+      }
+
+
+      .fl-table td {
+          border-right: 1px solid #f8f8f8;
+          font-size: 14px;
+          font-family: 'Cairo';
+      }
+
+
+      .fl-table thead th {
+          color: #ffffff;
+          background: transparent;
+      }
+
+      .fl-table tr {
+        border: 1px solid rgb(0, 0, 0);
+      }
+
+      /* Responsive */
+
+
+
+
+
+      .CompanyName::before{
+        content: "Digital vision for information technology";
+        position: relative;
+        bottom: -28px;
+        left: 300px;
+        font-family: myFirstFont;
+        color: #397eaf;
+        font-size: 13px;
+      }
+
+
+
+
+      .OrderActiveNote{
+        width: 98%;
+        border: 2px solid black;
+        border-radius: 6px;
+        padding: 10px;
+        font-size: 20px;
+      }
+
+
+      .OrderActiveNoteTwo{
+        width: 98%;
+        border: 2px solid black;
+        border-radius: 6px;
+        padding: 10px;
+        font-size: 20px;
+      }
+
+
+      
+
+
+/* Slideshow container */
+.slideshow-container {
+  position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+
+.mySlides img {
+  max-height: 600px;
+}
+
+
+
+
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 10px;
+  color: white;
+  background-color: rgba(0,0,0,0.8);
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  text-decoration: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev {
+  left: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: white;
+  background: black;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+.fade:not(.show) {
+  opacity: 10!important;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+
+
+.removeFile{
+    cursor: pointer;
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 25px;
+    background: darkred;
+    padding: 12px 35px 12px 14px;
+    width: 50px;
+    border-radius: 50%;
+    user-select: none;
+}
+
+
+
+
+
+    </style>
+
+  </head>
+  <body>
+    <div class="page d-flex">
+      
+      <div class="content w-full">
+        
+        <!-- Start Head -->
+        <div class="head bg-white between-flex" style="padding: 0px 10px 0px; background: #f1f5f9;">
+          <div class="p-relative">
+            <i class="fa-brands fa-css3-alt cssStoreBtn icon-Theam" style="color: white;"></i>
+            <i class="fa-brands fa-js jsStoreBtn icon-Theam" style="color: white;"></i>
+          </div>
+          <div class="icons d-flex align-center">
+            
+            <i class="fa-solid fa-laptop laptopBtnView icon-Theam"></i>
+            <i class="fa-solid fa-mobile phoneBtnView icon-Theam"></i>
+
+          </div>
+        </div>
+        <!-- End Head -->
+
+        
+
+        <div style="overflow: auto; display: flex; justify-content: center;">
+          <iframe class="iframeStore" src="" frameborder="0" style="width: 100%;height: calc(100vh - 100px);"></iframe>
+        </div>
+
+      </div>
+
+
+      <!-- Start Sidebar can copy it to anthor file -->
+      <div class="sidebar bg-white p-20 p-relative" style="width: 500px;">
+
+        <div class="sidebarDiv">
+          <div class="HelloDiv">
+  
+            <div style="display: flex; justify-content: center;">
+  
+              <input style="display: none;" id="personImgInput" type="file" name="img" accept="image/*">
+              <label for="personImgInput" style="cursor: pointer;">
+                <img style="width: 100px;" class="personImg" src="https://img.freepik.com/free-icon/user_318-159711.jpg" alt="">
+              </label>
+  
+            </div>
+  
+            <h2>Hello <span id="AdminName" style="color: #397eaf"></span></h2>
+          </div>
+          <ul>
+            
+            <li class="AllPagesBtns">
+             
+  
+            </li>
+            <a class="Orders-Accepted active d-flex align-center fs-14 c-black rad-6 p-10" style="display: flex; justify-content: end; cursor: pointer; background: rgba(137, 8, 8, 0.676); color: white;" id="logOut-digital">
+              <span style="font-weight: bold; font-size:20px;">تسجيل الخروج</span>
+              <i class="fas fa-sign-out-alt fa-fw" style="font-weight: bold; font-size:20px; margin-left: 10px; color: white;"></i>
+            </a>
+            
+          </ul>
+        </div>
+
+        <div class="themeEditDiv" style="display: none;">
+
+          <a class="hideThemeDivBtn d-flex align-center fs-14 c-black rad-6 p-10" style="cursor: pointer; background-image: radial-gradient(circle at top right, rgb(78, 78, 78) 0%, rgb(78, 78, 78) 1%,rgb(72, 72, 72) 1%, rgb(72, 72, 72) 10%,rgb(65, 65, 65) 10%, rgb(65, 65, 65) 22%,rgb(59, 59, 59) 22%, rgb(59, 59, 59) 23%,rgb(53, 53, 53) 23%, rgb(53, 53, 53) 28%,rgb(46, 46, 46) 28%, rgb(46, 46, 46) 37%,rgb(40, 40, 40) 37%, rgb(40, 40, 40) 100%); color: white;;display: flex; justify-content: end;">
+            <span style="font-weight: bold; font-size:20px;">رجوع للقايمة الرئيسية</span>
+            <i class="fas fa-sign-out-alt " style="color: white;  font-weight: bold; font-size:20px; margin-left: 10px;"></i>
+          </a>
+
+          <br>
+
+          <a class=" d-flex align-center fs-14 c-black rad-6 p-10" style=" background-image: radial-gradient(circle at 39% 47%, rgba(107, 107, 107,0.08) 0%, rgba(107, 107, 107,0.08) 33.333%,rgba(72, 72, 72,0.08) 33.333%, rgba(72, 72, 72,0.08) 66.666%,rgba(36, 36, 36,0.08) 66.666%, rgba(36, 36, 36,0.08) 99.999%),radial-gradient(circle at 53% 74%, rgba(182, 182, 182,0.08) 0%, rgba(182, 182, 182,0.08) 33.333%,rgba(202, 202, 202,0.08) 33.333%, rgba(202, 202, 202,0.08) 66.666%,rgba(221, 221, 221,0.08) 66.666%, rgba(221, 221, 221,0.08) 99.999%),radial-gradient(circle at 14% 98%, rgba(184, 184, 184,0.08) 0%, rgba(184, 184, 184,0.08) 33.333%,rgba(96, 96, 96,0.08) 33.333%, rgba(96, 96, 96,0.08) 66.666%,rgba(7, 7, 7,0.08) 66.666%, rgba(7, 7, 7,0.08) 99.999%),linear-gradient(45deg, rgb(97, 14, 117),rgb(20, 32, 127)); color: white;display: flex; justify-content: center;">
+            <span style="font-weight: bold; font-size:20px; text-align: center;" id="nameOfCode">Code</span>
+          </a>
+          
+          <br>
+
+          <textarea autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" data-gramm="false"  name="" id="" cols="30" rows="10" class="themeTextarea"></textarea>
+          
+          <a class=" saveThemeBtn d-flex align-center fs-14 c-black rad-6 p-10" style=" cursor: pointer; background-image: radial-gradient(circle at 39% 47%, rgba(107, 107, 107,0.08) 0%, rgba(107, 107, 107,0.08) 33.333%,rgba(72, 72, 72,0.08) 33.333%, rgba(72, 72, 72,0.08) 66.666%,rgba(36, 36, 36,0.08) 66.666%, rgba(36, 36, 36,0.08) 99.999%),radial-gradient(circle at 53% 74%, rgba(182, 182, 182,0.08) 0%, rgba(182, 182, 182,0.08) 33.333%,rgba(202, 202, 202,0.08) 33.333%, rgba(202, 202, 202,0.08) 66.666%,rgba(221, 221, 221,0.08) 66.666%, rgba(221, 221, 221,0.08) 99.999%),radial-gradient(circle at 14% 98%, rgba(184, 184, 184,0.08) 0%, rgba(184, 184, 184,0.08) 33.333%,rgba(96, 96, 96,0.08) 33.333%, rgba(96, 96, 96,0.08) 66.666%,rgba(7, 7, 7,0.08) 66.666%, rgba(7, 7, 7,0.08) 99.999%),linear-gradient(45deg, rgb(97, 14, 117),rgb(20, 32, 127)); color: white;display: flex; justify-content: center;">
+            <span style="font-weight: bold; font-size:20px; text-align: center; font-family: 'Cairo';">حفظ</span>
+            <i class="fas fa-save " style="color: white;  font-weight: bold; font-size:20px; margin-left: 10px;"></i>
+          </a>
+
+
+        </div>
+
+      </div>
+      <!-- End Sidebar can copy it to anthor file -->
+
+    </div>
+
+
+</body>
+  
+
+  <script src="./js cdn/swalCdn.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
+
+  <script src="./AllPagesObject.js"></script>
+
+  <script type="module">
+
+  /**/
+  import {docName, initializeApp,firebaseConfig ,getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from './firebase.js';
+
+  firebase.initializeApp(firebaseConfig);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const storage = firebase.storage();
+  /**/
+
+  let X;
+
+
+
+////////////////////////////////////////////////////////////////////
+
+let iframeStore = document.querySelector(".iframeStore")
+let phoneBtnView = document.querySelector(".phoneBtnView")
+let laptopBtnView = document.querySelector(".laptopBtnView")
+let jsStoreBtn = document.querySelector(".jsStoreBtn")
+let cssStoreBtn = document.querySelector(".cssStoreBtn")
+let sidebarDiv =  document.querySelector(".sidebarDiv")
+let themeEditDiv =  document.querySelector(".themeEditDiv")
+let nameOfCode =  document.querySelector("#nameOfCode")
+let hideThemeDivBtn =  document.querySelector(".hideThemeDivBtn")
+let themeTextarea =  document.querySelector(".themeTextarea")
+let saveThemeBtn =  document.querySelector(".saveThemeBtn")
+
+iframeStore.src=`${location.origin}`;
+
+phoneBtnView.addEventListener("click",()=>{
+  iframeStore.style=`
+  width: 400px;
+  height: 1000px;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin-top: 30px;
+  `
+})
+
+laptopBtnView.addEventListener("click",()=>{
+  iframeStore.style=`
+  width: 100%;
+  height: calc(100vh - 100px);
+  `
+})
+
+
+
+hideThemeDivBtn.addEventListener("click",()=>{
+  sidebarDiv.style.display=`block`;
+  themeEditDiv.style.display=`none`;
+});
+
+
+cssStoreBtn.addEventListener("click",async()=>{
+
+  let cssCode;
+  await getDoc(doc(db, "StoreTheme", `css`)).then(e=>{
+    cssCode=e.data();
+
+    themeTextarea.value=`${cssCode!==undefined?cssCode.code:""}`;
+    themeTextarea.dataset.codename="css";
+    sidebarDiv.style.display=`none`;
+    themeEditDiv.style.display=`block`;
+    nameOfCode.textContent=`Css Code`;
+  });
+
+});
+
+
+jsStoreBtn.addEventListener("click",async()=>{
+
+  let jsCode;
+  await getDoc(doc(db, "StoreTheme", `js`)).then(e=>{
+    jsCode=e.data();
+
+    themeTextarea.value=`${jsCode!==undefined?jsCode.code:""}`;
+    themeTextarea.dataset.codename="js";
+    sidebarDiv.style.display=`none`;
+    themeEditDiv.style.display=`block`;
+    nameOfCode.textContent=`Js Code`;
+  });
+
+});
+
+
+saveThemeBtn.addEventListener("click",async()=>{
+
+  let CodeName = themeTextarea.dataset.codename;
+  let theCode = themeTextarea.value;
+
+  await setDoc(doc(db, "StoreTheme", `${CodeName}`),{
+
+    code: `${theCode}`,
+
+  }).then(e=>{
+    Swal.fire("Save Done","","success");
+    iframeStore.contentDocument.location.reload(true);
+  });
+
+});
+
+
+
+//////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+/* 04 start check and get user doc */
+let AllPersonsData;
+let mainPersonData;
+let docId = await localStorage.getItem(`${docName}`);
+
+if(docId!==null&&docId.trim()!==''){
+
+    // mainPersonData=await getUserDataWithId(docId);
+    mainPersonData= JSON.parse(localStorage.getItem(`${docName}_personData`));
+
+    if(mainPersonData.isAdmin==false){
+      location.href="./Dashboard-notAdmin.html";
+    };
+
+    document.querySelector("#AdminName").textContent=`${mainPersonData.username}`;
+    document.querySelector(".personImg").src=mainPersonData.personImg||"https://img.freepik.com/free-icon/user_318-159711.jpg"
+
+
+
+
+
+} else {
+  location.href="./login/login.html"
+}
+
+/* 04 end check and get user doc */
+
+
+
+
+
+/* 02 start get AllAccounts */
+
+async function getUserDataWithId(id){
+  let userData;
+  await getDoc(doc(db, "accounts", `${id}`)).then(e=>{
+    userData=e.data();
+  });
+  return userData;
+}
+
+/* 02 end get All Accounts */
+
+/*end login cods*/
+
+
+
+
+/* start img upload and show */
+
+
+
+let personImgInput = document.querySelector("#personImgInput")
+personImgInput.addEventListener("change",()=>{
+
+  Swal.fire({
+    title: 'Please Wait!',
+    didOpen: () => {
+      Swal.showLoading()
+    }
+  });
+
+
+
+  let firebaseStorageUrl = document.querySelector('.personImg').src;
+  let startIndex = firebaseStorageUrl.indexOf('o/') + 2;
+  let endIndex = firebaseStorageUrl.indexOf('?alt=media');
+  let filePathAndName = firebaseStorageUrl.substring(startIndex, endIndex);
+  let fileName = decodeURIComponent(filePathAndName);
+
+
+  let imageRef = storage.ref().child(fileName);
+  // Delete the file
+  imageRef.delete().then(function() {
+    console.log("done")
+  }).catch(function(error) {
+    console.log("error")
+  });
+
+
+
+
+
+
+  let ref = firebase.storage().ref();
+  let file = personImgInput.files[0];
+  let name = +new Date() + "-" + file.name;
+  let metadata = {
+    contentType: file.type
+  };
+
+  let task = ref.child(name).put(file, metadata);
+  task
+  .then(async snapshot => snapshot.ref.getDownloadURL())
+  .then(async url => {
+
+    console.log(mainPersonData.id)
+
+    setDoc(doc(db, "accounts", `${mainPersonData.id}`), {
+      ...mainPersonData,
+      personImg: url,
+    }).then(e=>{
+      Swal.fire("Done","","success")
+      console.log(url);
+      document.querySelector('.personImg').src=url;
+      mainPersonData.personImg=url;
+      localStorage.setItem(`${docName}_personData`,JSON.stringify(mainPersonData));
+    })
+    
+
+  })
+  .catch(console.error);
+
+
+});
+
+
+/* end img upload and show */
+
+
+
+
+
+
+
+
+</script>
+
+
+</html>

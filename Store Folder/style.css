@@ -17,8 +17,11 @@ body{
 
 :root
 {
+
   --main-color: black;
+  --main-color2: #5b4ebb;
   --one-color: #198754;
+  --main-bg: radial-gradient(circle at top right, rgb(78, 78, 78) 0%, rgb(78, 78, 78) 1%,rgb(72, 72, 72) 1%, rgb(72, 72, 72) 10%,rgb(65, 65, 65) 10%, rgb(65, 65, 65) 22%,rgb(59, 59, 59) 22%, rgb(59, 59, 59) 23%,rgb(53, 53, 53) 23%, rgb(53, 53, 53) 28%,rgb(46, 46, 46) 28%, rgb(46, 46, 46) 37%,rgb(40, 40, 40) 37%, rgb(40, 40, 40) 100%);
 }
 
 
@@ -49,14 +52,314 @@ body{
 }
 
 .footer-dad{
+  z-index: 1 !important;
+  position: relative;
   background-image: radial-gradient(circle at 93% 71%, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 80% 77%, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 26% 66%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 57% 92%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 87% 50%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 37% 43%, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 20% 80%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 96% 20%, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 98% 99%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 83% 86%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 54% 28%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 40% 66%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 87% 26%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 39% 24%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 21% 9%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 61% 29%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 58% 19%, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 5%,transparent 5%, transparent 100%),linear-gradient(0deg, hsla(321,0%,14%,1),hsla(306,0%,14%,1));
 }
+
+
+
+
+
+
+
+
+
+
+/* start new styles */
+
+
+
+.swiper2 .swiper-slide {
+  display: block !important;
+}
+
+.swiper-wrapper2 .swiper-slide {
+   display: flex !important;
+   align-self: center;
+}
+
+
+
+#btnup {
+   z-index: 4!important;
+}
+
+
+
+.CardImgDad a{
+
+display: contents!important;
+
+}
+
+
+/* start new styles */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 /* body::-webkit-scrollbar {
   display: none;
 } */
 
+
+
+/* 
+
+.swiperDivForProductPageSlider{
+  position: relative;
+}
+
+
+.swiperDivForProductPageSlider > .swiper{
+  position: fixed;
+  width: 45%;
+}
+ */
+
+
+
+
+
+
+#navbarNav > ul > li > a,
+div.card-body > h1,
+#services > div > h1,
+#AllStoreCategories{
+
+color: black !important;
+font-weight: bold;
+}
+
+.active {
+    background-color: black!important;
+}
+
+
+#services > div > div.grid.cardsDad > div > div{
+font-weight: bold !important;
+
+}
+
+
+
+
+.orderCoicesDiv{
+  display: flex;
+  justify-content: space-around;
+  font-size: 20px !important;
+  font-weight: bold !important;
+  word-spacing: 2px !important;
+  color: white !important;
+  font-weight: 500 !important;
+  font-family: inherit !important;
+  background: var(--main-color2) !important;
+  padding: 4px 12px !important;
+  border: 2px solid var(--main-color2) !important;
+  border-radius: 6px !important;
+  margin-top: 8px !important;
+}
+
+
+.orderCoicesDiv select{
+  border-radius: 6px;
+  font-weight: bold;
+  padding: 2px 5px;
+}
+
+.ProductCategorieNameDiv{
+  color: white;
+  text-align: start;
+  background-image: url("./images/text\ bg.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.ProductCategorieNameDiv > h3{
+  margin: 3px 10px 7px 35px !important;
+}
+
+@media (max-width: 550px) {
+  .ProductCategorieNameDiv > h3{
+    margin: 3px 4px 7px 22px !important;
+  }
+}
+
+.showAllBtn{
+  background-image: var(--main-bg);
+  color: white;
+  margin: 0 10px;
+  font-size: 18px;
+  text-decoration: none;
+  font-family: var(--bs-font-sans-serif);
+  border: none;
+  padding: 5px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.showAllBtn:hover{
+  transition: 0.3s;
+  color: rgb(188, 188, 188);
+}
+
+.s-slider-prev,
+.s-slider-next{
+  border: none;
+  padding: 3px;
+  border-radius: 50% !important;
+  background-image: var(--main-bg) !important;
+}
+
+.s-slider-prev svg,
+.s-slider-next svg{
+  fill: white;
+}
+
+
+
+.cardName{
+font-size: 23px !important;
+font-weight: bold;
+}
+
+
+
+.ProductPriceBeforeRivalSpan {
+    color: #c2272d !important;
+}
+
+
+@media (max-width: 500px){
+
+div.card-body > .card-title {
+    font-size: 18px !important;
+}
+
+
+.ProductPriceBeforeRivalSpan {
+   font-size: 14px !important;
+}
+
+
+
+#containerProduct p {
+    font-size: 10px;
+}
+
+}
+
+
+
+body > div.footer-dad.bg-dark.card-footer > div > h5 > a
+{
+
+    text-decoration: none;
+    cursor: pointer;
+    background: white;
+    color: black !important;
+    padding: 0px 5px;
+
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+
+}
+
+.swal2-icon {
+    border-color: black !important;
+    color: black !important;
+}
+
+
+
+
+body > div.footer-dad.bg-dark.card-footer > div > h5 > i 
+{
+    display: none;
+}
+
+
+
+#containerProduct #imageSection{
+
+    margin: 0 !important;
+
+}
+
+
+
+
+
+
+
+
+.swiper-button-prev1{
+  left: 30px !important;
+}
+
+.swiper-button-next1{
+  right: 30px !important;
+}
+
+.swiper-pagination1 .swiper-pagination-bullet{
+  background-color: white !important;
+}
+
+
+@media(max-width: 600px){
+  .swiper-button-next:after, .swiper-button-prev:after{
+    display: none;
+  }
+}
+
+
+
+.swiper-pagination1 .swiper-pagination-bullet-active{
+  background-color: white !important;
+  border: 2px solid white;
+}
+
+.swiper-scrollbar1 .swiper-scrollbar-drag{
+  background-color: rgb(80, 80, 80) !important;
+}
+
+
+#FormToSendOrderButton{
+  background-color: var(--main-color2) !important;
+}
+
+
+
+.search-btn{
+  background-image: radial-gradient(circle at 17% 77%, rgba(17, 17, 17,0.04) 0%, rgba(17, 17, 17,0.04) 50%,rgba(197, 197, 197,0.04) 50%, rgba(197, 197, 197,0.04) 100%),radial-gradient(circle at 26% 17%, rgba(64, 64, 64,0.04) 0%, rgba(64, 64, 64,0.04) 50%,rgba(244, 244, 244,0.04) 50%, rgba(244, 244, 244,0.04) 100%),radial-gradient(circle at 44% 60%, rgba(177, 177, 177,0.04) 0%, rgba(177, 177, 177,0.04) 50%,rgba(187, 187, 187,0.04) 50%, rgba(187, 187, 187,0.04) 100%),linear-gradient(19deg, rgb(28, 117, 250),rgb(34 104 204)) ;
+  padding: 10px !important;
+  color: white !important;
+  font-size: 25px !important;
+  position: absolute;
+  left: 155px !important;
+  top: 17px !important;
+  border-radius: 50%;
+  margin: 0 !important;
+  cursor: pointer;
+}
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -1159,7 +1462,7 @@ body > div.divForCardsHasSelcDad > div > div > div.delOfCardDad > img
   height: 400px;
   padding: 10px;
   font-size: 20px;
-  border: 2px solid #5b4ebb;
+  border: 2px solid var(--main-color2);
   border-radius: 6px;
   font-weight: bold;
   color: rgb(99, 99, 99);
@@ -1176,8 +1479,8 @@ body > div.divForCardsHasSelcDad > div > div > div.delOfCardDad > img
 }
 
 #containerProduct #details > textarea::-webkit-scrollbar-thumb {
-background-color: #5b4ebb;
-outline: 1px solid #5b4ebb;
+background-color: var(--main-color2);
+outline: 1px solid var(--main-color2);
 }
 
 #containerProduct #containerD
@@ -1203,7 +1506,7 @@ outline: 1px solid #5b4ebb;
 }
 #containerProduct #imageSection img:hover
 {
-  box-shadow: 1px 0px 9px 1px #5b4ebb;
+  box-shadow: 1px 0px 9px 1px var(--main-color2);
 
 }
 
@@ -1213,18 +1516,18 @@ outline: 1px solid #5b4ebb;
   margin: 20px auto;
   text-align: end;
 }
-#containerProduct h1
+#containerProduct .ProductName
 {
-  font-size: 35px;
-  letter-spacing: 1px;
-  word-spacing: 2px;
+  display: flex;
+  justify-content: center;
+  font-size: 34px;
   text-align: center;
   background: #ffffff;
   line-height: 50px;
   padding: 0 20px;
   font-weight: 700;
-  color: #5b4ebb;
-  border: 2px solid #5b4ebb;
+  color: var(--main-color2);
+  border: 2px solid var(--main-color2);
   border-radius: 6px;
   
 }
@@ -1260,11 +1563,179 @@ outline: 1px solid #5b4ebb;
     border: 2px solid #00000099;
     border-radius: 6px;
 }
+
+.swiper {
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.swiper2 .swiper-backface-hidden .swiper-slide{
+  width: 100% !important;
+}
+
+.swiper-wrapper2 .swiper-slide{
+  width: 100% !important;
+  /* display: flex !important;
+  justify-content: center !important;
+  align-self: center !important;
+  max-height: 80vh !important; */
+} 
+
+.swiper2 .swiper-slide{
+  display: flex;
+}
+
+.swiper2 .swiper-slide img{
+  align-self: center;
+}
+
+.swiper-button-next, .swiper-button-prev{
+  color: var(--main-color2) !important;
+}
+
+.swiper-pagination-bullet-active{
+  background-color: white !important;
+  border: 2px solid var(--main-color2);
+}
+
+.swiper-scrollbar-drag{
+  background-color: var(--main-color2) !important;
+}
+
+
+.swiper-horizontal>.swiper-scrollbar, .swiper-scrollbar.swiper-scrollbar-horizontal {
+  bottom: var(--swiper-scrollbar-bottom,0px) !important;
+}
+
+
+
+
+/* ///////////////////////////////////////// */
+.swiperProducts {
+  width: 100%;
+  height: 100%;
+  z-index: 0 !important;
+}
+
+.swiperProducts .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+}
+
+.swiperProducts .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+
+
+
+@media (max-width: 700px){
+  .swiperMainProducts{
+    padding: 0 !important;
+  }
+}
+
+/* ///////////////////////////////////////// */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+div:where(.swal2-container) .swal2-html-container{
+  margin: 10px !important;
+}
+
+
+
+
+
+.accordion-button:focus{
+  box-shadow: none !important;
+}
+#containerProduct button{
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.accordion-body{
+  padding: 0 !important;
+  border: none !important;
+}
+
+.ProductNote{
+  resize: none;
+  width: 100%;
+  height: 400px;
+  padding: 15px;
+  font-size: 20px;
+  border: 2px solid var(--main-color2);
+  border-radius: 6px;
+  margin-top: 5px;
+  margin-bottom: -6px;
+  border-radius: 6px;
+  font-weight: bold;
+  color: rgb(99, 99, 99);
+}
+.ProductNote::-webkit-scrollbar-thumb{
+  background-color: var(--main-color2);
+}
+
+
+.accordion-button::after{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='1em' viewBox='0 0 448 512'%3E%3C!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --%3E%3Cstyle%3Esvg%7Bfill:%23ffffff%7D%3C/style%3E%3Cpath d='M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z'/%3E%3C/svg%3E") !important;
+  margin-left: 0 !important;
+  margin-right: auto;
+}
+.productCode{
+  background: white;
+  padding: 0px 6px;
+  color: var(--main-color2);
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+#productId
+{
+  font-size: 20px !important;
+  font-weight: bold !important;
+  word-spacing: 2px !important;
+  color: white !important;
+  font-weight: 500 !important;
+  font-family: inherit !important;
+  background: var(--main-color2) !important;
+  padding: 4px 12px !important;
+  border: 2px solid var(--main-color2) !important;
+  border-radius: 6px !important;
+  margin-top: 8px !important;
+}
+
+
+
 #containerProduct button
 {
     padding: 10px 15px;
     color: white;
-    background-color: #5b4ebb;
+    background-color: var(--main-color2);
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -1277,7 +1748,7 @@ outline: 1px solid #5b4ebb;
 }
 #containerProduct button:hover
 {
-    background-color: #5b4ebb;
+    background-color: var(--main-color2);
 }
 #containerProduct button a:focus
 {
@@ -1288,7 +1759,7 @@ outline: 1px solid #5b4ebb;
 #details > h3:nth-child(1) > span.ProductPrice{
   order: 2;
   color: white;
-  background: #5b4ebb;
+  background: var(--main-color2);
   padding: 3px 5px;
   border-radius: 6px;
 }
@@ -1306,7 +1777,7 @@ outline: 1px solid #5b4ebb;
 #codplugin-checkout{
   position: relative;
   padding: 30px;
-  border: 2px solid #5b4ebb;
+  border: 2px solid var(--main-color2);
   border-radius: 6px;
   margin-top: 50px;
 }
@@ -1324,12 +1795,13 @@ outline: 1px solid #5b4ebb;
   line-height: 50px;
   padding: 0 20px;
   display: inline-block;
-  color: #5b4ebb;
-  border: 2px solid #5b4ebb;
+  color: var(--main-color2);
+  border: 2px solid var(--main-color2);
   border-radius: 6px;
 }
 #codplugin_woo_single_form input,
 #codplugin_state {
+  font-weight: bold;
   width: 100%;
   padding: 16px;
   margin: 7px auto;
@@ -1339,7 +1811,7 @@ outline: 1px solid #5b4ebb;
 
 
 #nrwooconfirm{
-  background-color: #5b4ebb;
+  background-color: var(--main-color2);
   width: 72%!important;
   border: none;
   margin: 7px;
@@ -1425,7 +1897,7 @@ div#codplugin_order_history {
 .btnNext{
   font-size: 25px;
   font-weight: bold;
-  background: #5b4ebb;
+  background: var(--main-color2);
   color: white;
   padding: 5px 10px;
   margin: 10px;
@@ -1559,7 +2031,7 @@ div#codplugin_order_history {
 
 @media(max-width: 1300px)
 {
-    #containerProduct h1
+    #containerProduct .ProductName
     {
         font-size: 28px;
     }
@@ -1571,7 +2043,7 @@ div#codplugin_order_history {
     #containerProduct button
     {
         padding: 8px 13px;
-        background-color: #5b4ebb;
+        background-color: var(--main-color2);
         border: none;
         border-radius: 6px;
         cursor: pointer;
@@ -1580,7 +2052,7 @@ div#codplugin_order_history {
 
 @media(max-width: 1170px)
 {
-    #containerProduct h1
+    #containerProduct .ProductName
     {
         font-size: 22px;
     }
@@ -1605,7 +2077,7 @@ div#codplugin_order_history {
 
 }
 
-@media(max-width: 900px)
+@media(max-width: 1000px)
 {
     /* #containerProduct */
     #containerProduct #containerD
@@ -1636,6 +2108,16 @@ div#codplugin_order_history {
     {
         text-align: center;
     }
+
+
+
+    .swiperDivForProductPageSlider > .swiper {
+      position: relative;
+      width: 100%;
+    }
+
+
+
 }
 
 @media(max-width: 650px)
@@ -1676,10 +2158,6 @@ div#codplugin_order_history {
   
 
 };
-
-
-
-
 
 
 

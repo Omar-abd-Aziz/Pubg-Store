@@ -1,0 +1,261 @@
+
+html{
+    min-width: 1200px;
+    overflow: scroll;
+  }
+
+
+  @font-face {
+    font-family: myFirstFont;
+    src: url(./Fonts/Ethnocentric.ttf);
+  }
+
+  
+
+  
+  /* Table Styles */
+
+  .table-wrapper{
+      box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+  }
+
+  .fl-table {
+      border-radius: 5px;
+      font-size: 17px;
+      font-weight: normal;
+      border: none;
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 100%;
+      white-space: nowrap;
+      background-color: white;
+  }
+
+  .fl-table td{
+      text-align: center;
+      padding: 3px;
+      border: 2px solid black;
+  }
+
+
+  .fl-table th {
+      text-align: center;
+      padding: 8px;
+      border: 2px solid black;
+  }
+
+
+  .fl-table td {
+      border-right: 1px solid #f8f8f8;
+      font-size: 14px;
+      font-family: 'Cairo';
+  }
+
+
+  .fl-table thead th {
+      color: #ffffff;
+      background: transparent;
+  }
+
+  .fl-table tr {
+    border: 1px solid rgb(0, 0, 0);
+  }
+
+  /* Responsive */
+
+
+
+
+
+  /* .CompanyName::before{
+    content: "Digital vision for information technology";
+    position: relative;
+    bottom: -28px;
+    left: 300px;
+    font-family: myFirstFont;
+    color: #397eaf;
+    font-size: 13px;
+  } */
+
+
+  .simpleShadow{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  }
+
+  .OrderActiveNote{
+    width: 98%;
+    border: 2px solid black;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 20px;
+  }
+
+
+  .OrderActiveNoteTwo{
+    width: 98%;
+    border: 2px solid black;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 20px;
+  }
+
+
+  
+
+
+/* Slideshow container */
+.slideshow-container {
+position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+display: none;
+}
+
+
+.mySlides img {
+max-height: 600px;
+}
+
+
+
+
+
+/* Next & previous buttons */
+.prev, .next {
+cursor: pointer;
+position: absolute;
+top: 50%;
+width: auto;
+margin-top: -22px;
+padding: 10px;
+color: white;
+background-color: rgba(0,0,0,0.8);
+font-weight: bold;
+font-size: 18px;
+transition: 0.6s ease;
+border-radius: 0 3px 3px 0;
+user-select: none;
+text-decoration: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+right: 0;
+border-radius: 3px 0 0 3px;
+}
+
+.prev {
+left: 0;
+border-radius: 3px 0 0 3px;
+}
+
+
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+color: #f2f2f2;
+font-size: 15px;
+padding: 8px 12px;
+position: absolute;
+bottom: 8px;
+width: 100%;
+text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+color: white;
+background: black;
+font-size: 12px;
+padding: 8px 12px;
+position: absolute;
+top: 0;
+}
+
+
+/* The dots/bullets/indicators */
+.dot {
+height: 15px;
+width: 15px;
+margin: 0 2px;
+background-color: #bbb;
+border-radius: 50%;
+display: inline-block;
+transition: background-color 0.6s ease;
+}
+
+.active {
+background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+animation-name: fade;
+animation-duration: 1.5s;
+}
+
+.fade:not(.show) {
+opacity: 10!important;
+}
+
+@keyframes fade {
+from {opacity: .4} 
+to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+.text {font-size: 11px}
+}
+
+
+.removeFile{
+cursor: pointer;
+color: whitesmoke;
+font-weight: bold;
+font-size: 25px;
+background: darkred;
+padding: 12px 35px 12px 14px;
+width: 50px;
+border-radius: 50%;
+user-select: none;
+}
+
+
+
+
+
+.choicesOrderDiv{
+  font-family: cairo;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+
+.ChoiceName {
+  width: 95% !important;
+  max-width: 95% !important;
+  margin: 10px auto;
+}
+
+
+
+.choicesOrderDiv input {
+  max-width: 40%;
+  font-size: 20px;
+  margin: 5px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border: 2px solid black;
+  font-family: cairo;
+  border-radius: 11px;
+}
+
+
