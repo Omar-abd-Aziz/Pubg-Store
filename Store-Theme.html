@@ -361,7 +361,7 @@
   <script type="module">
 
   /**/
-  import {docName, initializeApp,firebaseConfig ,getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from './firebase.js';
+  import {docName, initializeApp,firebaseConfig ,getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, updateDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from './firebase.js';
 
   firebase.initializeApp(firebaseConfig);
   const app = initializeApp(firebaseConfig);
@@ -569,8 +569,7 @@ personImgInput.addEventListener("change",()=>{
 
     console.log(mainPersonData.id)
 
-    setDoc(doc(db, "accounts", `${mainPersonData.id}`), {
-      ...mainPersonData,
+    updateDoc(doc(db, "accounts", `${mainPersonData.id}`), {
       personImg: url,
     }).then(e=>{
       Swal.fire("Done","","success")

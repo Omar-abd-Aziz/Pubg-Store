@@ -2,7 +2,7 @@
 
 /////* start firebase */////
 
-import {docName,firebaseConfig,initializeApp ,getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt, startAfter,endAt  } from "../firebase.js";
+import {docName,firebaseConfig,initializeApp ,getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, updateDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt, startAfter,endAt  } from "../firebase.js";
 
 
 firebase.initializeApp(firebaseConfig);
@@ -288,8 +288,7 @@ document.querySelector(".ForgotPassword").addEventListener("click",()=>{
                     let arrayOfAccounts = querySnapshot.docs.map(doc => doc.data());
 
 
-                    setDoc(doc(db,"accounts",`${arrayOfAccounts[0].id}`),{
-                        ...arrayOfAccounts[0],
+                    updateDoc(doc(db,"accounts",`${arrayOfAccounts[0].id}`),{
                         password: NewPassword,
                     }).then(e=>{
                         Swal.fire("Done","","success");

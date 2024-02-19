@@ -279,7 +279,7 @@
 
 
   /**/
-  import {docName, initializeApp,firebaseConfig, getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from './firebase.js';
+  import {docName, initializeApp,firebaseConfig, getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, updateDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from './firebase.js';
 
   firebase.initializeApp(firebaseConfig);
   const app = initializeApp(firebaseConfig);
@@ -457,8 +457,7 @@ personImgInput.addEventListener("change",()=>{
 
     console.log(mainPersonData.id)
 
-    setDoc(doc(db, "accounts", `${mainPersonData.id}`), {
-      ...mainPersonData,
+    updateDoc(doc(db, "accounts", `${mainPersonData.id}`), {
       personImg: url,
     }).then(e=>{
       Swal.fire("Done","","success")
@@ -1131,8 +1130,7 @@ confirmButtonText: 'Yes, Accept it!'
     let orderId=e.target.dataset.id;
     let orderData=AllPersonsData.find(el=>el.id==`${orderId}`);
 
-    setDoc(doc(db,"Persons",orderId),{
-      ...orderData,
+    updateDoc(doc(db,"Persons",orderId),{
       isAccepted: true,
     });
 
@@ -1174,8 +1172,7 @@ if([...e.target.classList].includes("archiveOrder")){
       let orderId=e.target.dataset.id;
       let orderData=AllPersonsData.find(el=>el.id==`${orderId}`);
 
-      setDoc(doc(db,"Persons",orderId),{
-        ...orderData,
+      updateDoc(doc(db,"Persons",orderId),{
         isAccepted: false,
       });
 
@@ -1310,8 +1307,7 @@ function swool(orderData){
           SetData(name,phone,active,city,price);
 
           function SetData(name,phone,active,city,price){
-            setDoc(doc(db,"Persons",orderData.id), {
-              ...orderData,
+            updateDoc(doc(db,"Persons",orderData.id), {
               name: name,
               phone: phone,
               city: city,

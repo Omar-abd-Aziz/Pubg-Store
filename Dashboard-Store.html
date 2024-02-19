@@ -187,7 +187,7 @@
 
 /* start import from firebase */
 
-  import {docName, initializeApp,firebaseConfig ,getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from './firebase.js';
+  import {docName, initializeApp,firebaseConfig ,getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, addDoc, updateDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from './firebase.js';
 
   firebase.initializeApp(firebaseConfig);
   const app = initializeApp(firebaseConfig);
@@ -633,8 +633,10 @@ if([...e.target.classList].includes("Product-Hidden")){
 
       let x = (productData.isHidden==true?false:true);
 
-      setDoc(doc(db,"StoreProducts",productId),{
-        ...productData,
+
+
+
+      updateDoc(doc(db,"StoreProducts",productId),{
         isHidden: x,
       }).then(e=>{
 
@@ -657,8 +659,8 @@ if([...e.target.classList].includes("Product-Hidden")){
       });
 
 
-    }
-  })
+    };
+  });
 
 
 };
@@ -706,8 +708,7 @@ if([...e.target.classList].includes("removeFile")){
         console.log("error")
       });
 
-      setDoc(doc(db,"StoreProducts",productId),{
-        ...productData,
+      updateDoc(doc(db,"StoreProducts",productId),{
         ArrayOfProductImages: ArrayOfProductImages,
       });
 
@@ -818,8 +819,7 @@ if([...e.target.classList].includes("makeThisImgTheMainProductImg")){
 
   e.target.classList.add("fa-spinner");
 
-  setDoc(doc(db,"StoreProducts",productData.id), {
-    ...productData,
+  updateDoc(doc(db,"StoreProducts",productData.id), {
     ProductImage: mainImgSrc,
   }).then(()=>{
 
@@ -1174,8 +1174,7 @@ if([...e.target.classList].includes("choicesOrder")){
 
 
 
-        setDoc(doc(db,"StoreProducts",productData.id), {
-          ...productData,
+        updateDoc(doc(db,"StoreProducts",productData.id), {
           productOrderChoices: productOrderChoices,
         }).then(e=>{
 
@@ -1351,8 +1350,7 @@ async function swool(productData){
 
               if(ProductImgInput.files[0]==undefined){
 
-                setDoc(doc(db,"StoreProducts",productData.id), {
-                  ...productData,
+                updateDoc(doc(db,"StoreProducts",productData.id), {
                   ProductName: ProductName,
                   ProductPriceBeforeRival: ProductPriceBeforeRival.trim()==""?"":ProductPriceBeforeRival,
                   ProductPrice: ProductPrice,

@@ -299,7 +299,7 @@
 
 
   /**/
-  import {docName, initializeApp,firebaseConfig, getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from './firebase.js';
+  import {docName, initializeApp,firebaseConfig, getFirestore,getCountFromServer, collection, query, where, getDocs,getDoc, setDoc, updateDoc, addDoc, doc,deleteDoc,onSnapshot,orderBy, limit,startAt,endAt } from './firebase.js';
 
   firebase.initializeApp(firebaseConfig);
   const app = initializeApp(firebaseConfig);
@@ -473,8 +473,7 @@ personImgInput.addEventListener("change",()=>{
 
     console.log(mainPersonData.id)
 
-    setDoc(doc(db, "accounts", `${mainPersonData.id}`), {
-      ...mainPersonData,
+    updateDoc(doc(db, "accounts", `${mainPersonData.id}`), {
       personImg: url,
     }).then(e=>{
       Swal.fire("Done","","success")
@@ -1110,7 +1109,11 @@ Swal.fire({
     <div>
       <canvas id="myChart1"></canvas>
     </div>
-    <br>
+
+
+    <hr>
+
+
     <div>
       <canvas id="myChart2"></canvas>
     </div>
@@ -1144,6 +1147,14 @@ Swal.fire({
     showConfirmButton: false
 });
 
+
+let TotalOrders = 0;
+let TotalPrices = 0;
+AllLastMonths.forEach(el=>{
+  TotalOrders+=Number(el.CountOrdersThisMonth);
+  TotalPrices+=Number(el.totalPrice);
+});
+
 let ctx1 = document.getElementById('myChart1');
 
 new Chart(ctx1, {
@@ -1154,12 +1165,16 @@ new Chart(ctx1, {
     {
       label: 'Month TotalPrice',
       data: AllMonthsTotalPrice,
-      borderWidth: 1
+      borderWidth: 2,
+      borderColor: '#ff9f40',
+      backgroundColor: '#ffcd5696',
     },
     {
       label: 'Month Goal',
       data: AllMonthsGoals,
-      borderWidth: 1
+      borderWidth: 2,
+      borderColor: 'green',
+      backgroundColor: '#00800069',
     },
   ]
   },
@@ -1168,13 +1183,30 @@ new Chart(ctx1, {
       y: {
         beginAtZero: true
       }
-    }
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: `Total Prices: ${TotalPrices}`,
+        color: 'black',
+        font: {
+          size: 18,
+          family: 'cairo',
+          weight: 'bold',
+        },
+      },
+      tooltip: {
+        usePointStyle: true,
+      }
+    },
   }
 });
 
 
 
 let ctx2 = document.getElementById('myChart2');
+
+
 
 new Chart(ctx2, {
   type: 'bar',
@@ -1184,17 +1216,35 @@ new Chart(ctx2, {
     {
       label: 'Month Count Orders',
       data: CountOrdersThisMonth,
-      borderWidth: 1
+      borderWidth: 2,
+      // borderColor: 'black',
+      // backgroundColor: '#000000ab',
     }
   ]
   },
   options: {
     scales: {
       y: {
-        beginAtZero: true
+        beginAtZero: true,
+        // suggestedMax: 200
+      },
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: `Total Orders: ${TotalOrders}`,
+        color: 'black',
+        font: {
+          size: 18,
+          family: 'cairo',
+          weight: 'bold',
+        },
+      },
+      tooltip: {
+        usePointStyle: true,
       }
-    }
-  }
+    },
+  },
 });
 
 
@@ -1498,8 +1548,7 @@ confirmButtonText: 'Yes, Accept it!'
     let orderId=e.target.dataset.id;
     let orderData=AllPersonsData.find(el=>el.id==`${orderId}`);
 
-    setDoc(doc(db,"Persons",orderId),{
-      ...orderData,
+    updateDoc(doc(db,"Persons",orderId),{
       isAccepted: true,
     });
 
@@ -1541,8 +1590,7 @@ if([...e.target.classList].includes("archiveOrder")){
       let orderId=e.target.dataset.id;
       let orderData=AllPersonsData.find(el=>el.id==`${orderId}`);
 
-      setDoc(doc(db,"Persons",orderId),{
-        ...orderData,
+      updateDoc(doc(db,"Persons",orderId),{
         isAccepted: false,
       });
 
@@ -1677,8 +1725,7 @@ function swool(orderData){
           SetData(name,phone,active,city,price);
 
           function SetData(name,phone,active,city,price){
-            setDoc(doc(db,"Persons",orderData.id), {
-              ...orderData,
+            updateDoc(doc(db,"Persons",orderData.id), {
               name: name,
               phone: phone,
               city: city,
@@ -1953,7 +2000,21 @@ onSnapshot(colRef,async ()=>{
       let data = AA;
       console.log(data);
 
-      const worksheet = XLSX.utils.json_to_sheet(AA);
+      let DataWitoutPhonesRepeat = [];
+
+
+      for(let i=0; i<data.length; i++){
+
+        if(!DataWitoutPhonesRepeat.find(e=>e.phone==data[i].phone)){
+          DataWitoutPhonesRepeat.push(data[i])
+        }
+
+      };
+
+      console.log(DataWitoutPhonesRepeat);
+
+
+      const worksheet = XLSX.utils.json_to_sheet(DataWitoutPhonesRepeat);
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "Dates");
       XLSX.writeFile(workbook,filename);
